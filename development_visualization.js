@@ -86,9 +86,6 @@ function scatterPlot3d( parent )
       // Get the current timepoint as the x position
       var timepoint = d3.select(this).attr("cx")
 
-      // Log the timepoint
-      console.log(timepoint)
-
       // Update the data displayed
       plotData(timepoint,5);
   }
@@ -234,6 +231,12 @@ function scatterPlot3d( parent )
   function loadTimePoints(idx, max){
     if (idx == max){
         ready = true;
+
+        // TODO this is here temporarily -- will be moved once updating of the tree is
+        // implemented
+        var cellLineage = getCellLineageMap(this.csvdata, idx)
+        plotCellLineageTree(cellLineage)
+
         return;
     }
 
@@ -322,30 +325,27 @@ HELPER FUNCTIONS FOR LINEAGE TREE PLOTTING
 ****************************************************************/
 function getCellLineageMap(endTimepoint) {
   // Create a list of {'name': name, 'parent': parent} from the loaded time points
-  var cell_lineage = []
+  cell_lineage = []
   cell_lineage.push({'name': "root", "parent":'null'})
 
   // Loop over all time points 
-  for (j = 0; j <= endTimepoint; j++) {
-    var flat_data = this.csvdata[j]
+  for (j = 0; j < this.csvdata.length; j++) {
+    flat_data = this.csvdata[j]
 
     // For each cell in time point, record the nodes next to the root and any transitions
     for (i = 0; i < flat_data.length; i++) {
-
       var name = flat_data[i].name
       var parent_name = flat_data[i].pred.name
-
+  
       if (name === parent_name && j == 1) {
         parent_name = "root"
         cell_lineage.push({"name": name, "parent": parent_name})
-
       } else if(j > 1 &&  name != parent_name){
         cell_lineage.push({"name": name, "parent": parent_name})
-      } 
+      }
     }
   }
-
-    return cell_lineage;
+  return cell_lineage;
 }
 
 function plotCellLineageTree(cell_lineage) {
@@ -403,7 +403,7 @@ function plotCellLineageTree(cell_lineage) {
       }
     }
 
-    //root.children.forEach(collapse);
+    root.children.forEach(collapse);
     
     update(root);
 
