@@ -9,7 +9,13 @@ Website to provide interactive visualization of C. Elegans development and relat
 git clone git@github.com:CSE512-15S/a3-tdurham-ajh24-chiasson.git
 ```
 
-This command can be run from anywhere you want to keep your copy of the project. It create a new directory, which can be renamed to whatever.
+This may require you to set up SSH keys with git. Alternatively, you may use the following:
+
+```
+git clone https://github.com/CSE512-15S/a3-tdurham-ajh24-chiasson.git
+```
+
+These commands can be run from anywhere you want to keep your copy of the project. It create a new directory, which can be renamed to whatever.
 
 ### 2 | Move timepoints data into directory 
 Currently, I have not comitted the time points data to the repository, so copy this folder (named timepoints) into the main directory.
