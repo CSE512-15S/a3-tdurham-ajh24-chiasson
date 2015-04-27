@@ -530,5 +530,5 @@ function scatterPlot3d( parent ) {
         .attr('min', 0)
         .attr('step', 1)
         .attr('value', 0)
-        .attr('oninput', 'updatetime()')
+        .attr('onchange', 'updatetime()')
 }
