@@ -87,7 +87,7 @@ function scatterPlot3d( parent )
       var timepoint = d3.select(this).attr("cx")
 
       // Update the data displayed
-      plotData(timepoint,5);
+      plotData(timepoint,500);
   }
 
   function endSliderDragCallback() {
