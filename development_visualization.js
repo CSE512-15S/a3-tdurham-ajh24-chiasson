@@ -350,6 +350,7 @@ function development() {
         var t_idx = timepoint % csvdata.length;
         plotData(t_idx,1000);
         timepoint = t_idx + 1;
+        document.getElementById('timerange').value = timepoint;
 
         // Update and plot the tree (Not yet working)
         //var cellLineage = getCellLineageMap(this.csvdata, t_idx)
