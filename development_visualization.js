@@ -23,10 +23,25 @@ var ready = false;
 //blastomere predecessors are not as systematic as their daughters
 var blastpred = {P0:'', AB:'P0', P1:'P0', EMS:'P1', P2:'P1',
                  MS:'EMS', E:'EMS', P3:'P2', C:'P2', P4:'P3', 
-                 D:'P3', Z2:'P4', Z3:'P4'}
+                 D:'P3', Z2:'P4', Z3:'P4'};
 
 //timepoint counter for automated iteration through time points
 var timepoint = 0;
+
+//interval id for playback of development
+var playback_id;
+
+//3d variables
+var x3d, scene;
+
+//other variables from scatterplot3D
+var axisRange = [-1000, 1000];
+var scales = [];
+var initialDuration = 0;
+var ease = 'linear';
+var axisKeys = ["x", "y", "z"];
+
+var load_idx = 0;
 
 /****************************************************************
 Lineage Highlighting Functions
@@ -44,15 +59,9 @@ function initializeLineagePicker() {
 }
 
 /****************************************************************
-Main Thread of execution
+SLIDER INITIALIZATION AND CALLBACKS
 ****************************************************************/
-function scatterPlot3d( parent )
-{
-
-  /****************************************************************
-  SLIDER INITIALIZATION AND CALLBACKS
-  ****************************************************************/
-  function initializeSlider() {
+function initializeSlider() {
     // Define callbacks on dragging behavior
     var drag = d3.behavior.drag()
                 .origin(Object)
@@ -75,11 +84,11 @@ function scatterPlot3d( parent )
 
     // Add the rectangle for slider
     var rect = g
-                    .append('rect')
-                    .attr('y', 17)
-                    .attr("height", 5)
-                    .attr("width", 242)
-                    .attr('fill', '#C0C0C0');
+        .append('rect')
+        .attr('y', 17)
+        .attr("height", 5)
+        .attr("width", 242)
+        .attr('fill', '#C0C0C0');
 
     // Add the circle for the slider and attach the callback for drag events to it
     g.append("circle")
@@ -88,48 +97,46 @@ function scatterPlot3d( parent )
         .attr("cy", function(d) { return d.y; })
         .attr("fill", "#2394F5")
         .call(drag);
-  }
+}
 
 
-  function sliderMoveCallback(d) {
+function sliderMoveCallback(d) {
     // Update the position of the circle
-      d3.select(this)
-          .attr("cx", d.x = Math.max(0, Math.min(242, d3.event.x)))
-          .attr("cy", d.y = 20);
+    d3.select(this)
+        .attr("cx", d.x = Math.max(0, Math.min(242, d3.event.x)))
+        .attr("cy", d.y = 20);
 
-      // Get the current timepoint as the x position
-      var timepoint = d3.select(this).attr("cx")
+    // Get the current timepoint as the x position
+    timepoint = d3.select(this).attr("cx")
 
-      // Update the data displayed
-      plotData(timepoint,500);
-  }
+    // Update the data displayed
+    plotData(timepoint,500);
+}
 
-  function endSliderDragCallback() {
-      d3.select(this)
-          .attr('opacity', 1)
-  }
-  
-  /****************************************************************
-  GRAPHICAL HELPER FUNCTIONS FOR 3D DEVELOPMENT PLOT
-  ****************************************************************/
+function endSliderDragCallback() {
+    d3.select(this)
+        .attr('opacity', 1)
+}
 
-  // Used to make 2d elements visible
-  function makeSolid(selection, color) {
+/****************************************************************
+GRAPHICAL HELPER FUNCTIONS FOR 3D DEVELOPMENT PLOT
+****************************************************************/
+// Used to make 2d elements visible
+function makeSolid(selection, color) {
     selection.append("appearance")
-      .append("material")
-         .attr("diffuseColor", color||"black")
+        .append("material")
+        .attr("diffuseColor", color||"black")
     return selection;
-  }
+}
 
-  // Initialize the axes lines and labels.
-  function initializePlot() {
+// Initialize the axes lines and labels.
+function initializePlot() {
     initializeAxis(0);
     initializeAxis(1);
     initializeAxis(2);
-  }
+}
 
-  function initializeAxis( axisIndex )
-  {
+function initializeAxis( axisIndex ){
     var key = axisKeys[axisIndex];
     drawAxis( axisIndex, key, initialDuration );
 
@@ -138,32 +145,31 @@ function scatterPlot3d( parent )
 
     // the axis line
     var newAxisLine = scene.append("transform")
-         .attr("class", axisKeys[axisIndex])
-         .attr("rotation", ([[0,0,0,0],[0,0,1,Math.PI/2],[0,1,0,-Math.PI/2]][axisIndex]))
-      .append("shape")
+        .attr("class", axisKeys[axisIndex])
+        .attr("rotation", ([[0,0,0,0],[0,0,1,Math.PI/2],[0,1,0,-Math.PI/2]][axisIndex]))
+        .append("shape")
     newAxisLine
-      .append("appearance")
-      .append("material")
+        .append("appearance")
+        .append("material")
         .attr("emissiveColor", "lightgray")
     newAxisLine
-      .append("polyline2d")
+        .append("polyline2d")
          // Line drawn along y axis does not render in Firefox, so draw one
          // along the x axis instead and rotate it (above).
         .attr("lineSegments", scaleMin + " 0," + scaleMax + " 0")
-  }
+}
 
-  // Assign key to axis, creating or updating its ticks, grid lines, and labels.
-  function drawAxis( axisIndex, key, duration ) {
-
+// Assign key to axis, creating or updating its ticks, grid lines, and labels.
+function drawAxis( axisIndex, key, duration ) {
     var scale = d3.scale.linear()
-      .domain( [-1000,1000] ) // demo data range
-      .range( axisRange )
+        .domain( [-1000,1000] ) // demo data range
+        .range( axisRange )
     
     scales[axisIndex] = scale;
-  }
+}
 
-  // Update the data points (spheres) and stems.
-  function plotData( time_point, duration ) {
+// Update the data points (spheres) and stems.
+function plotData( time_point, duration ) {
     if (!this.csvdata){
      console.log("no rows to plot.")
      return;
@@ -203,65 +209,71 @@ function scatterPlot3d( parent )
         datapoints.select(function(d){return d.name.substr(0, highlight.length) == highlight ? null : this;}).selectAll('shape appearance material').attr('transparency', 0.8);
     }
 
-
     datapoints.transition().ease(ease).duration(duration)
         .attr("translation", function(row) {
             return x(row.x) + " " + y(row.y) + " " + z(row.z);
-          });
-  }
+        });
+}
 
-  /****************************************************************
-  HELPER FUNCTIONS FOR DATA PARSING AND INITIALIZATION
-  ****************************************************************/
-  function parseCSV(csvdata_in) {
-      var rows = d3.csv.parseRows(csvdata_in);
-      var filtered_rows = [], parsed_data = [];
-      var row;
-      var xmean = 0, ymean = 0, zmean = 0;
-      for (var i=0; i < rows.length; i++){
-          row = rows[i];
-          if(row[9].trim()){
-              var x = +row[5], y = +row[6], z = +row[7] * 11.1, r = +row[8];
-              xmean += x;
-              ymean += y;
-              zmean += z;
-              filtered_rows.push([x, y, z, r, row[9]]);
-          }
-      }
-
-      xmean = xmean/filtered_rows.length;
-      ymean = ymean/filtered_rows.length;
-      zmean = zmean/filtered_rows.length;
-      for (var i=0; i < filtered_rows.length; i++){
-          row = filtered_rows[i];
-          parsed_data.push({'succ': [],
-                            'x': row[0] - xmean,
-                            'y': row[1] - ymean,
-                            'z': row[2] - zmean,
-                            'radius': row[3],
-                            'name': row[4].trim()
-          });
-      }
-      return parsed_data;
-  }
-
-  function loadTimePoints(idx, max){
-    if (idx == max){
-        ready = true;
-
-        // TODO this is here temporarily -- will be moved once updating of the tree is
-        // implemented
-        var cellLineage = getCellLineageMap(this.csvdata, idx)
-        plotCellLineageTree(cellLineage)
-
-        return;
+/****************************************************************
+HELPER FUNCTIONS FOR DATA PARSING AND INITIALIZATION
+****************************************************************/
+function parseCSV(csvdata_in) {
+    var rows = d3.csv.parseRows(csvdata_in);
+    var filtered_rows = [], parsed_data = [];
+    var row;
+    var xmean = 0, ymean = 0, zmean = 0;
+    for (var i=0; i < rows.length; i++){
+        row = rows[i];
+        if(row[9].trim()){
+            var x = +row[5], y = +row[6], z = +row[7] * 11.1, r = +row[8];
+            xmean += x;
+            ymean += y;
+            zmean += z;
+            filtered_rows.push([x, y, z, r, row[9]]);
+        }
     }
+
+    xmean = xmean/filtered_rows.length;
+    ymean = ymean/filtered_rows.length;
+    zmean = zmean/filtered_rows.length;
+    for (var i=0; i < filtered_rows.length; i++){
+        row = filtered_rows[i];
+        parsed_data.push({'succ': [],
+                          'x': row[0] - xmean,
+                          'y': row[1] - ymean,
+                          'z': row[2] - zmean,
+                          'radius': row[3],
+                          'name': row[4].trim()
+        });
+    }
+    return parsed_data;
+}
+
+function loadTimePoints(idx){
+//    if (idx == max){
+//        ready = true;
+//
+//        var cellLineage = getCellLineageMap(this.csvdata, idx)
+//        plotCellLineageTree(cellLineage)
+//
+//        return;
+//    }
 
     var basename = 't' + ("000" + (idx + 1)).substr(-3) + '-nuclei';
     var url = 'http://localhost:2255/timepoints/nuclei/' + basename;
     d3.text(url, function(tpdata){
-        this.csvdata[idx] = parseCSV(tpdata);
-        this.namemap[idx] = {};
+        if (!tpdata){
+            ready = true;
+            d3.select('#timerange').attr('max', csvdata.length);
+            // TODO this is here temporarily -- will be moved once updating of the tree is
+            // implemented
+            var cellLineage = getCellLineageMap(csvdata, idx);
+            plotCellLineageTree(cellLineage);
+            return;
+        }
+        csvdata[idx] = parseCSV(tpdata);
+        namemap[idx] = {};
         for(var i = 0; i < this.csvdata[idx].length; i++){
             //make entry in namemap for this cell at this timepoint
             var cell = this.csvdata[idx][i];
@@ -286,20 +298,32 @@ function scatterPlot3d( parent )
                 cell.pred.succ.push(cell);
             }
         }
-        loadTimePoints(idx + 1, max);
+        loadTimePoints(idx + 1);
     });
-  }
+}
 
-  /****************************************************************
-  INITIALIZATION AND CALLBACKS FOR VISUALIZATION
-  ****************************************************************/
-  function initializeEmbryo() {
+/****************************************************************
+INITIALIZATION AND CALLBACKS FOR VISUALIZATION
+****************************************************************/
+//Function to handle start/stop playback of development
+function playpausedev(){
+    var button = document.getElementById('playpause');
+    if(button.innerHTML === "Play"){
+        playback_id = setInterval(development, 1000);
+        button.innerHTML = "Pause";
+    }else{
+        clearInterval(playback_id);
+        button.innerHTML = "Play";
+    }
+}
+
+function initializeEmbryo() {
     d3.text('http://localhost:2255/timepoints/nuclei/t001-nuclei', function(t0data){
-        this.csvdata[0] = parseCSV(t0data);
-        this.namemap[0] = {};
-        for(var i = 0; i < this.csvdata[0].length; i++){
-            this.namemap[0][this.csvdata[0][i].name] = i;
-            this.csvdata[0][i].pred = -1;
+        csvdata[0] = parseCSV(t0data);
+        namemap[0] = {};
+        for(var i = 0; i < csvdata[0].length; i++){
+            namemap[0][csvdata[0][i].name] = i;
+            csvdata[0][i].pred = -1;
         }
         console.log("Got data:")
 
@@ -308,7 +332,7 @@ function scatterPlot3d( parent )
         initializeLineagePicker();
         console.log("Plot data")
         plotData(0, 5);
-        loadTimePoints(1, 243);
+        loadTimePoints(1);
 
         // Set up the slider
         initializeSlider();
@@ -317,17 +341,15 @@ function scatterPlot3d( parent )
         //var cellLineage = getCellLineageMap(this.csvdata, 0)
         //plotCellLineageTree(cellLineage)
 
-        //setInterval( development, 1000 );
+//        setInterval( development, 1000 );
     });
   }
 
 function development() {
     if (ready && x3d.node() && x3d.node().runtime ) {
-        var t_idx = this.timepoint % this.csvdata.length;
-        plotData(t_idx,800);
-        this.timepoint += 1;
-
-        console.log(t_idx)
+        var t_idx = timepoint % csvdata.length;
+        plotData(t_idx,1000);
+        timepoint = t_idx + 1;
 
         // Update and plot the tree (Not yet working)
         //var cellLineage = getCellLineageMap(this.csvdata, t_idx)
@@ -336,6 +358,12 @@ function development() {
     } else {
         console.log('x3d not ready.')
     }
+}
+
+//update the timepoint variable to match the slider value and run plotData
+function updatetime() {
+    timepoint = document.getElementById('timerange').value;
+    plotData(timepoint, 500);
 }
 
 /****************************************************************
@@ -527,40 +555,40 @@ function plotCellLineageTree(cell_lineage) {
     return;
   }
 
+/****************************************************************
+Main Thread of execution
+****************************************************************/
+function scatterPlot3d( parent ) {
+    x3d = parent  
+        .append("x3d")
+        .style( "width", parseInt(parent.style("width"))+"px" )
+        .style( "height", parseInt(parent.style("height"))+"px" )
+        .style( "border", "none" )
 
-  /****************************************************************
-  MAIN THREAD OF EXECUTION
+    scene = x3d.append("scene")
 
-  Set up the the scene for 3D plot
-  ****************************************************************/
-  var x3d = parent  
-    .append("x3d")
-      .style( "width", parseInt(parent.style("width"))+"px" )
-      .style( "height", parseInt(parent.style("height"))+"px" )
-      .style( "border", "none" )
-      
-  var scene = x3d.append("scene")
+    scene.append("orthoviewpoint")
+        .attr( "centerOfRotation", [0, 0, 0])
+        .attr( "fieldOfView", [-300, -300, 800, 800])
+        .attr( "orientation", [-0.5, 1, 0.2, 1.12*Math.PI/4])
+        .attr( "position", [600, 300, 800])
 
-  
-  scene.append("orthoviewpoint")
-     .attr( "centerOfRotation", [0, 0, 0])
-     .attr( "fieldOfView", [-300, -300, 800, 800])
-     .attr( "orientation", [-0.5, 1, 0.2, 1.12*Math.PI/4])
-     .attr( "position", [600, 300, 800])
-
-
-  /****************************************************************
-  FUNCTION LEVEL VARIABLES
-  ****************************************************************/
-  var rows = [];
-  var axisRange = [-1000, 1000];
-  var scales = [];
-  var initialDuration = 0;
-  var ease = 'linear';
-  var axisKeys = ["x", "y", "z"]
-
-  console.log("Reading in embryo positions.");
-  initializeEmbryo();
-  console.log("Loading data")
-
+    console.log("Reading in embryo positions.");
+    initializeEmbryo();
+    console.log("Loading data")
+    
+    // Add play button for time points
+    d3.select('body').append('button')
+        .attr('id', 'playpause')
+        .attr('onclick', "playpausedev()")
+        .html("Play");
+    // Add slider for time points
+    d3.select('body').append('input')
+        .attr('type', 'range')
+        .attr('id', 'timerange')
+        .attr('defaultValue', 0)
+        .attr('min', 0)
+        .attr('step', 1)
+        .attr('value', 0)
+        .attr('onchange', 'updatetime()')
 }
