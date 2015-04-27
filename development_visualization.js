@@ -50,12 +50,12 @@ function initializeLineagePicker() {
     //Text box and color picker
     var textbox = d3.select('body')
         .append('div').attr('class', 'lineageinput')
-        .append('input').attr('type', 'text').attr('id', 'hicell').attr('size', 20)
+        .append('input').attr('type', 'text').attr('id', 'hicell').attr('size', 20).attr('placeholder', 'Enter lineage...')
         .text("Type cell name here.");
     var colorpicker = d3.select('div.lineageinput')
-        .append('input').attr('type', 'text').attr('id', 'hicellcolor');
+        .append('input').attr('type', 'color').attr("value", "#ff0000").attr('id', 'hicellcolor');
     //use jQuery to initialize the color picker on the hicellcolor input
-    $("#hicellcolor").spectrum({color: '#f00'});
+    //$("#hicellcolor").val("#ff0000")
 }
 
 /****************************************************************
@@ -142,7 +142,9 @@ function plotData( time_point, duration ) {
     //Code to highlight a specific lineage in green
 //    var highlight = d3.select('#hicell').html(this.value);
     var highlight = document.getElementById('hicell').value;
-    var color = $('#hicellcolor').spectrum('get').toHexString();
+    var color = $('#hicellcolor').val();
+    console.log(color)
+    console.log(highlight)
     if(highlight){
         datapoints.select(function(d){return d.name.substr(0, highlight.length) == highlight ? this : null;}).selectAll('shape appearance material').attr('diffuseColor', color);
         //make non-highlighted lineages more transparent
