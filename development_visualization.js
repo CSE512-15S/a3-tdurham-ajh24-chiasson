@@ -28,6 +28,20 @@ var blastpred = {P0:'', AB:'P0', P1:'P0', EMS:'P1', P2:'P1',
 //timepoint counter for automated iteration through time points
 var timepoint = 0;
 
+/****************************************************************
+Lineage Highlighting Functions
+****************************************************************/
+function initializeLineagePicker() {
+    //Text box and color picker
+    var textbox = d3.select('body')
+        .append('div').attr('class', 'lineageinput')
+        .append('input').attr('type', 'text').attr('id', 'hicell').attr('size', 20)
+        .text("Type cell name here.");
+    var colorpicker = d3.select('div.lineageinput')
+        .append('input').attr('type', 'text').attr('id', 'hicellcolor');
+    //use jQuery to initialize the color picker on the hicellcolor input
+    $("#hicellcolor").spectrum({color: '#f00'});
+}
 
 /****************************************************************
 Main Thread of execution
@@ -94,8 +108,7 @@ function scatterPlot3d( parent )
       d3.select(this)
           .attr('opacity', 1)
   }
-
-
+  
   /****************************************************************
   GRAPHICAL HELPER FUNCTIONS FOR 3D DEVELOPMENT PLOT
   ****************************************************************/
@@ -181,10 +194,14 @@ function scatterPlot3d( parent )
     new_data.append('sphere');
 
     //Code to highlight a specific lineage in green
-    var highlight = 'MS'
-    datapoints.select(function(d){return d.name.substr(0, highlight.length) == highlight ? this : null;}).selectAll('shape appearance material').attr('diffuseColor', 'green');
-    //make non-highlighted lineages more transparent
-    datapoints.select(function(d){return d.name.substr(0, highlight.length) == highlight ? null : this;}).selectAll('shape appearance material').attr('transparency', 0.8);
+//    var highlight = d3.select('#hicell').html(this.value);
+    var highlight = document.getElementById('hicell').value;
+    var color = $('#hicellcolor').spectrum('get').toHexString();
+    if(highlight){
+        datapoints.select(function(d){return d.name.substr(0, highlight.length) == highlight ? this : null;}).selectAll('shape appearance material').attr('diffuseColor', color);
+        //make non-highlighted lineages more transparent
+        datapoints.select(function(d){return d.name.substr(0, highlight.length) == highlight ? null : this;}).selectAll('shape appearance material').attr('transparency', 0.8);
+    }
 
 
     datapoints.transition().ease(ease).duration(duration)
@@ -288,6 +305,7 @@ function scatterPlot3d( parent )
 
         console.log("Init Plot")
         initializePlot();
+        initializeLineagePicker();
         console.log("Plot data")
         plotData(0, 5);
         loadTimePoints(1, 243);
