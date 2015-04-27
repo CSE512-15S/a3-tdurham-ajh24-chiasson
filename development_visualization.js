@@ -59,66 +59,6 @@ function initializeLineagePicker() {
 }
 
 /****************************************************************
-SLIDER INITIALIZATION AND CALLBACKS
-****************************************************************/
-function initializeSlider() {
-    // Define callbacks on dragging behavior
-    var drag = d3.behavior.drag()
-                .origin(Object)
-                .on("drag", sliderMoveCallback)
-                .on('dragend', endSliderDragCallback);
-
-    // Define a SVG element for the slider
-    var svg = d3.select('body')
-                    .append('svg')
-                    .attr("height", 200)
-                    .attr("width", 300);
-
-    var g = svg.selectAll('g')
-                .data([{x: 100, y : 20}])
-                .enter()
-                    .append('g')
-                    .attr("height", 200)
-                    .attr("width", 300)
-                    .attr('transform', 'translate(20, 10)');
-
-    // Add the rectangle for slider
-    var rect = g
-        .append('rect')
-        .attr('y', 17)
-        .attr("height", 5)
-        .attr("width", 242)
-        .attr('fill', '#C0C0C0');
-
-    // Add the circle for the slider and attach the callback for drag events to it
-    g.append("circle")
-        .attr("r", 10)
-        .attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; })
-        .attr("fill", "#2394F5")
-        .call(drag);
-}
-
-
-function sliderMoveCallback(d) {
-    // Update the position of the circle
-    d3.select(this)
-        .attr("cx", d.x = Math.max(0, Math.min(242, d3.event.x)))
-        .attr("cy", d.y = 20);
-
-    // Get the current timepoint as the x position
-    timepoint = d3.select(this).attr("cx")
-
-    // Update the data displayed
-    plotData(timepoint,500);
-}
-
-function endSliderDragCallback() {
-    d3.select(this)
-        .attr('opacity', 1)
-}
-
-/****************************************************************
 GRAPHICAL HELPER FUNCTIONS FOR 3D DEVELOPMENT PLOT
 ****************************************************************/
 // Used to make 2d elements visible
@@ -333,9 +273,6 @@ function initializeEmbryo() {
         console.log("Plot data")
         plotData(0, 5);
         loadTimePoints(1);
-
-        // Set up the slider
-        initializeSlider();
 
         // Build and plot the tree (Not yet working)
         //var cellLineage = getCellLineageMap(this.csvdata, 0)
