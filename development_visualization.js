@@ -358,52 +358,107 @@ function plotCellLineageTree(cell_lineage) {
   });
 
   // ************** Generate the tree diagram    *****************
-var margin = {top: 40, right: 120, bottom: 20, left: 120},
-    width = 960 - margin.right - margin.left,
+
+    // Various accessors that specify the four dimensions of data to visualize.
+  function x(d) {  return d.x; }
+  function y(d) {return d.y; }
+
+ // Chart dimensions
+var margin = {top: 10, right: 10, bottom: 10, left: 10},
+    width = 1200 - margin.right - margin.left,
     height = 500 - margin.top - margin.bottom;
-    
+
+  // Various scales and distortions.
+  var xScale = d3.fisheye.scale(d3.scale.linear).domain([1, 300]).range([0, 900]),
+      yScale = d3.fisheye.scale(d3.scale.linear).domain([1, 100]).range([height, 0]),
+      radiusScale = d3.scale.sqrt().domain([0, 5e8]).range([0, 40])
+
+  // The x & y axes.
+  var xAxis = d3.svg.axis().orient("bottom").scale(xScale).tickFormat(d3.format(",d")).tickSize(-height),
+      yAxis = d3.svg.axis().scale(yScale).orient("left").tickSize(-width);
+
+  // Set up the SVG element
+  var svg = d3.select("body").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  // Add a background rect for mousemove.
+  svg.append("rect")
+      .attr("class", "background")
+      .attr("width", width)
+      .attr("height", height);
+
+  // Add the x-axis.
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  // Add the y-axis.
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+  // Add an x-axis label.
+  svg.append("text")
+      .attr("class", "x label")
+      .attr("text-anchor", "end")
+      .attr("x", width - 6)
+      .attr("y", height - 6)
+      .text("income per capita, inflation-adjusted (dollars)");
+
+  // Add a y-axis label.
+  svg.append("text")
+      .attr("class", "y label")
+      .attr("text-anchor", "end")
+      .attr("x", -6)
+      .attr("y", 6)
+      .attr("dy", ".75em")
+      .attr("transform", "rotate(-90)")
+      .text("life expectancy (years)");
+
+// Now create the tree    
 var i = 0;
 
 var tree = d3.layout.tree()
-    .size([height, width]);
+    .size([height/2, width]);
 
 var diagonal = d3.svg.diagonal()
     .projection(function(d) { return [d.x, d.y]; });
 
-var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.right + margin.left)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
 
 root = treeData[0];
-  
-update(root);
-
-function update(source) {
 
   // Compute the new tree layout.
   var nodes = tree.nodes(root).reverse(),
       links = tree.links(nodes);
 
   // Normalize for fixed-depth.
-  nodes.forEach(function(d) { d.y = d.depth * 100; });
+  nodes.forEach(function(d) { d.y = d.depth * 100; d.y = d.depth * 100; });
 
   // Declare the nodes…
   var node = svg.selectAll("g.node")
-      .data(nodes, function(d) { return d.id || (d.id = ++i); });
+      
 
   // Enter the nodes.
-  var nodeEnter = node.enter().append("g")
-      .attr("class", "node")
+  var dot = svg.append("g")
+          .attr("class", "dots")
+      .selectAll(".dot")
+        .data(nodes, function(d) { return d.id || (d.id = ++i); })
+      .enter().append("circle")
+        .attr("class", "dot")
+      .attr("r", 10)
+      .style("fill", "#fff")
+
       .attr("transform", function(d) { 
-          return "translate(" + d.x + "," + d.y + ")"; });
+          return "translate(" + d.x + "," + d.y + ")"; })
+      .call(position)
 
-  //nodeEnter.append("circle")
-  //    .attr("r", 10)
-  //    .style("fill", "#fff");
 
-  nodeEnter.append("text")
+  dot.append("text")
       .attr("y", function(d) { 
           return d.children || d._children ? -18 : 18; })
       .attr("dy", ".35em")
@@ -411,16 +466,34 @@ function update(source) {
       .text(function(d) { return d.name; })
       .style("fill-opacity", 1);
 
+    // Positions the dots based on data.
+    function position(dot) {
+      dot .attr("cx", function(d) { return xScale(x(d)); })
+          .attr("cy", function(d) { return yScale(y(d)); })
+          //.attr("r", function(d) { return radiusScale(radius(d)); });
+    }
+
+    svg.on("mousemove", function() {
+      var mouse = d3.mouse(this);
+      xScale.distortion(10).focus(mouse[0]);
+      yScale.distortion(10).focus(mouse[1]);
+
+      dot.call(position);
+      svg.select(".x.axis").call(xAxis);
+      svg.select(".y.axis").call(yAxis);
+    });
+
+
+
   // Declare the links…
-  var link = svg.selectAll("path.link")
-      .data(links, function(d) { return d.target.id; });
+  //var link = svg.selectAll("path.link")
+  //    .data(links, function(d) { return d.target.id; });
 
   // Enter the links.
-  link.enter().insert("path", "g")
-      .attr("class", "link")
-      .attr("d", diagonal);
+  //link.enter().insert("path", "g")
+  //    .attr("class", "link")
+  //    .attr("d", diagonal);
 
-}
 
     return;
   }
