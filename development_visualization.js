@@ -357,140 +357,70 @@ function plotCellLineageTree(cell_lineage) {
     }
   });
 
-  var margin = {top: 20, right: 120, bottom: 20, left: 120},
-      width = 960 - margin.right - margin.left,
-      height = 800 - margin.top - margin.bottom;
-      
-  var i = 0,
-      duration = 750,
-      root;
-
-  var tree = d3.layout.tree()
-      .size([1200, width]);
-
-  var diagonal = d3.svg.diagonal()
-      .projection(function(d) { return [d.x, d.y]; });
-
-  var svg = d3.select("body").append("svg")
-      .attr("overflow", "scroll")
-      .attr("width", "95%")
-      .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-
-
-  root = treeData[0];
-
-    function collapse(d) {
-      if (d.children) {
-        d._children = d.children;
-        d._children.forEach(collapse);
-        d.children = null;
-      }
-    }
-
-    root.children.forEach(collapse);
+  // ************** Generate the tree diagram    *****************
+var margin = {top: 40, right: 120, bottom: 20, left: 120},
+    width = 960 - margin.right - margin.left,
+    height = 500 - margin.top - margin.bottom;
     
-    update(root);
+var i = 0;
 
-    function update(source) {
+var tree = d3.layout.tree()
+    .size([height, width]);
 
-      // Compute the new tree layout.
-      var nodes = tree.nodes(root).reverse(),
-          links = tree.links(nodes);
+var diagonal = d3.svg.diagonal()
+    .projection(function(d) { return [d.x, d.y]; });
 
-      // Normalize for fixed-depth.
-      nodes.forEach(function(d) { d.y = d.depth * 50; });
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.right + margin.left)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      // Update the nodes…
-      var node = svg.selectAll("g.node")
-          .data(nodes, function(d) { return d.id || (d.id = ++i); });
+root = treeData[0];
+  
+update(root);
 
-      // Enter any new nodes at the parent's previous position.
-      var nodeEnter = node.enter().append("g")
-          .attr("class", "node")
-          .attr("transform", function(d) { return "translate(" + source.x0 + "," + source.y0 + ")"; })
-          .on("click", click);
+function update(source) {
 
-      nodeEnter.append("circle")
-          .attr("r", 1e-6)
-          .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+  // Compute the new tree layout.
+  var nodes = tree.nodes(root).reverse(),
+      links = tree.links(nodes);
 
-      nodeEnter.append("text")
-          .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
-          .attr("dy", ".35em")
-          .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-          .text(function(d) { return d.name; })
-          .style("fill-opacity", 1e-6);
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d) { d.y = d.depth * 100; });
 
-      // Transition nodes to their new position.
-      var nodeUpdate = node.transition()
-          .duration(duration)
-          .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+  // Declare the nodes…
+  var node = svg.selectAll("g.node")
+      .data(nodes, function(d) { return d.id || (d.id = ++i); });
 
-      nodeUpdate.select("circle")
-          .attr("r", 4.5)
-          .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+  // Enter the nodes.
+  var nodeEnter = node.enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { 
+          return "translate(" + d.x + "," + d.y + ")"; });
 
-      nodeUpdate.select("text")
-          .style("fill-opacity", 1);
+  //nodeEnter.append("circle")
+  //    .attr("r", 10)
+  //    .style("fill", "#fff");
 
-      // Transition exiting nodes to the parent's new position.
-      var nodeExit = node.exit().transition()
-          .duration(duration)
-          .attr("transform", function(d) { return "translate(" + source.x + "," + source.y + ")"; })
-          .remove();
+  nodeEnter.append("text")
+      .attr("y", function(d) { 
+          return d.children || d._children ? -18 : 18; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", "middle")
+      .text(function(d) { return d.name; })
+      .style("fill-opacity", 1);
 
-      nodeExit.select("circle")
-          .attr("r", 1e-6);
+  // Declare the links…
+  var link = svg.selectAll("path.link")
+      .data(links, function(d) { return d.target.id; });
 
-      nodeExit.select("text")
-          .style("fill-opacity", 1e-6);
+  // Enter the links.
+  link.enter().insert("path", "g")
+      .attr("class", "link")
+      .attr("d", diagonal);
 
-      // Update the links…
-      var link = svg.selectAll("path.link")
-          .data(links, function(d) { return d.target.id; });
-
-      // Enter any new links at the parent's previous position.
-      link.enter().insert("path", "g")
-          .attr("class", "link")
-          .attr("d", function(d) {
-            var o = {x: source.x0, y: source.y0};
-            return diagonal({source: o, target: o});
-          });
-
-      // Transition links to their new position.
-      link.transition()
-          .duration(duration)
-          .attr("d", diagonal);
-
-      // Transition exiting nodes to the parent's new position.
-      link.exit().transition()
-          .duration(duration)
-          .attr("d", function(d) {
-            var o = {x: source.x, y: source.y};
-            return diagonal({source: o, target: o});
-          })
-          .remove();
-
-      // Stash the old positions for transition.
-      nodes.forEach(function(d) {
-        d.x0 = d.x;
-        d.y0 = d.y;
-      });
-    }
-
-    // Toggle children on click.
-    function click(d) {
-      if (d.children) {
-        d._children = d.children;
-        d.children = null;
-      } else {
-        d.children = d._children;
-        d._children = null;
-      }
-      update(d);
-    }
+}
 
     return;
   }
@@ -532,3 +462,93 @@ function scatterPlot3d( parent ) {
         .attr('value', 0)
         .attr('onchange', 'updatetime()')
 }
+
+/****************************************************************
+* Fisheye Distortion Plugin
+* https://github.com/d3/d3-plugins/blob/master/fisheye/fisheye.js
+****************************************************************/
+(function() {
+  d3.fisheye = {
+    scale: function(scaleType) {
+      return d3_fisheye_scale(scaleType(), 3, 0);
+    },
+    circular: function() {
+      var radius = 200,
+          distortion = 2,
+          k0,
+          k1,
+          focus = [0, 0];
+
+      function fisheye(d) {
+        var dx = d.x - focus[0],
+            dy = d.y - focus[1],
+            dd = Math.sqrt(dx * dx + dy * dy);
+        if (!dd || dd >= radius) return {x: d.x, y: d.y, z: dd >= radius ? 1 : 10};
+        var k = k0 * (1 - Math.exp(-dd * k1)) / dd * .75 + .25;
+        return {x: focus[0] + dx * k, y: focus[1] + dy * k, z: Math.min(k, 10)};
+      }
+
+      function rescale() {
+        k0 = Math.exp(distortion);
+        k0 = k0 / (k0 - 1) * radius;
+        k1 = distortion / radius;
+        return fisheye;
+      }
+
+      fisheye.radius = function(_) {
+        if (!arguments.length) return radius;
+        radius = +_;
+        return rescale();
+      };
+
+      fisheye.distortion = function(_) {
+        if (!arguments.length) return distortion;
+        distortion = +_;
+        return rescale();
+      };
+
+      fisheye.focus = function(_) {
+        if (!arguments.length) return focus;
+        focus = _;
+        return fisheye;
+      };
+
+      return rescale();
+    }
+  };
+
+  function d3_fisheye_scale(scale, d, a) {
+
+    function fisheye(_) {
+      var x = scale(_),
+          left = x < a,
+          range = d3.extent(scale.range()),
+          min = range[0],
+          max = range[1],
+          m = left ? a - min : max - a;
+      if (m == 0) m = max - min;
+      return (left ? -1 : 1) * m * (d + 1) / (d + (m / Math.abs(x - a))) + a;
+    }
+
+    fisheye.distortion = function(_) {
+      if (!arguments.length) return d;
+      d = +_;
+      return fisheye;
+    };
+
+    fisheye.focus = function(_) {
+      if (!arguments.length) return a;
+      a = +_;
+      return fisheye;
+    };
+
+    fisheye.copy = function() {
+      return d3_fisheye_scale(scale.copy(), d, a);
+    };
+
+    fisheye.nice = scale.nice;
+    fisheye.ticks = scale.ticks;
+    fisheye.tickFormat = scale.tickFormat;
+    return d3.rebind(fisheye, scale, "domain", "range");
+  }
+})();
