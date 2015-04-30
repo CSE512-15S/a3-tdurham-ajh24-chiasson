@@ -413,21 +413,28 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
   // Enter the nodes.
   var node = svg.append("g")
     .attr("class", "nodes")
-    .selectAll(".n")
+    .selectAll(".node")
       .data(nodes, function(d) { return d.id || (d.id = ++i); })
-        .enter().append("circle")
-        .attr("class", "node")
-        .attr("r", 10)
-        .attr("fill", "steelblue")
-        .attr("transform", function(d) { 
-          return "translate(" + 0 + "," + d.y + ")"; }) // 0 is required for x to make edges match up with nodes
-        .call(position_node)
+        .enter().append("g").
+        attr("class", "node")
+        .append('circle')
+        
+          .attr("r", 10)
+          .attr("fill", "steelblue")
+          .attr("transform", function(d) { 
+            return "translate(" + 0 + "," + d.y + ")"; }) // 0 is required for x to make edges match up with nodes
+          .call(position_node)
 
   // TODO not working -- no text is displayed
-  svg.selectAll(".node").append('text')
+  var text = svg.selectAll(".node").append('text')
     .attr('class', 'text')
     .text(function(d) {return d.name})
+    .attr("transform", "translate(-25, -20)")
     .call(position_node)
+    .style("text-anchor", "start")
+    
+    
+
 
   // Declare the links…
   var link = svg.selectAll("path.link")
@@ -440,7 +447,9 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
   // Functions to position nodes and edges
   function position_node(node) {
     node 
-      .attr("cx", function(d) {return xScale(d.x);});
+      .attr("cx", function(d) {return xScale(d.x);})
+      .attr("x", function(d) {return xScale(d.x);})
+      .attr("y", function(d) {return d.y;});
         //.attr("cy", function(d) { return yScale(y(d)); }) // TODO commenting this out made tree height issues go away
         //.attr("r", function(d) { return radiusScale(radius(d)); });
   }
@@ -458,6 +467,8 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
 
     node.call(position_node);
     link.call(position_links)
+    text.call(position_node);
+
     svg.select(".x.axis").call(xAxis);
     svg.select(".y.axis").call(yAxis);
   });
@@ -492,6 +503,7 @@ function scatterPlot3d( parent ) {
         .attr('id', 'playpause')
         .attr('onclick', "playpausedev()")
         .html("Play");
+
     // Add slider for time points
     d3.select('body').append('input')
         .attr('type', 'range')
