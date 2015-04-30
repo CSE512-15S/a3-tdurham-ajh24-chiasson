@@ -1,0 +1,671 @@
+ABplapaaaapp, ADAL ring gang,ADAL,ABplapaaaapp,Ring interneurons,neuron,body nervous system
+ABprapaaaapp, ADAR ring gang,ADAR,ABprapaaaapp,Ring interneurons,neuron,body nervous system
+ABplapaaaapa, ADEL ring gang,ADEL,ABplapaaaapa,"Anterior deirid, sensory neuron, dopaminergic",neuron,body nervous system
+ABprapaaaapa, ADER ring gang,ADER,ABprapaaaapa,"Anterior deirid, sensory neuron, dopaminergic",neuron,body nervous system
+ABarppaaaa, ADEshL ring gang,ADEshL,ABarppaaaa,Anterior deirid sheath,neuron support,body nervous system
+ABarpppaaa, ADEshR ring gang,ADEshR,ABarpppaaa,Anterior deirid sheath,neuron support,body nervous system
+ABalpppppaa, ADFL  ring gang,ADFL,ABalpppppaa,"Amphid neuron, prob. chemosensory",neuron,body nervous system
+ABpraaappaa, ADFR ring gang,ADFR,ABpraaappaa,"Amphid neuron, prob. chemosensory",neuron,body nervous system
+ABalppppaad, ADLL  ring gang,ADLL,ABalppppaad,"Amphid neuron, prob. chemosensory",neuron,body nervous system
+ABpraaapaad, ADLR ring gang,ADLR,ABpraaapaad,"Amphid neuron, prob. chemosensory",neuron support,body nervous system
+ABalpppapav, AFDL  ring gang,AFDL,ABalpppapav,"Amphid finger cell, neuron associated with amphid sheath",neuron support,body nervous system
+ABpraaaapav, AFDR ring gang,AFDR,ABpraaaapav,"Amphid finger cell, neuron associated with amphid sheath",neuron,body nervous system
+ABplppaappa, AIAL vent gang,AIAL,ABplppaappa,Amphid interneuron,neuron,body nervous system
+ABprppaappa, AIAR vent gang,AIAR,ABprppaappa,Amphid interneuron,neuron,body nervous system
+ABplaapappa, AIBL ring gang,AIBL,ABplaapappa,Amphid interneuron,neuron,body nervous system
+ABpraapappa, AIBR ring gang,AIBR,ABpraapappa,Amphid interneuron,neuron,body nervous system
+ABplpaapppa, AIML vent gang,AIML,ABplpaapppa,Ring interneuron,neuron,body nervous system
+ABprpaapppa, AIMR vent gang,AIMR,ABprpaapppa,Ring interneuron,neuron,body nervous system
+ABalaaaalal, AINL ring gang,AINL,ABalaaaalal,Ring interneuron,neuron,body nervous system
+ABalaapaaar, AINR ring gang,AINR,ABalaapaaar,Ring interneuron,neuron,body nervous system
+ABplpapaaap, AIYL vent gang,AIYL,ABplpapaaap,Amphid interneuron,neuron,body nervous system
+ABprpapaaap, AIYR vent gang,AIYR,ABprpapaaap,Amphid interneuron,neuron,body nervous system
+ABplapaaapav, AIZL ring gang,AIZL,ABplapaaapav,Amphid interneuron,neuron,body nervous system
+ABprapaaapav, AIZR ring gang,AIZR,ABprapaaapav,Amphid interneuron,neuron,body nervous system
+ABalapppaaa, ALA ring gang,ALA,ABalapppaaa,"Neuron, sends processes laterally and along dorsal cord",neuron,body nervous system
+ABarppaappa, ALML lat neur,ALML,ABarppaappa,"Anterior lateral microtubule cell, touch receptor",neuron,body nervous system
+ABarpppappa, ALMR lat neur,ALMR,ABarpppappa,"Anterior lateral microtubule cell, touch receptor",neuron,body nervous system
+ABplapappppap, ALNL lumb gang,ALNL,ABplapappppap,Neuron associated with ALM,neuron,body nervous system
+ABprapappppap, ALNR lumb gang,ALNR,ABprapappppap,Neuron associated with ALM,neuron,body nervous system
+ABplaapaapp, AMshL ring gang,AMshL,ABplaapaapp,Amphid sheath,neuron support,body nervous system
+ABpraapaapp, AMshR ring gang,AMshR,ABpraapaapp,Amphid sheath,neuron support,body nervous system
+ABplpaapapa, AMsoL ring gang,AMsoL,ABplpaapapa,Amphid socket,neuron support,body nervous system
+ABprpaapapa, AMsoR ring gang,AMsoR,ABprpaapapa,Amphid sheath,neuron support,body nervous system
+ABplpppppap, anal depressor muscle,mu_anal,ABplpppppap,Anal depressor muscle,muscle,Alimentary tract
+ABalpaappaa, arc ant DL,arc ant DL,ABalpaappaa,"Interface between pharynx and hypodermis, form anterior part of the buccal cavity",arcade,Alimentary tract
+ABaraaapppa, arc ant DR,arc ant DR,ABaraaapppa,"Interface between pharynx and hypodermis, form anterior part of the buccal cavity",arcade,Alimentary tract
+ABalpapaapa, arc ant V,arc ant V,ABalpapaapa,"Interface between pharynx and hypodermis, form anterior part of the buccal cavity",arcade,Alimentary tract
+ABaraaappaa, arc post D,arc post D,ABaraaappaa,"Interface between pharynx and hypodermis, form anterior part of the buccal cavity",arcade,Alimentary tract
+ABalpaapaaa, arc post DL,arc post DL,ABalpaapaaa,"Interface between pharynx and hypodermis, form anterior part of the buccal cavity",arcade,Alimentary tract
+ABaraaapaaa, arc post DR,arc post DR,ABaraaapaaa,"Interface between pharynx and hypodermis, form anterior part of the buccal cavity",arcade,Alimentary tract
+ABarapapapa, arc post V,arc post V,ABarapapapa,"Interface between pharynx and hypodermis, form anterior part of the buccal cavity",arcade,Alimentary tract
+ABalpaappap, arc post VL,arc post VL,ABalpaappap,"Interface between pharynx and hypodermis, form anterior part of the buccal cavity",arcade,Alimentary tract
+ABaraaappap, arc post VR,arc post VR,ABaraaappap,"Interface between pharynx and hypodermis, form anterior part of the buccal cavity",arcade,Alimentary tract
+ABalppppppaa, ASEL  ring gang,ASEL,ABalppppppaa,"Amphid neurons, single ciliated endings, probably chemo-sensory; project into ring via commissure from ventral ganglion, make diverse synaptic connections in ring neuropil",neuron,body nervous system
+ABpraaapppaa, ASER ring gang,ASER,ABpraaapppaa,"Amphid neurons, single ciliated endings, probably chemo-sensory; project into ring via commissure from ventral ganglion, make diverse synaptic connections in ring neuropil",neuron,body nervous system
+ABplaapapap, ASGL ring gang,ASGL,ABplaapapap,"Amphid neurons, single ciliated endings, probably chemo-sensory; project into ring via commissure from ventral ganglion, make diverse synaptic connections in ring neuropil",neuron,body nervous system
+ABpraapapap, ASGR ring gang,ASGR,ABpraapapap,"Amphid neurons, single ciliated endings, probably chemo-sensory; project into ring via commissure from ventral ganglion, make diverse synaptic connections in ring neuropil",neuron,body nervous system
+ABplpaappaa, ASHL ring gang,ASHL,ABplpaappaa,"Amphid neurons, single ciliated endings, probably chemo-sensory; project into ring via commissure from ventral ganglion, make diverse synaptic connections in ring neuropil",neuron,body nervous system
+ABprpaappaa, ASHR ring gang,ASHR,ABprpaappaa,"Amphid neurons, single ciliated endings, probably chemo-sensory; project into ring via commissure from ventral ganglion, make diverse synaptic connections in ring neuropil",neuron,body nervous system
+ABplaapapppa, ASIL ring gang,ASIL,ABplaapapppa,"Amphid neurons, single ciliated endings, probably chemo-sensory; project into ring via commissure from ventral ganglion, make diverse synaptic connections in ring neuropil",neuron,body nervous system
+ABpraapapppa, ASIR ring gang,ASIR,ABpraapapppa,"Amphid neurons, single ciliated endings, probably chemo-sensory; project into ring via commissure from ventral ganglion, make diverse synaptic connections in ring neuropil",neuron,body nervous system
+ABalpppppppa, ASJL  ring gang,ASJL,ABalpppppppa,"Amphid neurons, single ciliated endings, probably chemo-sensory; project into ring via commissure from ventral ganglion, make diverse synaptic connections in ring neuropil",neuron,body nervous system
+ABpraaappppa, ASJR ring gang,ASJR,ABpraaappppa,"Amphid neurons, single ciliated endings, probably chemo-sensory; project into ring via commissure from ventral ganglion, make diverse synaptic connections in ring neuropil",neuron,body nervous system
+ABalpppapppa, ASKL  ring gang,ASKL,ABalpppapppa,"Amphid neurons, single ciliated endings, probably chemo-sensory; project into ring via commissure from ventral ganglion, make diverse synaptic connections in ring neuropil",neuron,body nervous system
+ABpraaaapppa, ASKR ring gang,ASKR,ABpraaaapppa,"Amphid neurons, single ciliated endings, probably chemo-sensory; project into ring via commissure from ventral ganglion, make diverse synaptic connections in ring neuropil",neuron,body nervous system
+ABalpppppppp, AUAL ring gang,AUAL,ABalpppppppp,"Neuron, process runs with amphid processes but lacks ciliated ending",neuron,body nervous system
+ABpraaappppp, AUAR ring gang,AUAR,ABpraaappppp,"Neuron, process runs with amphid processes but lacks ciliated ending",neuron,body nervous system
+ABalppaaapa, AVAL ring gang,AVAL,ABalppaaapa,"Ventral cord interneuron, synapses onto VA, DA, and AS motor neurons; formerly called alpha",neuron,body nervous system
+ABalaappapa, AVAR ring gang,AVAR,ABalaappapa,"Ventral cord interneuron, synapses onto VA, DA, and AS motor neurons; formerly called alpha",neuron,body nervous system
+ABplpaapaap, AVBL ring gang,AVBL,ABplpaapaap,"Ventral cord interneuron, synapses onto VB and DB motor neurons; formerly called beta",neuron,body nervous system
+ABprpaapaap, AVBR ring gang,AVBR,ABprpaapaap,"Ventral cord interneuron, synapses onto VB and DB motor neurons; formerly called beta",neuron,body nervous system
+ABalaaapalr, AVDL ring gang,AVDL,ABalaaapalr,"Ventral cord interneuron, synapses onto VA, DA, AS motorneurons; formerly called delta",neuron,body nervous system
+ABalaaapprl, AVDR ring gang,AVDR,ABalaaapprl,"Ventral cord interneuron, synapses onto VA, DA, AS motorneurons; formerly called delta",neuron,body nervous system
+ABalpppaaaa, AVEL ring gang,AVEL,ABalpppaaaa,"Ventral cord interneuron, like AVD but outputs restrict-ed to anterior cord",neuron,body nervous system
+ABpraaaaaaa, AVER ring gang,AVER,ABpraaaaaaa,"Ventral cord interneuron, like AVD but outputs restrict-ed to anterior cord",neuron,body nervous system
+ABprpapppap, AVG r-v gang,AVG,ABprpapppap,"Ventral cord interneuron, few synapses",neuron,body nervous system
+ABalapaaaaa, AVHL ring gang,AVHL,ABalapaaaaa,"Neuron, mainly postsynaptic in ventral cord and presynaptic in the ring",neuron,body nervous system
+ABalappapaa, AVHR ring gang,AVHR,ABalappapaa,"Neuron, mainly postsynaptic in ventral cord and presynaptic in the ring",neuron,body nervous system
+ABalapapppa, AVJL ring gang,AVJL,ABalapapppa,"Neuron, synapses like AVHL/R",neuron,body nervous system
+ABalapppppa, AVJR ring gang,AVJR,ABalapppppa,"Neuron, synapses like AVHL/R",neuron,body nervous system
+ABplpapapap, AVKL vent gang,AVKL,ABplpapapap,Ring and ventral cord interneuron,neuron,body nervous system
+ABprpapapap, AVKR vent gang,AVKR,ABprpapapap,Ring and ventral cord interneuron,neuron,body nervous system
+ABprpappaap, AVL vent gang,AVL,ABprpappaap,"Ring and ventral cord interneuron, few synapses",neuron,body nervous system
+ABplaapapaa, AWAL ring gang,AWAL,ABplaapapaa,"Amphid wing cells, neurons having ciliated sheet-like sensory endings closely associated with amphid sheath",neuron,body nervous system
+ABpraapapaa, AWAR ring gang,AWAR,ABpraapapaa,"Amphid wing cells, neurons having ciliated sheet-like sensory endings closely associated with amphid sheath",neuron,body nervous system
+ABalpppppap, AWBL  ring gang,AWBL,ABalpppppap,"Amphid wing cells, neurons having ciliated sheet-like sensory endings closely associated with amphid sheath",neuron,body nervous system
+ABpraaappap, AWBR ring gang,AWBR,ABpraaappap,"Amphid wing cells, neurons having ciliated sheet-like sensory endings closely associated with amphid sheath",neuron,body nervous system
+ABplpaaaaap, AWCL ring gang,AWCL,ABplpaaaaap,"Amphid wing cells, neurons having ciliated sheet-like sensory endings closely associated with amphid sheath",neuron,body nervous system
+ABprpaaaaap, AWCR ring gang,AWCR,ABprpaaaaap,"Amphid wing cells, neurons having ciliated sheet-like sensory endings closely associated with amphid sheath",neuron,body nervous system
+ABprppppapa, B blast,B,ABprppppapa,"Rectal cell, postembryonic blast cell in male",rectum,Alimentary tract
+ABalppappap, BAGL  ring gang,BAGL,ABalppappap,"Neuron, ciliated ending in head, no supporting cells, associated with ILso",neuron,body nervous system
+ABarappppap, BAGR ring gang,BAGR,ABarappppap,"Neuron, ciliated ending in head, no supporting cells, associated with ILso",neuron,body nervous system
+ABarppaappp, BDUL lat neur,BDUL,ABarppaappp,"Neuron, process runs along excretory canal and into ring, unique darkly staining synaptic vesicles",neuron,body nervous system
+ABarpppappp, BDUR lat neur,BDUR,ABarpppappp,"Neuron, process runs along excretory canal and into ring, unique darkly staining synaptic vesicles",neuron,body nervous system
+ABprpppppaa, body muscle,mu_bod,ABprpppppaa,Embryonic body wall muscle,body muscle,body mesoderm
+Capaaaa, body muscle,mu_bod,Capaaaa,Embryonic body wall muscle,body muscle,body mesoderm
+Capaaap, body muscle,mu_bod,Capaaap,Embryonic body wall muscle,body muscle,body mesoderm
+Capaapa, body muscle,mu_bod,Capaapa,Embryonic body wall muscle,body muscle,body mesoderm
+Capaapp, body muscle,mu_bod,Capaapp,Embryonic body wall muscle,body muscle,body mesoderm
+Capapaa, body muscle,mu_bod,Capapaa,Embryonic body wall muscle,body muscle,body mesoderm
+Capapap, body muscle,mu_bod,Capapap,Embryonic body wall muscle,body muscle,body mesoderm
+Capappa, body muscle,mu_bod,Capappa,Embryonic body wall muscle,body muscle,body mesoderm
+Capappp, body muscle,mu_bod,Capappp,Embryonic body wall muscle,body muscle,body mesoderm
+Cappaaa, body muscle,mu_bod,Cappaaa,Embryonic body wall muscle,body muscle,body mesoderm
+Cappaap, body muscle,mu_bod,Cappaap,Embryonic body wall muscle,body muscle,body mesoderm
+Cappapa, body muscle,mu_bod,Cappapa,Embryonic body wall muscle,body muscle,body mesoderm
+Cappapp, body muscle,mu_bod,Cappapp,Embryonic body wall muscle,body muscle,body mesoderm
+Capppaa, body muscle,mu_bod,Capppaa,Embryonic body wall muscle,body muscle,body mesoderm
+Capppap, body muscle,mu_bod,Capppap,Embryonic body wall muscle,body muscle,body mesoderm
+Cappppd, body muscle,mu_bod,Cappppd,Embryonic body wall muscle,body muscle,body mesoderm
+Cappppv, body muscle,mu_bod,Cappppv,Embryonic body wall muscle,body muscle,body mesoderm
+Cppaaaa, body muscle,mu_bod,Cppaaaa,Embryonic body wall muscle,body muscle,body mesoderm
+Cppaaap, body muscle,mu_bod,Cppaaap,Embryonic body wall muscle,body muscle,body mesoderm
+Cppaapa, body muscle,mu_bod,Cppaapa,Embryonic body wall muscle,body muscle,body mesoderm
+Cppaapp, body muscle,mu_bod,Cppaapp,Embryonic body wall muscle,body muscle,body mesoderm
+Cppapaa, body muscle,mu_bod,Cppapaa,Embryonic body wall muscle,body muscle,body mesoderm
+Cppapap, body muscle,mu_bod,Cppapap,Embryonic body wall muscle,body muscle,body mesoderm
+Cppappa, body muscle,mu_bod,Cppappa,Embryonic body wall muscle,body muscle,body mesoderm
+Cppappp, body muscle,mu_bod,Cppappp,Embryonic body wall muscle,body muscle,body mesoderm
+Cpppaaa, body muscle,mu_bod,Cpppaaa,Embryonic body wall muscle,body muscle,body mesoderm
+Cpppaap, body muscle,mu_bod,Cpppaap,Embryonic body wall muscle,body muscle,body mesoderm
+Cpppapa, body muscle,mu_bod,Cpppapa,Embryonic body wall muscle,body muscle,body mesoderm
+Cpppapp, body muscle,mu_bod,Cpppapp,Embryonic body wall muscle,body muscle,body mesoderm
+Cppppaa, body muscle,mu_bod,Cppppaa,Embryonic body wall muscle,body muscle,body mesoderm
+Cppppap, body muscle,mu_bod,Cppppap,Embryonic body wall muscle,body muscle,body mesoderm
+Cpppppd, body muscle,mu_bod,Cpppppd,Embryonic body wall muscle,body muscle,body mesoderm
+Cpppppv, body muscle,mu_bod,Cpppppv,Embryonic body wall muscle,body muscle,body mesoderm
+Daaaa, body muscle,mu_bod,Daaaa,Embryonic body wall muscle,body muscle,body mesoderm
+Daaap, body muscle,mu_bod,Daaap,Embryonic body wall muscle,body muscle,body mesoderm
+Daapa, body muscle,mu_bod,Daapa,Embryonic body wall muscle,body muscle,body mesoderm
+Daapp, body muscle,mu_bod,Daapp,Embryonic body wall muscle,body muscle,body mesoderm
+Dapaa, body muscle,mu_bod,Dapaa,Embryonic body wall muscle,body muscle,body mesoderm
+Dapap, body muscle,mu_bod,Dapap,Embryonic body wall muscle,body muscle,body mesoderm
+Dappaa, body muscle,mu_bod,Dappaa,Embryonic body wall muscle,body muscle,body mesoderm
+Dappap, body muscle,mu_bod,Dappap,Embryonic body wall muscle,body muscle,body mesoderm
+Dapppa, body muscle,mu_bod,Dapppa,Embryonic body wall muscle,body muscle,body mesoderm
+Dapppp, body muscle,mu_bod,Dapppp,Embryonic body wall muscle,body muscle,body mesoderm
+Dpaaa, body muscle,mu_bod,Dpaaa,Embryonic body wall muscle,body muscle,body mesoderm
+Dpaap, body muscle,mu_bod,Dpaap,Embryonic body wall muscle,body muscle,body mesoderm
+Dpapa, body muscle,mu_bod,Dpapa,Embryonic body wall muscle,body muscle,body mesoderm
+Dpapp, body muscle,mu_bod,Dppaa,Embryonic body wall muscle,body muscle,body mesoderm
+Dppaa, body muscle,mu_bod,Dppap,Embryonic body wall muscle,body muscle,body mesoderm
+Dppap, body muscle,mu_bod,Dppap,Embryonic body wall muscle,body muscle,body mesoderm
+Dpppaa, body muscle,mu_bod,Dpppaa,Embryonic body wall muscle,body muscle,body mesoderm
+Dpppap, body muscle,mu_bod,Dpppap,Embryonic body wall muscle,body muscle,body mesoderm
+Dppppa, body muscle,mu_bod,Dppppa,Embryonic body wall muscle,body muscle,body mesoderm
+Dppppp, body muscle,mu_bod,Dppppp,Embryonic body wall muscle,body muscle,body mesoderm
+MSaapppaa, body muscle,mu_bod,MSaapppaa,Embryonic body wall muscle,body muscle,body mesoderm
+MSaapppap, body muscle,mu_bod,MSaapppap,Embryonic body wall muscle,body muscle,body mesoderm
+MSaappppa, body muscle,mu_bod,MSaappppa,Embryonic body wall muscle,body muscle,body mesoderm
+MSaappppp, body muscle,mu_bod,MSaappppp,Embryonic body wall muscle,body muscle,body mesoderm
+MSapaaap, body muscle,mu_bod,MSapaaap,Embryonic body wall muscle,body muscle,body mesoderm
+MSapapap, body muscle,mu_bod,MSapapap,Embryonic body wall muscle,body muscle,body mesoderm
+MSapappa, body muscle,mu_bod,MSapappa,Embryonic body wall muscle,body muscle,body mesoderm
+MSapappp, body muscle,mu_bod,MSapappp,Embryonic body wall muscle,body muscle,body mesoderm
+MSappapp, body muscle,mu_bod,MSappapp,Embryonic body wall muscle,body muscle,body mesoderm
+MSapppaa, body muscle,mu_bod,MSapppaa,Embryonic body wall muscle,body muscle,body mesoderm
+MSapppap, body muscle,mu_bod,MSapppap,Embryonic body wall muscle,body muscle,body mesoderm
+MSappppa, body muscle,mu_bod,MSappppa,Embryonic body wall muscle,body muscle,body mesoderm
+MSappppp, body muscle,mu_bod,MSappppp,Embryonic body wall muscle,body muscle,body mesoderm
+MSpappaa, body muscle,mu_bod,MSpappaa,Embryonic body wall muscle,body muscle,body mesoderm
+MSpappap, body muscle,mu_bod,MSpappap,Embryonic body wall muscle,body muscle,body mesoderm
+MSpapppaa, body muscle,mu_bod,MSpapppaa,Embryonic body wall muscle,body muscle,body mesoderm
+MSpapppap, body muscle,mu_bod,MSpapppap,Embryonic body wall muscle,body muscle,body mesoderm
+MSpappppa, body muscle,mu_bod,MSpappppa,Embryonic body wall muscle,body muscle,body mesoderm
+MSpappppp, body muscle,mu_bod,MSpappppp,Embryonic body wall muscle,body muscle,body mesoderm
+MSppaaap, body muscle,mu_bod,MSppaaap,Embryonic body wall muscle,body muscle,body mesoderm
+MSppapap, body muscle,mu_bod,MSppapap,Embryonic body wall muscle,body muscle,body mesoderm
+MSppappa, body muscle,mu_bod,MSppappa,Embryonic body wall muscle,body muscle,body mesoderm
+MSppappp, body muscle,mu_bod,MSppappp,Embryonic body wall muscle,body muscle,body mesoderm
+MSpppapp, body muscle,mu_bod,MSpppapp,Embryonic body wall muscle,body muscle,body mesoderm
+MSppppaa, body muscle,mu_bod,MSppppaa,Embryonic body wall muscle,body muscle,body mesoderm
+MSppppap, body muscle,mu_bod,MSppppap,Embryonic body wall muscle,body muscle,body mesoderm
+MSpppppa, body muscle,mu_bod,MSpppppa,Embryonic body wall muscle,body muscle,body mesoderm
+MSpppppp, body muscle,mu_bod,MSpppppp,Embryonic body wall muscle,body muscle,body mesoderm
+ABalapaaapa, CANL lat neur,CANL,ABalapaaapa,"Process runs along excretory canal, no synapses, essential for survival",neuron,body nervous system
+ABalappappa, CANR lat neur,CANR,ABalappappa,"Process runs along excretory canal, no synapses, essential for survival",neuron,body nervous system
+ABplaaaaappa, CEPDL ring gang,CEPDL,ABplaaaaappa,"Cephalic neurons, contain dopamine",neuron,body nervous system
+ABarpapaappa, CEPDR ring gang,CEPDR,ABarpapaappa,"Cephalic neurons, contain dopamine",neuron,body nervous system
+ABarpaaaapp, CEPshDL ring gang,CEPshDL,ABarpaaaapp,"Cephalic sheath, sheet-like processes envelop neuropil of the ring and part of ventral ganglion",neuron support,body nervous system
+ABarpaaapap, CEPshDR ring gang,CEPshDR,ABarpaaapap,"Cephalic sheath, sheet-like processes envelop neuropil of the ring and part of ventral ganglion",neuron support,body nervous system
+ABplpaaapap, CEPshVL ring gang,CEPshVL,ABplpaaapap,"Cephalic sheath, sheet-like processes envelop neuropil of the ring and part of ventral ganglion",neuron support,body nervous system
+ABprpaaapap, CEPshVR ring gang,CEPshVR,ABprpaaapap,"Cephalic sheath, sheet-like processes envelop neuropil of the ring and part of ventral ganglion",neuron support,body nervous system
+ABalapapppp, CEPsoDL ring gang,CEPsoDL,ABalapapppp,Cephalic socket,neuron support,body nervous system
+ABalapppppp, CEPsoDR ring gang,CEPsoDR,ABalapppppp,Cephalic socket,neuron support,body nervous system
+ABalppaappp, CEPsoVL ring gang,CEPsoVL,ABalppaappp,Cephalic socket,neuron support,body nervous system
+ABalaapappp, CEPsoVR ring gang,CEPsoVR,ABalaapappp,Cephalic socket,neuron support,body nervous system
+ABplpaappppa, CEPVL ring gang,CEPVL,ABplpaappppa,"Cephalic neurons, contain dopamine",neuron,body nervous system
+ABprpaappppa, CEPVR ring gang,CEPVR,ABprpaappppa,"Cephalic neurons, contain dopamine",neuron,body nervous system
+MSapapaaa, coelomocyte AL,ccAL,MSapapaaa,Embryonic coelomocytes,coelomocyte,body mesoderm
+MSppapaaa, coelomocyte AR,ccAR,MSppapaaa,Embryonic coelomocytes,coelomocyte,body mesoderm
+MSapapaap, coelomocyte PL,ccPL,MSapapaap,Embryonic coelomocytes,coelomocyte,body mesoderm
+MSppapaap, coelomocyte PR,ccPR,MSppapaap,Embryonic coelomocytes,coelomocyte,body mesoderm
+ABprppapaap, DA1 r-v gang,DA1,ABprppapaap,"Ventral cord motor neurons, innervate dorsal muscles",neuron,body nervous system
+ABplppapapa, DA2 cord,DA2,ABplppapapa,"Ventral cord motor neurons, innervate dorsal muscles",neuron,body nervous system
+ABprppapapa, DA3 cord,DA3,ABprppapapa,"Ventral cord motor neurons, innervate dorsal muscles",neuron,body nervous system
+ABplppapapp, DA4 cord,DA4,ABplppapapp,"Ventral cord motor neurons, innervate dorsal muscles",neuron,body nervous system
+ABprppapapp, DA5 cord,DA5,ABprppapapp,"Ventral cord motor neurons, innervate dorsal muscles",neuron,body nervous system
+ABplpppaaap, DA6 cord,DA6,ABplpppaaap,"Ventral cord motor neurons, innervate dorsal muscles",neuron,body nervous system
+ABprpppaaap, DA7 cord,DA7,ABprpppaaap,"Ventral cord motor neurons, innervate dorsal muscles",neuron,body nervous system
+ABprpapappp, DA8 cord,DA8,ABprpapappp,"Ventral cord motor neurons, innervate dorsal muscles",neuron,body nervous system
+ABplpppaaaa, DA9 p-a gang,DA9,ABplpppaaaa,"Ventral cord motor neurons, innervate dorsal muscles",neuron,body nervous system
+ABplpaaaapp, DB1 r-v gang,DB1/3,ABplpaaaapp,"Ventral cord motor neurons, innervate dorsal muscles",neuron,body nervous system
+ABarappappa, DB2 r-v gang,DB2,ABarappappa,"Ventral cord motor neurons, innervate dorsal muscles",neuron,body nervous system
+ABprpaaaapp, DB3 cord,DB3/1,ABprpaaaapp,"Ventral cord motor neurons, innervate dorsal muscles",neuron,body nervous system
+ABprpappapp, DB4 cord,DB4,ABprpappapp,"Ventral cord motor neurons, innervate dorsal muscles",neuron,body nervous system
+ABplpapappp, DB5 cord,DB5,ABplpapappp,"Ventral cord motor neurons, innervate dorsal muscles",neuron,body nervous system
+ABplppaappp, DB6 cord,DB6,ABplppaappp,"Ventral cord motor neurons, innervate dorsal muscles",neuron,body nervous system
+ABprppaappp, DB7 cord,DB7,ABprppaappp,"Ventral cord motor neurons, innervate dorsal muscles",neuron,body nervous system
+ABplppappap, DD1 r-v gang,DD1,ABplppappap,"Ventral cord motor neurons, reciprocal inhibitors, change synaptic pattern during postembryonic development",neuron,body nervous system
+ABprppappap, DD2 cord,DD2,ABprppappap,"Ventral cord motor neurons, reciprocal inhibitors, change synaptic pattern during postembryonic development",neuron,body nervous system
+ABplppapppa, DD3 cord,DD3,ABplppapppa,"Ventral cord motor neurons, reciprocal inhibitors, change synaptic pattern during postembryonic development",neuron,body nervous system
+ABprppapppa, DD4 cord,DD4,ABprppapppa,"Ventral cord motor neurons, reciprocal inhibitors, change synaptic pattern during postembryonic development",neuron,body nervous system
+ABplppapppp, DD5 cord,DD5,ABplppapppp,"Ventral cord motor neurons, reciprocal inhibitors, change synaptic pattern during postembryonic development",neuron,body nervous system
+ABprppapppp, DD6 p-a gang,DD6,ABprppapppp,"Ventral cord motor neurons, reciprocal inhibitors, change synaptic pattern during postembryonic development",neuron,body nervous system
+ABalaaaalar, death,,, death,death,death
+ABalaaaalpa, death,,, death,death,death
+ABalaaaarla, death,,, death,death,death
+ABalaaaarra, death,,, death,death,death
+ABalaaaparl, death,,, death,death,death
+ABalaaapplr, death,,, death,death,death
+ABalaapaaal, death,,, death,death,death
+ABalaapaapa, death,,, death,death,death
+ABalaapapa, death,,, death,death,death
+ABalaapappa, death,,, death,death,death
+ABalaappaa, death,,, death,death,death
+ABalaapppap, death,,, death,death,death
+ABalaappppap, death,,, death,death,death
+ABalapaaaap, death,,, death,death,death
+ABalapaapap, death,,, death,death,death
+ABalapaappap, death,,, death,death,death
+ABalapapaa, death,,, death,death,death
+ABalapapapap, death,,, death,death,death
+ABalapappaap, death,,, death,death,death
+ABalappaaa, death,,, death,death,death
+ABalappaapp, death,,, death,death,death
+ABalappapap, death,,, death,death,death
+ABalapppapap, death,,, death,death,death
+ABalappppaap, death,,, death,death,death
+ABalpaaaapp, death,,, death,death,death
+ABalpaaapap, death,,, death,death,death
+ABalpaaappa, death,,, death,death,death
+ABalpapaapp, death,,, death,death,death
+ABalpapapapa, death,,, death,death,death
+ABalpapappa, death,,, death,death,death
+ABalpappaaa, death,,, death,death,death
+ABalpappaapp, death,,, death,death,death
+ABalpapppap, death,,, death,death,death
+ABalppaaaa, death,,, death,death,death
+ABalppaapa, death,,, death,death,death
+ABalppaappa, death,,, death,death,death
+ABalppapppap, death,,, death,death,death
+ABalpppaapv, death,,, death,death,death
+ABalpppappa, death,,, death,death,death
+ABalpppapppp, death,,, death,death,death
+ABalppppaav, death,,, death,death,death
+ABalppppapap, death,,, death,death,death
+ABalppppapp, death,,, death,death,death
+ABalppppppap, death,,, death,death,death
+ABaraaaapaa, death,,, death,death,death
+ABaraaaapp, death,,, death,death,death
+ABaraapapaad, death,,, death,death,death
+ABaraapppaad, death,,, death,death,death
+ABarapaaapp, death,,, death,death,death
+ABarapaapap, death,,, death,death,death
+ABarapapaaa, death,,, death,death,death
+ABarapapaapp, death,,, death,death,death
+ABarapappap, death,,, death,death,death
+ABarappaaap, death,,, death,death,death
+ABarappaapp, death,,, death,death,death
+ABarappapapa, death,,, death,death,death
+ABarapppppap, death,,, death,death,death
+ABarpaaapp, death,,, death,death,death
+ABarpapaaap, death,CEMDR,ABarpapaaap,"Male specific cephalic neurons (programmed cell death in hermaphrodite embryo) open to outside, possible function in male chemotaxis toward hermaphrodite.",death,death
+ABarpapaapa, death,,, death,death,death
+ABplaaaaaap, death,CEMDL,ABplaaaaaap,"Male specific cephalic neurons (programmed cell death in hermaphrodite embryo) open to outside, possible function in male chemotaxis toward hermaphrodite.",death,death
+ABplaaaaapa, death,,, death,death,death
+ABplaapapppp, death,,, death,death,death
+ABplapaaaaa, death,,, death,death,death
+ABplapapppa, death,,, death,death,death
+ABplapappppp, death,,, death,death,death
+ABplapppaap, death,,, death,death,death
+ABplapppapa, death,,, death,death,death
+ABplpaaappap, death,,, death,death,death
+ABplpaapapp, death,CEMVL,ABplpaapapp,"Male specific cephalic neurons (programmed cell death in hermaphrodite embryo) open to outside, possible function in male chemotaxis toward hermaphrodite.",death,death
+ABplpaappppp, death,,, death,death,death
+ABplpappap, death,,, death,death,death
+ABplppaaaapa, death,,, death,death,death
+ABplppaaap, death,,, death,death,death
+ABplppaapaa, death,,, death,death,death
+ABplpppapp, death,,, death,death,death
+ABpraaaaapv, death,,, death,death,death
+ABpraaaappa, death,,, death,death,death
+ABpraaaapppp, death,,, death,death,death
+ABpraaapaav, death,,, death,death,death
+ABpraaapapap, death,,, death,death,death
+ABpraaapapp, death,,, death,death,death
+ABpraaapppap, death,,, death,death,death
+ABpraapapppp, death,,, death,death,death
+ABprapaaaaa, death,,, death,death,death
+ABprapapppa, death,,, death,death,death
+ABprapappppp, death,,, death,death,death
+ABprapppaap, death,,, death,death,death
+ABprapppapa, death,,, death,death,death
+ABprpaaappap, death,,, death,death,death
+ABprpaapapp, death,CEMVR,ABprpaapapp,"Male specific cephalic neurons (programmed cell death in hermaphrodite embryo) open to outside, possible function in male chemotaxis toward hermaphrodite.",death,death
+ABprpaappppp, death,,, death,death,death
+ABprppaaaapa, death,,, death,death,death
+ABprppaaap, death,,, death,death,death
+ABprppaapaa, death,,, death,death,death
+ABprpppapp, death,,, death,death,death
+Caapap, death,,, death,death,death
+MSaaaappa, death,,, death,death,death
+MSaaappa, death,,, death,death,death
+MSaapaapap, death,,, death,death,death
+MSaapapap, death,,, death,death,death
+MSapaapa, death,,, death,death,death
+MSappapa, death,,, death,death,death
+MSpaaaaap, death,,, death,death,death
+MSpaapaap, death,,, death,death,death
+MSpaapp, death,,, death,death,death
+MSpapaapap, death,,, death,death,death
+MSpapapap, death,,, death,death,death
+MSppaapa, death,,, death,death,death
+MSpppaaa, death,,, death,death,death
+MSpppapa, death,,, death,death,death
+ABprppppapp, DVA d-r gang,DVA,ABprppppapp,"Ring interneurons, cell bodies in dorsorectal ganglion",neuron,body nervous system
+Caapaa, DVC d-r gang,DVC,Caapaa,"Ring interneurons, cell bodies in dorsorectal ganglion",neuron,body nervous system
+ABaraaaapap, e1D  pharynx,e1D,ABaraaaapap,Pharyngeal epithelial cells,pharynx structural,Alimentary tract
+ABaraaaaaaa, e1VL  pharynx,e1VL,ABaraaaaaaa,Pharyngeal epithelial cells,pharynx structural,Alimentary tract
+ABaraaaaapa, e1VR  pharynx,e1VR,ABaraaaaapa,Pharyngeal epithelial cells,pharynx structural,Alimentary tract
+ABalpaapaap, e2DL pharynx,e2DL,ABalpaapaap,Pharyngeal epithelial cells,pharynx structural,Alimentary tract
+ABaraaapaap, e2DR  pharynx,e2DR,ABaraaapaap,Pharyngeal epithelial cells,pharynx structural,Alimentary tract
+ABalpappapa, e2V pharynx,e2V,ABalpappapa,Pharyngeal epithelial cells,pharynx structural,Alimentary tract
+ABaraapaaaa, e3D  pharynx,e3D,ABaraapaaaa,Pharyngeal epithelial cells,pharynx structural,Alimentary tract
+ABalpaaaaaa, e3VL pharynx,e3VL,ABalpaaaaaa,Pharyngeal epithelial cells,pharynx structural,Alimentary tract
+ABarapaaaaa, e3VR  pharynx,e3VR,ABarapaaaaa,Pharyngeal epithelial cells,pharynx structural,Alimentary tract
+ABprpaaaapa, emb exc socket G1 blast,G1,ABprpaaaapa,"Postembryonic blast cell, excretory socket in embryo",hypodermal blast,hypoderm
+ABplpappaap, excretory cell,exc_cell,ABplpappaap,Large H-shaped excretory cell,excretory system,body mesoderm
+ABplpaaaapa, excretory duct,exc_duct,ABplpaaaapa,Excretory duct,excretory system,body mesoderm
+ABprpapapaa, excretory gland R,exc_gl_R,ABprpapapaa,"Excretory glands, fused, send processes to ring, open into excretory duct",excretory system,body mesoderm
+ABplpapapaa, execretory gland L,exc_gl_L,ABplpapapaa,"Excretory glands, fused, send processes to ring, open into excretory duct",excretory system,body mesoderm
+ABplapaaapad, FLPL ring gang,FLPL,ABplapaaapad,"Neuron, ciliated ending in head, no supporting cells, associated with ILso",neuron,body nervous system
+ABprapaaapad, FLPR ring gang,FLPR,ABprapaaapad,"Neuron, ciliated ending in head, no supporting cells, associated with ILso",neuron,body nervous system
+MSaapaapaa, g1AL pharynx,g1AL,MSaapaapaa,Pharyngeal gland cells,pharynx gland,Alimentary tract
+MSpapaapaa, g1AR pharynx,g1AR,MSpapaapaa,Pharyngeal gland cells,pharynx gland,Alimentary tract
+MSaaaaapap, g1p pharynx,g1P,MSaaaaapap,Pharyngeal gland cells,pharynx gland,Alimentary tract
+ABplapaapa, G2 neuroblast,G2,ABplapaapa,"Postembryonic blast cell, excretory socket in L1, G2.p becomes socket later",hypodermal blast,hypoderm
+MSaapapaa, g2L pharynx,g2L,MSaapapaa,Pharyngeal gland cells,pharynx gland,Alimentary tract
+MSpapapaa, g2R pharynx,g2R,MSpapapaa,Pharyngeal gland cells,pharynx gland,Alimentary tract
+Z2, germ line,,,germline,gonad germline,gonad
+Z3, germ line,,,germline,gonad germline,gonad
+MSaaaaaal, GLRDL ring gang,GLRDL,MSaaaaaal,"Set of six cells that form a thin cylindrical sheet between pharynx and ring neuropile; no chemical synapses, but gap junctions with muscle arms and RME motor neurons",glial,body nervous system
+MSaaaaaar, GLRDR ring gang,GLRDR,MSaaaaaar,"Set of six cells that form a thin cylindrical sheet between pharynx and ring neuropile; no chemical synapses, but gap junctions with muscle arms and RME motor neurons",glial,body nervous system
+MSapaaaad, GLRL ring gang,GLRL,MSapaaaad,"Set of six cells that form a thin cylindrical sheet between pharynx and ring neuropile; no chemical synapses, but gap junctions with muscle arms and RME motor neurons",glial,body nervous system
+MSppaaaad, GLRR ring gang,GLRR,MSppaaaad,"Set of six cells that form a thin cylindrical sheet between pharynx and ring neuropile; no chemical synapses, but gap junctions with muscle arms and RME motor neurons",glial,body nervous system
+MSapaaaav, GLRVL ring gang,GLRVL,MSapaaaav,"Set of six cells that form a thin cylindrical sheet between pharynx and ring neuropile; no chemical synapses, but gap junctions with muscle arms and RME motor neurons",glial,body nervous system
+MSppaaaav, GLRVR ring gang,GLRVR,MSppaaaav,"Set of six cells that form a thin cylindrical sheet between pharynx and ring neuropile; no chemical synapses, but gap junctions with muscle arms and RME motor neurons",glial,body nervous system
+ABplaaappa, H0L  hypodermal ectoblast,HOL,ABplaaappa,Seam hypodermal cell,hypodermis seam,hypoderm
+ABarpapppa, H0R  hypodermal ectoblast,HOR,ABarpapppa,Seam hypodermal cell,hypodermis seam,hypoderm
+ABplaaappp, H1L hypodermal ectoblast,H1L,ABplaaappp,"Seam hypodermal cell, postembryonic blast cell",hypodermis seam blast,hypoderm
+ABarpapppp, H1R hypodermal ectoblast,H1R,ABarpapppp,"Seam hypodermal cell, postembryonic blast cell",hypodermis seam blast,hypoderm
+ABarppaaap, H2L hypodermal ectoblast,H2L,ABarppaaap,"Seam hypodermal cell, postemb. blast cell, L1 deirid socket",hypodermis seam blast,hypoderm
+ABarpppaap, H2R hypodermal ectoblast,H2R,ABarpppaap,"Seam hypodermal cell, postemb. blast cell, L1 deirid socket",hypodermis seam blast,hypoderm
+MSappaaa, head mesodermal cell,hmc,MSappaaa,"Head mesodermal cell, function unknown",unknown,body mesoderm
+ABplapppappa, HSNL lat neur,HSNL,ABplapppappa,"Herm. specific motor neurons (die in male embryo), innervate vulval muscles, serotonergic",neuron,body nervous system
+ABprapppappa, HSNR lat neur,HSNR,ABprapppappa,"Herm. specific motor neurons (die in male embryo), innervate vulval muscles, serotonergic",neuron,body nervous system
+ABalpaapppa, hyp 1 DL,hyp1,ABalpaapppa,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABaraaapppp, hyp 1 DR,hyp1,ABaraaapppp,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABarappaapa, hyp 1 V,hyp1,ABarappaapa,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABplppppppp, hyp 10,hyp10,ABplppppppp,Tail ventral hypodermis,hypodermis,hypoderm
+ABprppppppp, hyp 10,hyp10,ABprppppppp,Tail ventral hypodermis,hypodermis,hypoderm
+Cpappv, hyp 11,hyp11,Cpappv,Tail dorsal hypodermis,hypodermis,hypoderm
+ABalpaapppp, hyp 2 DL,hyp2,ABalpaapppp,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABalpapaaap, hyp 2 V,hyp2,ABalpapaaap,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABplaapaaaa, hyp 3,hyp3,ABplaapaaaa,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABpraapaaaa, hyp 3,hyp3,ABpraapaaaa,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABarpapapa, hyp 4,hyp4,ABarpapapa,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABplaappaa, hyp 4,hyp4,ABplaappaa,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABpraappaa, hyp 4,hyp4,ABpraappaa,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABarpappap, hyp 5,hyp5,ABarpappap,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABplaaapap, hyp 5,hyp5,ABplaaapap,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABarpaapaa, hyp 6,hyp6,ABarpaapaa,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABarpapapp, hyp 6,hyp6,ABarpapapp,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABplaaaapa, hyp 6,hyp6,ABplaaaapa,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABplaaaapp, hyp 6,hyp6,ABplaaaapp,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABplaappap, hyp 6,hyp6,ABplaappap,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABpraappap, hyp 6,hyp6,ABpraappap,Cylindrical hypodermal syncytium in head,hypodermis,hypoderm
+ABarpaapap, hyp 7,hyp7,ABarpaapap,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+ABarpaappa, hyp 7,hyp7,ABarpaappa,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+ABarpaappp, hyp 7,hyp7,ABarpaappp,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+ABarppaapa, hyp 7,hyp7,ABarppaapa,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+ABarpppapa, hyp 7,hyp7,ABarpppapa,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+ABplaapppa, hyp 7,hyp7,ABplaapppa,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+ABplaapppp, hyp 7,hyp7,ABplaapppp,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+ABplappppa, hyp 7,hyp7,ABplappppa,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+ABpraapppa, hyp 7,hyp7,ABpraapppa,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+ABpraapppp, hyp 7,hyp7,ABpraapppp,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+ABprappppa, hyp 7,hyp7,ABprappppa,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+Caaaaa, hyp 7,hyp7,Caaaaa,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+Caaaap, hyp 7,hyp7,Caaaap,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+Caaapa, hyp 7,hyp7,Caaapa,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+Caaapp, hyp 7,hyp7,Caaapp,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+Caappd, hyp 7,hyp7,Caappd,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+Cpaaaa, hyp 7,hyp7,Cpaaaa,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+Cpaaap, hyp 7,hyp7,Cpaaap,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+Cpaapa, hyp 7,hyp7,Cpaapa,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+Cpaapp, hyp 7,hyp7,Cpaapp,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+Cpapaa, hyp 7,hyp7,Cpapaa,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+Cpapap, hyp 7,hyp7,Cpapap,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+Cpappd, hyp 7,hyp7,Cpappd,Embryonic large hypodermal syncytium,hypodermis,hypoderm
+ABplpppapap, hyp 8/9,hyp8/9,ABplpppapap,Tail ventral hypodermis,hypodermis,hypoderm
+ABprpppapap, hyp 8/9,hyp8/9,ABprpppapap,Tail ventral hypodermis,hypodermis,hypoderm
+ABalpapppaa, I1L pharynx,I1L,ABalpapppaa,"Pharyngeal interneurons: ant sensory, input from RIP",pharynx neuron,Alimentary tract
+ABarapappaa, I1R pharynx,I1R,ABarapappaa,"Pharyngeal interneurons: ant sensory, input from RIP",pharynx neuron,Alimentary tract
+ABalpappaapa, I2L pharynx,I2L,ABalpappaapa,"Pharyngeal interneurons, ant sensory.",pharynx neuron,Alimentary tract
+ABarapapaapa, I2R pharynx,I2R,ABarapapaapa,"Pharyngeal interneurons, ant sensory.",pharynx neuron,Alimentary tract
+MSaaaaapaa, I3 pharynx,I3,MSaaaaapaa,"Pharyngeal interneuron, ant sensory.",pharynx neuron,Alimentary tract
+MSaaaapaa, I4 pharynx,I4,MSaaaapaa,Pharyngeal interneuron.,pharynx neuron,Alimentary tract
+ABarapapapp, I5 pharynx,I5,ABarapapapp,"Pharyngeal interneuron, post sensory.",pharynx neuron,Alimentary tract
+MSpaaapaa, I6 pharynx,I6,MSpaaapaa,"Pharyngeal interneuron, post sensory.",pharynx neuron,Alimentary tract
+ABalapappaaa, IL1DL ring gang,IL1DL,ABalapappaaa,Inner labial neuron,neuron,body nervous system
+ABalappppaaa, IL1DR ring gang,IL1DR,ABalappppaaa,Inner labial neuron,neuron,body nervous system
+ABalapaappaa, IL1L ring gang,IL1L,ABalapaappaa,Inner labial neuron,neuron,body nervous system
+ABalaappppaa, IL1R ring gang,IL1R,ABalaappppaa,Inner labial neuron,neuron,body nervous system
+ABalppapppaa, IL1VL ring gang,IL1VL,ABalppapppaa,Inner labial neuron,neuron,body nervous system
+ABarapppppaa, IL1VR ring gang,IL1VR,ABarapppppaa,Inner labial neuron,neuron,body nervous system
+ABalapappap, IL2DL ring gang,IL2DL,ABalapappap,Inner labial neuron,neuron,body nervous system
+ABalappppap, IL2DR ring gang,IL2DR,ABalappppap,Inner labial neuron,neuron,body nervous system
+ABalapaappp, IL2L ring gang,IL2L,ABalapaappp,Inner labial neuron,neuron,body nervous system
+ABalaappppp, IL2R ring gang,IL2R,ABalaappppp,Inner labial neuron,neuron,body nervous system
+ABalppapppp, IL2VL  ring gang,IL2VL,ABalppapppp,Inner labial neuron,neuron,body nervous system
+ABarapppppp, IL2VR ring gang,IL2VR,ABarapppppp,Inner labial neuron,neuron,body nervous system
+ABalaaaparr, ILshDL ring gang,ILshDL,ABalaaaparr,Inner labial sheath,neuron support,body nervous system
+ABalaaappll, ILshDR ring gang,ILshDR,ABalaaappll,Inner labial sheath,neuron support,body nervous system
+ABalaaaalpp, ILshL ring gang,ILshL,ABalaaaalpp,Inner labial sheath,neuron support,body nervous system
+ABalaapaapp, ILshR ring gang,ILshR,ABalaapaapp,Inner labial sheath,neuron support,body nervous system
+ABalppapaap, ILshVL ring gang,ILshVL,ABalppapaap,Inner labial sheath,neuron support,body nervous system
+ABarapppaap, ILshVR ring gang,ILshVR,ABarapppaap,Inner labial sheath,neuron support,body nervous system
+ABplaapaaap, ILsoDL ring gang,ILsoDL,ABplaapaaap,Inner labial socket,neuron support,body nervous system
+ABpraapaaap, ILsoDR ring gang,ILsoDR,ABpraapaaap,Inner labial socket,neuron support,body nervous system
+ABalaaapall, ILsoL ring gang,ILsoL,ABalaaapall,Inner labial socket,neuron support,body nervous system
+ABalaaapprr, ILsoR ring gang,ILsoR,ABalaaapprr,Inner labial socket,neuron support,body nervous system
+ABalppapapp, ILsoVL  ring gang,ILsoVL,ABalppapapp,Inner labial socket,neuron support,body nervous system
+ABarapppapp, ILsoVR ring gang,ILsoVR,ABarapppapp,Inner labial socket,neuron support,body nervous system
+Ealaad, int1DL intestine,int,Ealaad,Intestinal cell,intestine,Alimentary tract
+Earaad, int1DR intestine,int,Earaad,Intestinal cell,intestine,Alimentary tract
+Ealaav, int1VL intestine,int,Ealaav,Intestinal cell,intestine,Alimentary tract
+Earaav, int1VR intestine,int,Earaav,Intestinal cell,intestine,Alimentary tract
+Earpa, int2D intestine,int,Earpa,Intestinal cell,intestine,Alimentary tract
+Ealpa, int2V intestine,int,Ealpa,Intestinal cell,intestine,Alimentary tract
+Earap, int3D intestine,int,Earap,Intestinal cell,intestine,Alimentary tract
+Ealap, int3V intestine,int,Ealap,Intestinal cell,intestine,Alimentary tract
+Epraa, int4D intestine,int,Epraa,Intestinal cell,intestine,Alimentary tract
+Eplaa, int4V intestine,int,Eplaa,Intestinal cell,intestine,Alimentary tract
+Ealpp, int5L intestine,int,Ealpp,Intestinal cell,intestine,Alimentary tract
+Earpp, int5R intestine,int,Earpp,Intestinal cell,intestine,Alimentary tract
+Eplap, int6L intestine,int,Eplap,Intestinal cell,intestine,Alimentary tract
+Eprap, int6R intestine,int,Eprap,Intestinal cell,intestine,Alimentary tract
+Eplpa, int7L intestine,int,Eplpa,Intestinal cell,intestine,Alimentary tract
+Eprpa, int7R intestine,int,Eprpa,Intestinal cell,intestine,Alimentary tract
+Eplppa, int8L intestine,int,Eplppa,Intestinal cell,intestine,Alimentary tract
+Eprppa, int8R intestine,int,Eprppa,Intestinal cell,intestine,Alimentary tract
+Eplppp, int9L intestine,int,Eplppp,Intestinal cell,intestine,Alimentary tract
+Eprppp, int9R intestine,int,Eprppp,Intestinal cell,intestine,Alimentary tract
+ABplpppppaa, intestinal muscle L,mu_int_L,ABplpppppaa,"Intestinal muscles, attach to intestine and body wall anterior to anus",muscle,Alimentary tract
+MSppaapp, intestinal muscle R,mu_int_R,MSppaapp,"Intestinal muscles, attach to intestine and body wall anterior to anus",muscle,Alimentary tract
+ABplpapppaa, K blast,K,ABplpapppaa,"Rectal cell, postembryonic blast cell",rectum,Alimentary tract
+ABplpapppap, Kprime blast,K',ABplpapppap,Rectal cell,rectum,Alimentary tract
+ABplpppaapap, LUAL lumb gang,LUAL,ABplpppaapap,"Interneuron, short process in post ventral cord",neuron,body nervous system
+ABprpppaapap, LUAR lumb gang,LUAR,ABprpppaapap,"Interneuron, short process in post ventral cord",neuron,body nervous system
+MSapaapp, M mesoblast,M,MSapaapp,Postembryonic mesoblast,mesoblast,body mesoderm
+MSpaapaaa, M1 pharynx,M1,MSpaapaaa,Pharyngeal motorneurons,pharynx neuron,Alimentary tract
+ABaraapaaap, m1DL  pharynx,pm1DL,ABaraapaaap,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABaraappaap, m1DR  pharynx,pm1DR,ABaraappaap,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABaraaaaaap, m1L  pharynx,pm1L,ABaraaaaaap,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABaraaaaapp, m1R  pharynx,pm1R,ABaraaaaapp,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABalpaaaapa, m1VL pharynx,pm1VL,ABalpaaaapa,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABarapaaapa, m1VR  pharynx,pm1VR,ABarapaaapa,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABaraapaapa, m2DL  pharynx,pm2DL,ABaraapaapa,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABaraappapa, m2DR  pharynx,pm2DR,ABaraappapa,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABaraapappa, M2L  pharynx,M2L,ABaraapappa,Pharyngeal motorneurons,pharynx neuron,Alimentary tract
+ABalpaaapaa, m2L pharynx,pm2L,ABalpaaapaa,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABaraappppa, M2R  pharynx,M2R,ABaraappppa,Pharyngeal motorneurons,pharynx neuron,Alimentary tract
+ABarapaapaa, m2R  pharynx,pm2R,ABarapaapaa,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABalpaaaaap, m2VL pharynx,pm2VL,ABalpaaaaap,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABarapaaaap, m2VR  pharynx,pm2VR,ABarapaaaap,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSaaapaaa, m3DL pharynx,pm3DL,MSaaapaaa,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSpaaaapa, m3DR pharynx,pm3DR,MSpaaaapa,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABaraapappp, M3L  pharynx,M3L,ABaraapappp,Pharyngeal sensory-motorneurons,pharynx neuron,Alimentary tract
+ABalpaapapp, m3L pharynx,pm3L,ABalpaapapp,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABaraappppp, M3R  pharynx,M3R,ABaraappppp,Pharyngeal sensory-motorneurons,pharynx neuron,Alimentary tract
+ABarapaappa, m3R  pharynx,pm3R,ABarapaappa,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABalpappppp, m3VL pharynx,pm3VL,ABalpappppp,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABarapapppp, m3VR pharynx,pm3VR,ABarapapppp,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSpaaaaaa, M4 pharynx,M4,MSpaaaaaa,Pharyngeal motorneurons,pharynx neuron,Alimentary tract
+MSaaaaapp, m4DL pharynx,pm4DL,MSaaaaapp,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSpaaaapp, m4DR pharynx,pm4DR,MSpaaaapp,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSaaapaap, m4L pharynx,pm4L,MSaaapaap,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABaraaapapp, m4R  pharynx,pm4R,ABaraaapapp,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSaapaaaa, m4VL pharynx,pm4VL,MSaapaaaa,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSpapaaaa, m4VR pharynx,pm4VR,MSpapaaaa,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSpaaapap, M5 pharynx,M5,MSpaaapap,Pharyngeal motorneurons,pharynx neuron,Alimentary tract
+MSaaaapap, m5DL pharynx,pm5DL,MSaaaapap,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSpaaappa, m5DR pharynx,pm5DR,MSpaaappa,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABaraapapap, m5L  pharynx,pm5L,ABaraapapap,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABaraapppap, m5R  pharynx,pm5R,ABaraapppap,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSaapaaap, m5VL pharynx,pm5VL,MSaapaaap,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSpapaaap, m5VR pharynx,pm5VR,MSpapaaap,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSpaaappp, m6D pharynx,pm6D,MSpaaappp,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSaapappa, m6VL pharynx,pm6VL,MSaapappa,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSpapappa, m6VR pharynx,ppm6VR,MSpapappa,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSaaaappp, m7D pharynx,pm7D,MSaaaappp,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSaapaapp, m7VL pharynx,pm7VL,MSaapaapp,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSpapaapp, m7VR pharynx,pm7VR,MSpapaapp,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+MSaaapapp, m8 pharynx,pm8,MSaaapapp,Pharyngeal muscle cell,pharynx muscle,Alimentary tract
+ABaraaapapa, mc1DR  pharynx,mc1DR,ABaraaapapa,Pharyngeal marginal cell,pharynx structural,Alimentary tract
+ABalpappppa, mc1V pharynx,mc1V,ABalpappppa,Pharyngeal marginal cell,pharynx structural,Alimentary tract
+ABaraapaapp, mc2DL  pharynx,mc2DL,ABaraapaapp,Pharyngeal marginal cell,pharynx structural,Alimentary tract
+ABaraappapp, mc2DR  pharynx,mc2DR,ABaraappapp,Pharyngeal marginal cell,pharynx structural,Alimentary tract
+ABarapapppa, mc2V pharynx,mc2V,ABarapapppa,Pharyngeal marginal cell,pharynx structural,Alimentary tract
+MSaaapapa, mc3DL pharynx,mc3DL,MSaaapapa,Pharyngeal marginal cell,pharynx structural,Alimentary tract
+MSpaapapa, mc3DR pharynx,mc3DR,MSpaapapa,Pharyngeal marginal cell,pharynx structural,Alimentary tract
+ABalpappapp, mc3V pharynx,mc3V,ABalpappapp,Pharyngeal marginal cell,pharynx structural,Alimentary tract
+ABalpaapapa, mciDL pharynx,mc1DL,ABalpaapapa,Pharyngeal marginal cell,pharynx structural,Alimentary tract
+ABalpaaappp, MCL pharynx,MCL,ABalpaaappp,Pharyngeal neurons that synapse onto marginal cells,pharynx neuron,Alimentary tract
+ABarapaappp, MCR  pharynx,MCR,ABarapaappp,Pharyngeal neurons that synapse onto marginal cells,pharynx neuron,Alimentary tract
+ABaraappaaa, MI  pharynx,MI,ABaraappaaa,Pharyngeal motor neuron/interneuron,pharynx neuron,Alimentary tract
+ABaraapapaav, NSML  pharynx,NSML,ABaraapapaav,"Pharyngeal neurosecretory motorneuron, contain serotonin",pharynx neuron,Alimentary tract
+ABaraapppaav, NSMR  pharynx,NSMR,ABaraapppaav,"Pharyngeal neurosecretory motorneuron, contain serotonin",pharynx neuron,Alimentary tract
+ABalppppapaa, OLLL  ring gang,OLLL,ABalppppapaa,Lateral outer labial neurons,neuron,body nervous system
+ABpraaapapaa, OLLR ring gang,OLLR,ABpraaapapaa,Lateral outer labial neurons,neuron,body nervous system
+ABalpppaapd, OLLshL  ring gang,OLLshL,ABalpppaapd,Lateral outer labial sheath,neuron support,body nervous system
+ABpraaaaapd, OLLshR ring gang,OLLshR,ABpraaaaapd,Lateral outer labial sheath,neuron support,body nervous system
+ABalapaaapp, OLLsoL ring gang,OLLsoL,ABalapaaapp,Lateral outer labial socket,neuron support,body nervous system
+ABalappappp, OLLsoR ring gang,OLLsoR,ABalappappp,Lateral outer labial socket,neuron support,body nervous system
+ABalapapapaa, OLQDL ring gang,OLQDL,ABalapapapaa,Quadrant outer labial neuron,neuron,body nervous system
+ABalapppapaa, OLQDR,OLQDR,ABalapppapaa,Quadrant outer labial neuron,neuron,body nervous system
+ABalpppaaap, OLQshVL  ring gang,OLQshVL,ABalpppaaap,Quadrant outer labial sheath,neuron support,body nervous system
+ABpraaaaaap, OLQshVR ring gang,OLQshVR,ABpraaaaaap,Quadrant outer labial sheath,neuron support,body nervous system
+ABalaappapp, OLQsoVR ring gang,OLQsoVR,ABalaappapp,Quadrant outer labial socket,neuron support,body nervous system
+ABplpaaappaa, OLQVL ring gang,OLQVL,ABplpaaappaa,Quadrant outer labial neuron,neuron,body nervous system
+ABprpaaappaa, OLQVR ring gang,OLQVR,ABprpaaappaa,Quadrant outer labial neuron,neuron,body nervous system
+ABplapaapp, P1/2 L blast,P1/2L,ABplapaapp,"Postembryonic blast cells for ventral cord motorneurons, ventral hypodermis, vulva, male preanal ganglion; ventral hypodermis in L1",hypodermal blast,hypoderm
+ABprapaapp, P1/2 R blast,P1/2R,ABprapaapp,"Postembryonic blast cells for ventral cord motorneurons, ventral hypodermis, vulva, male preanal ganglion; ventral hypodermis in L1",hypodermal blast,hypoderm
+ABplapappa, P11/12 L blast,P11,ABplapappa,"Postembryonic blast cells for ventral cord motorneurons, ventral hypodermis, vulva, male preanal ganglion; ventral hypodermis in L1",hypodermal blast,hypoderm
+ABprapappa, P11/12 R blast,P12,ABprapappa,"Postembryonic blast cells for ventral cord motorneurons, ventral hypodermis, vulva, male preanal ganglion; ventral hypodermis in L1",hypodermal blast,hypoderm
+ABplappaaa, P3/4 L blast,P3/4L,ABplappaaa,"Postembryonic blast cells for ventral cord motorneurons, ventral hypodermis, vulva, male preanal ganglion; ventral hypodermis in L1",hypodermal blast,hypoderm
+ABprappaaa, P3/4R blast,P3/4R,ABprappaaa,"Postembryonic blast cells for ventral cord motorneurons, ventral hypodermis, vulva, male preanal ganglion; ventral hypodermis in L1",hypodermal blast,hypoderm
+ABplappaap, P5/6 L blast,P5/6L,ABplappaap,"Postembryonic blast cells for ventral cord motorneurons, ventral hypodermis, vulva, male preanal ganglion; ventral hypodermis in L1",hypodermal blast,hypoderm
+ABprappaap, P5/6 R blast,P5/6R,ABprappaap,"Postembryonic blast cells for ventral cord motorneurons, ventral hypodermis, vulva, male preanal ganglion; ventral hypodermis in L1",hypodermal blast,hypoderm
+ABplappapp, P7/8 L blast,P7/8L,ABplappapp,"Postembryonic blast cells for ventral cord motorneurons, ventral hypodermis, vulva, male preanal ganglion; ventral hypodermis in L1",hypodermal blast,hypoderm
+ABprappapp, P7/8 R blast,P7/8R,ABprappapp,"Postembryonic blast cells for ventral cord motorneurons, ventral hypodermis, vulva, male preanal ganglion; ventral hypodermis in L1",hypodermal blast,hypoderm
+ABplapapap, P9/10 L blast,P9/10L,ABplapapap,"Postembryonic blast cells for ventral cord motorneurons, ventral hypodermis, vulva, male preanal ganglion; ventral hypodermis in L1",hypodermal blast,hypoderm
+ABprapapap, P9/10 R blast,P9/10R,ABprapapap,"Postembryonic blast cells for ventral cord motorneurons, ventral hypodermis, vulva, male preanal ganglion; ventral hypodermis in L1",hypodermal blast,hypoderm
+ABprpppaaaa, PDA motor neuron,PDA,ABprpppaaaa,"Rectal cell at hatching, Motor neuron, process in dorsal cord, same as Y cell in hermaphrodite, Y.a in male",rectum,Alimentary tract
+ABplpppaapp, PHAL lumb gang,PHAL,ABplpppaapp,"Phasmid neurons, probably chemosensory",neuron,body nervous system
+ABprpppaapp, PHAR lumb gang,PHAR,ABprpppaapp,"Phasmid neurons, probably chemosensory",neuron,body nervous system
+ABplapppappp, PHBL lumb gang,PHBL,ABplapppappp,"Phasmid neurons, probably chemosensory",neuron,body nervous system
+ABprapppappp, PHBR lumb gang,PHRB,ABprapppappp,"Phasmid neurons, probably chemosensory",neuron,body nervous system
+ABplpppapaa, PHshL lumb gang,PHshL,ABplpppapaa,Phasmid sheath,neuron,body nervous system
+ABprpppapaa, PHshR lumb gang,PHshR,ABprpppapaa,Phasmid sheath,neuron,body nervous system
+ABplapappppaa, PLML lumb gang,PLML,ABplapappppaa,"Posterior lateral microtubule cell, touch receptor",neuron,body nervous system
+ABprapappppaa, PLMR lumb gang,PLMR,ABprapappppaa,"Posterior lateral microtubule cell, touch receptor",neuron,body nervous system
+ABplpppaapaa, PVCL lumb gang,PVCL,ABplpppaapaa,"Ventral cord interneuron, cell body in lumbar ganglion, synapses onto VB andDB motor neurons, formerly called delta",neuron,body nervous system
+ABprpppaapaa, PVCR lumb gang,PVCR,ABprpppaapaa,"Ventral cord interneuron, cell body in lumbar ganglion, synapses onto VB andDB motor neurons, formerly called delta",neuron,body nervous system
+ABplppppaaa, PVPL p-a gang,PVPL,ABplppppaaa,"Interneuron, cell body in lumbar ganglion, projects along ventral cord to nerve ring",neuron,body nervous system
+ABprppppaaa, PVPR p-a gang,PVPR,ABprppppaaa,"Interneuron, cell body in lumbar ganglion, projects along ventral cord to nerve ring",neuron,body nervous system
+ABplapppaaa, PVQL lumb gang,PVQL,ABplapppaaa,"Interneuron, projects along ventral cord to ring",neuron,body nervous system
+ABprapppaaa, PVQR lumb gang,PVQR,ABprapppaaa,"Interneuron, projects along ventral cord to ring",neuron,body nervous system
+Caappv, PVR lumb gang,PVR,Caappv,"Interneuron, projects along ventral cord to ring",neuron,body nervous system
+ABplpappppa, PVT p-a gang,PVT,ABplpappppa,"Interneuron, projects along ventral cord to ring",neuron,body nervous system
+ABplapapaaa, QL ectoblast,QL,ABplapapaaa,"Postembryonic neuroblast, migrates anteriorly",hypodermal blast,hypoderm
+ABarpaaaapa, QLQshDL ring gang,OLQshDL,ABarpaaaapa,Quadrant outer labial sheath,neuron support,body nervous system
+ABarpaaapaa, QLQshDR ring gang,OLQshSR,ABarpaaapaa,Quadrant outer labial sheath,neuron support,body nervous system
+ABarpaaaaal, QLQsoDL ring gang,OLQsoDL,ABarpaaaaal,Quadrant outer labial socket,neuron support,body nervous system
+ABarpaaaaar, QLQsoDR ring gang,OLQsoDR,ABarpaaaaar,Quadrant outer labial socket,neuron support,body nervous system
+ABalppaaapp, QLQsoVL ring gang,OLQsoVL,ABalppaaapp,Quadrant outer labial socket,neuron support,body nervous system
+ABprapapaaa, QR ectoblast,QR,ABprapapaaa,"Postembryonic neuroblast, migrates posteriorly",hypodermal blast,hypoderm
+ABplppppapa, rectal epithelium,U,ABplppppapa,"Rectal cell, postembryonic blast cell in male",rectum,Alimentary tract
+ABplppppapp, rectal epithelium,F,ABplppppapp,"Rectal cell, blast cell in male",rectum,Alimentary tract
+ABplpappppp, rectal epithelium D,rect_D,ABplpappppp,"Rectal epithelial cells, adjacent to intestino-rectal valve, have microvilli",rectum,Alimentary tract
+ABplppppaap, rectal epithelium VL,rect_VL,ABplppppaap,"Rectal epithelial cells, adjacent to intestino-rectal valve, have microvilli",rectum,Alimentary tract
+ABprppppaap, rectal epithelium VR,rect_VR,ABprppppaap,"Rectal epithelial cells, adjacent to intestino-rectal valve, have microvilli",rectum,Alimentary tract
+ABalaaaarlp, REML ring gang,RMEL,ABalaaaarlp,Ring motor neuron,neuron,body nervous system
+ABalapaapaa, RIAL ring gang,RIAL,ABalapaapaa,"Ring interneuron, many synapses",neuron,body nervous system
+ABalaapppaa, RIAR ring gang,RIAR,ABalaapppaa,"Ring interneuron, many synapses",neuron,body nervous system
+ABplpaappap, RIBL ring gang,RIBL,ABplpaappap,Ring interneuron,neuron,body nervous system
+ABprpaappap, RIBR ring gang,RIBR,ABprpaappap,Ring interneuron,neuron,body nervous system
+ABplppaaaapp, RICL ring gang,RICL,ABplppaaaapp,Ring interneuron,neuron,body nervous system
+ABprppaaaapp, RICR ring gang,RICR,ABprppaaaapp,Ring interneuron,neuron,body nervous system
+ABalappaapa, RID ring gang,RID,ABalappaapa,"Ring interneuron, projects along dorsal cord",neuron,body nervous system
+ABplppapaaap, RIFL r-v gang,RIFL,ABplppapaaap,Ring interneuron,neuron,body nervous system
+ABprppapaaap, RIFR r-v gang,RIFR,ABprppapaaap,Ring interneuron,neuron,body nervous system
+ABplppappaa, RIGL r-v gang,RIGL,ABplppappaa,Ring interneuron,neuron,body nervous system
+ABprppappaa, RIGR r-v gang,RIGR,ABprppappaa,Ring interneuron,neuron,body nervous system
+ABprpappaaa, RIH vent gang,RIH,ABprpappaaa,Ring interneuron,neuron,body nervous system
+ABplppaapap, RIML ring gang,RIML,ABplppaapap,Ring motor neuron,neuron,body nervous system
+ABprppaapap, RIMR ring gang,RIMR,ABprppaapap,Ring motor neuron,neuron,body nervous system
+ABalpapaaaa, RIPL ring gang,RIPL,ABalpapaaaa,"Ring/pharynx interneuron, only direct connection between pharynx and ring",neuron,body nervous system
+ABarappaaaa, RIPR ring gang,RIPR,ABarappaaaa,"Ring/pharynx interneuron, only direct connection between pharynx and ring",neuron,body nervous system
+ABprpapppaa, RIR vent gang,RIR,ABprpapppaa,Ring interneuron,neuron,body nervous system
+ABprpappapa, RIS vent gang,RIS,ABprpappapa,Ring interneuron,neuron,body nervous system
+ABplpaapaaa, RIVL ring gang,RIVL,ABplpaapaaa,Ring interneuron,neuron,body nervous system
+ABprpaapaaa, RIVR ring gang,RIVR,ABprpaapaaa,Ring interneuron,neuron,body nervous system
+ABalpapapaa, RMDDL vent gang,RMDDL,ABalpapapaa,"Ring motor neuron/interneuron, many synapses",neuron,body nervous system
+ABarappapaa, RMDDR vent gang,RMDDR,ABarappapaa,"Ring motor neuron/interneuron, many synapses",neuron,body nervous system
+ABalpppapad, RMDL ring gang,RMDL,ABalpppapad,"Ring motor neuron/interneuron, many synapses",neuron,body nervous system
+ABpraaaapad, RMDR ring gang,RMDR,ABpraaaapad,"Ring motor neuron/interneuron, many synapses",neuron,body nervous system
+ABalppapaaa, RMDVL ring gang,RMDVL,ABalppapaaa,"Ring motor neuron/interneuron, many synapses",neuron,body nervous system
+ABarapppaaa, RMDVR ring gang,RMDVR,ABarapppaaa,"Ring motor neuron/interneuron, many synapses",neuron,body nervous system
+ABalapppaap, RMED ring gang,RMED,ABalapppaap,Ring motor neuron,neuron,body nervous system
+ABalaaaarrp, RMER ring gang,RMER,ABalaaaarrp,Ring motor neuron,neuron,body nervous system
+ABplpappaaa, RMEV ring gang,RMEV,ABplpappaaa,Ring motor neuron,neuron,body nervous system
+ABplapaaapp, RMGL ring gang,RMGL,ABplapaaapp,Ring interneuron,neuron,body nervous system
+ABprapaaapp, RMGR ring gang,RMGR,ABprapaaapp,Ring interneuron,neuron,body nervous system
+ABalppapapa, SAADL vent gang,SAADL,ABalppapapa,"Ring interneuron, anteriorly projecting process that runs sublaterally",neuron,body nervous system
+ABarapppapa, SAADR vent gang,SAADR,ABarapppapa,"Ring interneuron, anteriorly projecting process that runs sublaterally",neuron,body nervous system
+ABplpaaaaaa, SAAVL ring gang,SAAVL,ABplpaaaaaa,"Ring interneuron, anteriorly projecting process that runs sublaterally",neuron,body nervous system
+ABprpaaaaaa, SAAVR ring gang,SAAVR,ABprpaaaaaa,"Ring interneuron, anteriorly projecting process that runs sublaterally",neuron,body nervous system
+ABplppapaap, SABD r-v gang,SABD,ABplppapaap,"Ring interneuron, anteriorly projecting process that runs sublaterally, synapses to anterior body muscles in L1",neuron,body nervous system
+ABplppapaaaa, SABVL r-v gang,SABVL,ABplppapaaaa,"Ring interneuron, anteriorly projecting process that runs sublaterally, synapses to anterior body muscles in L1",neuron,body nervous system
+ABprppapaaaa, SABVR r-v gang,SABVR,ABprppapaaaa,"Ring interneuron, anteriorly projecting process that runs sublaterally, synapses to anterior body muscles in L1",neuron,body nervous system
+ABplpapaapa, SIADL vent gang,SIADL,ABplpapaapa,"Receives a few synapses in the ring, has a posteriorly directed process that runs sublaterally",neuron,body nervous system
+ABprpapaapa, SIADR vent gang,SIADR,ABprpapaapa,"Receives a few synapses in the ring, has a posteriorly directed process that runs sublaterally",neuron,body nervous system
+ABplpapappa, SIAVL vent gang,SIAVL,ABplpapappa,"Receives a few synapses in the ring, has a posteriorly directed process that runs sublaterally",neuron,body nervous system
+ABprpapappa, SIAVR vent gang,SIAVR,ABprpapappa,"Receives a few synapses in the ring, has a posteriorly directed process that runs sublaterally",neuron,body nervous system
+ABplppaaaaa, SIBDL ring gang,SIBDL,ABplppaaaaa,"Receives a few synapses in the ring, has a posteriorly directed process that runs sublaterally",neuron,body nervous system
+ABprppaaaaa, SIBDR ring gang,SIBDR,ABprppaaaaa,"Receives a few synapses in the ring, has a posteriorly directed process that runs sublaterally",neuron,body nervous system
+ABplpapaapp, SIBVL vent gang,SIBVL,ABplpapaapp,"Receives a few synapses in the ring, has a posteriorly directed process that runs sublaterally",neuron,body nervous system
+ABprpapaapp, SIBVR vent gang,SIBVR,ABprpapaapp,"Receives a few synapses in the ring, has a posteriorly directed process that runs sublaterally",neuron,body nervous system
+ABalpapapapp, SMBDL vent gang,SMBDL,ABalpapapapp,"Ring motor neuron/interneuron, has a posteriorly direct ed process that runs sublaterally",neuron,body nervous system
+ABarappapapp, SMBDR vent gang,SMBDR,ABarappapapp,"Ring motor neuron/interneuron, has a posteriorly direct ed process that runs sublaterally",neuron,body nervous system
+ABalpapappp, SMBVL vent gang,SMBVL,ABalpapappp,"Ring motor neuron/interneuron, has a posteriorly direct ed process that runs sublaterally",neuron,body nervous system
+ABarappappp, SMBVR vent gang,SMBVR,ABarappappp,"Ring motor neuron/interneuron, has a posteriorly direct ed process that runs sublaterally",neuron,body nervous system
+ABplpapaaaa, SMDDL vent gang,SMDDL,ABplpapaaaa,"Ring motor neuron/interneuron, has a posteriorly direct ed process that runs sublaterally",neuron,body nervous system
+ABprpapaaaa, SMDDR vent gang,SMDDR,ABprpapaaaa,"Ring motor neuron/interneuron, has a posteriorly direct ed process that runs sublaterally",neuron,body nervous system
+ABalppappaa, SMDVL  ring gang,SMDVL,ABalppappaa,"Ring motor neuron/interneuron, has a posteriorly direct ed process that runs sublaterally",neuron,body nervous system
+ABarappppaa, SMDVR ring gang,SMDVR,ABarappppaa,"Ring motor neuron/interneuron, has a posteriorly direct ed process that runs sublaterally",neuron,body nervous system
+ABprpppppap, sphincter muscle,mu_sph,ABprpppppap,Sphincter muscle of intestino-rectal valve,muscle,Alimentary tract
+ABplppppppa, tail spike death,spike,ABplppppppa,"Used during embryogenesis to make tail spike, then die",death,death
+ABprppppppa, tail spike death,spike,Abprppppppa,"Used during embryogenesis to make tail spike, then die",death,death
+ABplappppp, TL tail lateral ectoblast,TL,ABplappppp,"Tail seam hypodermal cell, postembryonic blast cell, functions as phasmid socket in L1",hypodermis seam blast,hypoderm
+ABprappppp, TR tail lateral ectoblast,TR,ABprappppp,"Tail seam hypodermal cell, postembryonic blast cell, functions as phasmid socket in L1",hypodermis seam blast,hypoderm
+ABplaaaaaaa, URADL ring gang,URADL,ABplaaaaaaa,Ring motor neuron,neuron,body nervous system
+ABarpapaaaa, URADR ring gang,URADR,ABarpapaaaa,Ring motor neuron,neuron,body nervous system
+ABplpaaapaa, URAVL ring gang,URAVL,ABplpaaapaa,Ring motor neuron,neuron,body nervous system
+ABprpaaapaa, URAVR ring gang,URAVR,ABprpaaapaa,Ring motor neuron,neuron,body nervous system
+ABplaapaapa, URBL ring gang,URBL,ABplaapaapa,"Neuron, presynaptic in ring, ending in head",neuron,body nervous system
+ABpraapaapa, URBR ring gang,URBR,ABpraapaapa,"Neuron, presynaptic in ring, ending in head",neuron,body nervous system
+ABplaaaaappp, URXL ring gang,URXL,ABplaaaaappp,Ring interneuron,neuron,body nervous system
+ABarpapaappp, URXR ring gang,URXR,ABarpapaappp,Ring interneuron,neuron,body nervous system
+ABalapapapp, URYDL ring gang,URYDL,ABalapapapp,"Neuron, presynaptic in ring, ending in head",neuron,body nervous system
+ABalapppapp, URYDR ring gang,URYDR,ABalapppapp,"Neuron, presynaptic in ring, ending in head",neuron,body nervous system
+ABplpaaappp, URYVL ring gang,URYVL,ABplpaaappp,"Neuron, presynaptic in ring, ending in head",neuron,body nervous system
+ABprpaaappp, URYVR ring gang,URYVR,ABprpaaappp,"Neuron, presynaptic in ring, ending in head",neuron,body nervous system
+ABarppapaa, V1L ectoblast,V1L,ABarppapaa,"Seam hypodermal cell, postembryonic blast cell",hypodermis seam blast,hypoderm
+ABarppppaa, V1R ectoblast,V1R,ABarppppaa,"Seam hypodermal cell, postembryonic blast cell",hypodermis seam blast,hypoderm
+ABarppapap, V2L ectoblast,V2L,ABarppapap,"Seam hypodermal cell, postembryonic blast cell",hypodermis seam blast,hypoderm
+ABarppppap, V2R ectoblast,V2R,ABarppppap,"Seam hypodermal cell, postembryonic blast cell",hypodermis seam blast,hypoderm
+ABplappapa, V3L ectoblast,V3L,ABplappapa,"Seam hypodermal cell, postembryonic blast cell",hypodermis seam blast,hypoderm
+ABprappapa, V3R ectoblast,V3R,ABprappapa,"Seam hypodermal cell, postembryonic blast cell",hypodermis seam blast,hypoderm
+ABarppappa, V4L ectoblast,V4L,ABarppappa,"Seam hypodermal cell, postembryonic blast cell",hypodermis seam blast,hypoderm
+ABarpppppa, V4R ectoblast,V4R,ABarpppppa,"Seam hypodermal cell, postembryonic blast cell",hypodermis seam blast,hypoderm
+ABplapapaap, V5L ectoblast,V5L,ABplapapaap,"Seam hypodermal cell, postembryonic blast cell",hypodermis seam blast,hypoderm
+ABprapapaap, V5R ectoblast,V5R,ABprapapaap,"Seam hypodermal cell, postembryonic blast cell",hypodermis seam blast,hypoderm
+ABarppappp, V6L ectoblast,V6L,ABarppappp,"Seam hypodermal cell, postembryonic blast cell",hypodermis seam blast,hypoderm
+ABarpppppp, V6R ectoblast,V6R,ABarpppppp,"Seam hypodermal cell, postembryonic blast cell",hypodermis seam blast,hypoderm
+ABprpappppp, virL intesto-rectal valve,virL,ABprpappppp,Intestino-rectal valve,valve,Alimentary tract
+ABprpappppa, virR intesto-rectal valve,virR,ABprpappppa,Intestino-rectal valve,valve,Alimentary tract
+MSpaapapp, vpi1 pharynx,vpi1,MSpaapapp,Pharyngo-intestinal valve,valve,Alimentary tract
+MSaapappp, vpi2DL pharynx,vpi2DL,MSaapappp,Pharyngo-intestinal valve,valve,Alimentary tract
+MSpapappp, vpi2DR pharynx,vpi2DR,MSpapappp,Pharyngo-intestinal valve,valve,Alimentary tract
+MSaappaa, vpi2V pharynx,vpi2V,MSaappaa,Pharyngo-intestinal valve,valve,Alimentary tract
+MSaaappp, vpi3D pharynx,vpi3D,MSaaappp,Pharyngo-intestinal valve,valve,Alimentary tract
+MSaappap, vpi3V pharynx,vpi3V,MSaappap,Pharyngo-intestinal valve,valve,Alimentary tract
+ABprapaapa, W ectoblast,W,ABprapaapa,"Postembryonic neuroblast, analogous to Pn.a cells",hypodermal blast,hypoderm
+ABplaaapaa, XXXL hyp,XXXL,ABplaaapaa,Embryonic head hypodermal cell,hypodermis,hypoderm
+ABarpappaa, XXXR hyp,XXXR,ABarpappaa,Embryonic head hypodermal cell,hypodermis,hypoderm
+MSpppaap, Z1 blast,Z1,MSpppaap,Somatic gonad precursor cell,gonad somatic,gonad
+MSappaap, Z4 blast,Z4,MSappaap,Somatic gonad precursor cell,gonad somatic,gonad

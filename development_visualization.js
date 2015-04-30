@@ -17,6 +17,13 @@ var csvdata = [];
 //maps cell name to an index into this.csvdata for each time point
 var namemap = [];
 
+//maps cell types to cell names
+var celltypes = {};
+var cellnames = [];
+var celldesc = [];
+var celltype = [];
+var tissuetype = [];
+
 //detect when all time points are loaded
 var ready = false;
 
@@ -34,6 +41,9 @@ var playback_id;
 //3d variables
 var x3d, scene;
 
+//lineage picker idx, for unique ids
+var lpidx = 1;
+
 //other variables from scatterplot3D
 var axisRange = [-1000, 1000];
 var scales = [];
@@ -46,16 +56,150 @@ var load_idx = 0;
 /****************************************************************
 Lineage Highlighting Functions
 ****************************************************************/
-function initializeLineagePicker() {
-    //Text box and color picker
-    var textbox = d3.select('body')
-        .append('div').attr('class', 'lineageinput')
-        .append('input').attr('type', 'text').attr('id', 'hicell').attr('size', 20).attr('placeholder', 'Enter lineage...')
-        .text("Type cell name here.");
-    var colorpicker = d3.select('div.lineageinput')
-        .append('input').attr('type', 'color').attr("value", "#ff0000").attr('id', 'hicellcolor');
-    //use jQuery to initialize the color picker on the hicellcolor input
-    //$("#hicellcolor").val("#ff0000")
+function makeLPDivTemplate(){
+    var lpsubdiv = d3.select('div.lineage-pickers').append('div')
+        .attr('class', 'lineage-picker-template')
+        .attr('id', 'lineage-picker-template')
+        .attr('style', 'display: none;');
+    //Construct a select box for picking cell lineages/cell types to highlight
+    var id = 'selhi'+lpidx;
+    var select = lpsubdiv.append('select')
+        .attr('class', 'selhi')
+        .attr('id', id)
+        .attr('data-placeholder', 'Cell Lineage or Cell Type...')
+//        .attr('size', 15)
+    select.append('option').attr('value', '');
+    var optgroup = select.append('optgroup')
+        .attr('label', 'Tissue Type');
+    for(var i=0; i < tissuetype.length; i++){
+        optgroup.append('option').attr('value', 'tt' + tissuetype[i]).html(tissuetype[i]);
+    }
+    optgroup = select.append('optgroup')
+        .attr('label', 'Cell Type');
+    for(i=0; i < celltype.length; i++){
+        optgroup.append('option').attr('value', 'ct' + celltype[i]).html(celltype[i]);
+    }
+    optgroup = select.append('optgroup')
+        .attr('label', 'Cell Description');
+    for(i=0; i < celldesc.length; i++){
+        optgroup.append('option').attr('value', 'cd' + celldesc[i]).html(celldesc[i]);
+    }
+    optgroup = d3.select('#'+id).append('optgroup')
+        .attr('label', 'Cell Name');
+    for(i=0; i < cellnames.length; i++){
+        optgroup.append('option').attr('value', 'cn' + cellnames[i]).html(cellnames[i]);
+    }
+    lpsubdiv.append('input')
+        .attr('type', 'color')
+        .attr('value', '#ff0000')
+        .attr('class', 'hicolor')
+        .attr('id', 'hicolor'+lpidx);
+    lpsubdiv.append('input')
+        .attr('type', 'button')
+        .attr('value', 'Remove')
+        .attr('class', 'removehi')
+        .attr('id', 'removehi'+lpidx)
+        .attr('onclick', '(function(e, obj) {$(obj).parent().remove();})(event, this)');
+    lpidx++;
+}
+
+function cloneLPDiv(){
+    var lpdivclone = $('#lineage-picker-template').clone(true);
+    lpdivclone.attr('id', 'lineage-picker'+lpidx)
+        .attr('class', 'lineage-picker')
+        .attr('style', 'display: block');
+    var childs = lpdivclone.children();
+    var id;
+    for(var i = 0; i < childs.length; i++){
+        id = childs[i].id;
+        childs[i].id = id.substr(0, id.length - 1) + lpidx;
+    }
+    lpdivclone.appendTo('.lineage-pickers');
+    $('#selhi'+lpidx).chosen({search_contains:true});
+    lpidx++;
+}
+
+function initializeLineagePicker(){
+    d3.select('body')
+        .append('div').attr('class', 'lineage-pickers');
+    makeLPDivTemplate();
+    cloneLPDiv();
+    d3.select('body').append('input')
+        .attr('type', 'button')
+        .attr('value', 'Add Highlight')
+        .attr('class', 'add-highlight')
+        .attr('onclick', 'cloneLPDiv()');
+    d3.select('body').append('input')
+        .attr('type', 'button')
+        .attr('value', 'Hide Non-Highlighted')
+        .attr('class', 'add-highlight')
+        .attr('id', 'showhide-highlight')
+        .attr('onclick', '(function(e, obj) {obj.value = obj.value.substr(0,4) === "Hide" ? "Show Non-Highlighted" : "Hide Non-Highlighted";})(event, this)');
+}
+
+function loadCellTypeMap(){
+    d3.text('waterston_celltypes_filtered.csv', function (csvtext){
+        //read all the cell types in
+        var rows = d3.csv.parseRows(csvtext);
+
+        for(var i=0; i < rows.length; i++){
+            var row = rows[i];
+            var cellname = row[0];
+            cellnames.push(cellname);
+            var n;
+            if(cellname.substr(0,1) === 'E' || cellname.substr(0,1) === 'C' || cellname.substr(0,1) === 'D'){
+                n = 1;
+            }else if(cellname.substr(0,3) == 'EMS'){
+                n = 3;
+            }else{
+                n = 2;
+            }
+            for(n; n <= cellname.length; n++){
+                var prev = cellname.substr(0, n);
+                if(cellnames.indexOf(prev) === -1){
+                    cellnames.push(prev);
+                }
+            }
+            if(cellname.substr(0,2) == 'MS'){
+                cellname = 'E' + cellname;
+            }else if(cellname.substr(0,1) == 'E'){
+                cellname = 'EMS' + cellname;
+            }else if(cellname.substr(0,1) == 'C'){
+                cellname = 'P2' + cellname;
+            }else if(cellname.substr(0,1) == 'D'){
+                cellname = 'P2P3' + cellname;
+            }else if(cellname.substr(0,2) == 'P3'){
+                cellname = 'P2' + cellname;
+            }else if(cellname.substr(0,2) == 'P4'){
+                cellname = 'P2P3' + cellname;
+            }else if(cellname.substr(0,1) == 'Z'){
+                cellname = 'P2P3P4' + cellname;
+            }
+            for(var ct_idx=4; ct_idx < 7; ct_idx++){
+                var ct = row[ct_idx];
+                if(!(ct in celltypes)){
+                    celltypes[ct] = '';
+                }
+                celltypes[ct] += cellname;
+                if(ct_idx == 4 && celldesc.indexOf(ct) === -1){
+                    celldesc.push(ct);
+                }else if(ct_idx == 5 && celltype.indexOf(ct) === -1){
+                    celltype.push(ct);
+                }else if(ct_idx == 6 && tissuetype.indexOf(ct) === -1){
+                    tissuetype.push(ct);
+                }
+            }
+        }
+        //set up filter-able drop-down box
+        cellnames.sort();
+        celldesc.sort();
+        celltype.sort();
+        initializeLineagePicker();
+            // TODO this is here temporarily -- will be moved once updating of the tree is
+            // implemented
+            var cellLineage = getCellLineageMap(csvdata, csvdata.length - 1);
+            plotCellLineageTree(cellLineage);
+    });
 }
 
 /****************************************************************
@@ -134,21 +278,65 @@ function plotData( time_point, duration ) {
         .attr('scale', function(d){var ptrad = d.radius * 0.5; return [ptrad, ptrad, ptrad]})
         .append('shape');
     
-    new_data.append('appearance')
-        .append('material').attr('diffuseColor', 'steelblue');
-    
+    new_data.append('appearance').append('material');
     new_data.append('sphere');
 
-    //Code to highlight a specific lineage in green
-//    var highlight = d3.select('#hicell').html(this.value);
-    var highlight = document.getElementById('hicell').value;
-    var color = $('#hicellcolor').val();
-    console.log(color)
-    console.log(highlight)
-    if(highlight){
-        datapoints.select(function(d){return d.name.substr(0, highlight.length) == highlight ? this : null;}).selectAll('shape appearance material').attr('diffuseColor', color);
-        //make non-highlighted lineages more transparent
-        datapoints.select(function(d){return d.name.substr(0, highlight.length) == highlight ? null : this;}).selectAll('shape appearance material').attr('transparency', 0.8);
+    //Collect highlight classes
+    var picker_sel = document.getElementsByClassName('selhi');
+    var picker_col = document.getElementsByClassName('hicolor');
+    var cells = [];
+    var colors = [];
+    for(var i=0; i < picker_sel.length; i++){
+        var selected = picker_sel[i].value;
+        if(selected){
+            var sel_type = selected.substr(0, 2);
+            var sel_val = selected.substr(2);
+            if(sel_type === 'cn'){
+                cells.push(sel_val);
+            }else {
+                cells.push(celltypes[sel_val]);
+            }
+            colors.push(picker_col[i].value);
+        }
+    }
+    
+    //Coloring and code to highlight a specific lineage
+    if(cells.length > 0){
+        var pt_color_map = {};
+        function calc_highlights(d, elt){
+            var pt_colors = [];
+            for(i=0; i < cells.length; i++){
+                if(cells[i].indexOf(d.name) > -1){
+                    pt_colors.push($.Color(colors[i]));
+                }
+            }
+            if(pt_colors.length === 0){
+                return null;
+            }else if(pt_colors.length === 1){
+                pt_color_map[d.name] = pt_colors[0].toHexString();
+            }else{
+                pt_color_map[d.name] = Color_mixer.mix(pt_colors).toHexString();
+            }
+            return elt;
+        }
+        var showhide = document.getElementById('showhide-highlight').value;
+        var transp;
+        if(showhide.substr(0,4) === 'Show'){
+            transp = 1;
+        }else{
+            transp = 0.8;
+        }
+        datapoints.selectAll('shape appearance material')
+            .attr('transparency', transp)
+            .attr('diffuseColor', 'steelblue');
+        var to_color = datapoints.select(function(d){return calc_highlights(d, this);});
+        to_color.selectAll('shape appearance material')
+            .attr('transparency', 0)
+            .attr('diffuseColor', function(d){return pt_color_map[d.name];});
+    }else{
+        datapoints.selectAll('shape appearance material')
+            .attr('transparency', 0)
+            .attr('diffuseColor', 'steelblue');
     }
 
     datapoints.transition().ease(ease).duration(duration)
@@ -208,10 +396,8 @@ function loadTimePoints(idx){
         if (!tpdata){
             ready = true;
             d3.select('#timerange').attr('max', csvdata.length);
-            // TODO this is here temporarily -- will be moved once updating of the tree is
-            // implemented
-            var cellLineage = getCellLineageMap(csvdata, idx);
-            plotCellLineageTree(cellLineage);
+            //load cell type data
+            loadCellTypeMap();
             return;
         }
         csvdata[idx] = parseCSV(tpdata);
@@ -271,7 +457,7 @@ function initializeEmbryo() {
 
         console.log("Init Plot")
         initializePlot();
-        initializeLineagePicker();
+//        initializeLineagePicker();
         console.log("Plot data")
         plotData(0, 5);
         loadTimePoints(1);
