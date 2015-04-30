@@ -359,144 +359,111 @@ function plotCellLineageTree(cell_lineage) {
 
   // ************** Generate the tree diagram    *****************
 
-    // Various accessors that specify the four dimensions of data to visualize.
-  function x(d) {  return d.x; }
-  function y(d) {return d.y; }
-
  // Chart dimensions
 var margin = {top: 10, right: 10, bottom: 10, left: 10},
-    width = 1200 - margin.right - margin.left,
-    height = 500 - margin.top - margin.bottom;
+    width = 2000 - margin.right - margin.left,
+    height = 600 - margin.top - margin.bottom;
 
   // Various scales and distortions.
-  var xScale = d3.fisheye.scale(d3.scale.linear).domain([1, 300]).range([0, 900]),
-      yScale = d3.fisheye.scale(d3.scale.linear).domain([1, 100]).range([height, 0]),
+  var xScale = d3.fisheye.scale(d3.scale.linear).domain([-10, 300]).range([0, 1900]),
+      yScale = d3.fisheye.scale(d3.scale.linear).domain([-20, 100]).range([1000, 0]),
       radiusScale = d3.scale.sqrt().domain([0, 5e8]).range([0, 40])
 
   // The x & y axes.
-  var xAxis = d3.svg.axis().orient("bottom").scale(xScale).tickFormat(d3.format(",d")).tickSize(-height),
-      yAxis = d3.svg.axis().scale(yScale).orient("left").tickSize(-width);
+  var xAxis = d3.svg.axis().orient("bottom").scale(xScale),
+      yAxis = d3.svg.axis().scale(yScale).orient("left");
 
   // Set up the SVG element
-  var svg = d3.select("body").append("svg")
-      .attr("width", width + margin.left + margin.right)
+  var svg = d3.select("body")
+    .append('div')
+    .attr("class", 'lineage_tree')
+    .append("svg")
+      .attr("width", "100%")
       .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-  // Add a background rect for mousemove.
-  svg.append("rect")
-      .attr("class", "background")
-      .attr("width", width)
-      .attr("height", height);
-
-  // Add the x-axis.
-  svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
-
-  // Add the y-axis.
-  svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis);
-
-  // Add an x-axis label.
-  svg.append("text")
-      .attr("class", "x label")
-      .attr("text-anchor", "end")
-      .attr("x", width - 6)
-      .attr("y", height - 6)
-      .text("income per capita, inflation-adjusted (dollars)");
-
-  // Add a y-axis label.
-  svg.append("text")
-      .attr("class", "y label")
-      .attr("text-anchor", "end")
-      .attr("x", -6)
-      .attr("y", 6)
-      .attr("dy", ".75em")
-      .attr("transform", "rotate(-90)")
-      .text("life expectancy (years)");
-
-// Now create the tree    
-var i = 0;
-
-var tree = d3.layout.tree()
-    .size([height/2, width]);
-
-var diagonal = d3.svg.diagonal()
-    .projection(function(d) { return [d.x, d.y]; });
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
+      var distortion_slider = d3.select('.lineage_tree')
+        .append('input')
+          .attr('type', 'range')
+          .attr('id', 'distortion_slider')
+          .attr('defaultValue', 0)
+          .attr('min', 0)
+          .attr('max', width)
+          .attr('step', 1)
+          .attr('value', 0)
 
-root = treeData[0];
+  // Now create the tree    
+  var tree = d3.layout.tree()
+      .size([height/2, width]);
 
-  // Compute the new tree layout.
+  var diagonal = d3.svg.diagonal()
+      .projection(function(d) { return [xScale(d.x), d.y]; });
+
+  root = treeData[0];
+
+  // Compute the tree layout.
   var nodes = tree.nodes(root).reverse(),
       links = tree.links(nodes);
 
   // Normalize for fixed-depth.
-  nodes.forEach(function(d) { d.y = d.depth * 100; d.y = d.depth * 100; });
-
-  // Declare the nodes…
-  var node = svg.selectAll("g.node")
-      
+  nodes.forEach(function(d) { d.y = d.depth * 50;});
 
   // Enter the nodes.
-  var dot = svg.append("g")
-          .attr("class", "dots")
-      .selectAll(".dot")
-        .data(nodes, function(d) { return d.id || (d.id = ++i); })
-      .enter().append("circle")
-        .attr("class", "dot")
-      .attr("r", 10)
-      .style("fill", "#fff")
+  var node = svg.append("g")
+    .attr("class", "nodes")
+    .selectAll(".n")
+      .data(nodes, function(d) { return d.id || (d.id = ++i); })
+        .enter().append("circle")
+        .attr("class", "node")
+        .attr("r", 10)
+        .attr("fill", "steelblue")
+        .attr("transform", function(d) { 
+          return "translate(" + 0 + "," + d.y + ")"; }) // 0 is required for x to make edges match up with nodes
+        .call(position_node)
 
-      .attr("transform", function(d) { 
-          return "translate(" + d.x + "," + d.y + ")"; })
-      .call(position)
-
-
-  dot.append("text")
-      .attr("y", function(d) { 
-          return d.children || d._children ? -18 : 18; })
-      .attr("dy", ".35em")
-      .attr("text-anchor", "middle")
-      .text(function(d) { return d.name; })
-      .style("fill-opacity", 1);
-
-    // Positions the dots based on data.
-    function position(dot) {
-      dot .attr("cx", function(d) { return xScale(x(d)); })
-          .attr("cy", function(d) { return yScale(y(d)); })
-          //.attr("r", function(d) { return radiusScale(radius(d)); });
-    }
-
-    svg.on("mousemove", function() {
-      var mouse = d3.mouse(this);
-      xScale.distortion(10).focus(mouse[0]);
-      yScale.distortion(10).focus(mouse[1]);
-
-      dot.call(position);
-      svg.select(".x.axis").call(xAxis);
-      svg.select(".y.axis").call(yAxis);
-    });
-
-
+  // TODO not working -- no text is displayed
+  svg.selectAll(".node").append('text')
+    .attr('class', 'text')
+    .text(function(d) {return d.name})
+    .call(position_node)
 
   // Declare the links…
-  //var link = svg.selectAll("path.link")
-  //    .data(links, function(d) { return d.target.id; });
+  var link = svg.selectAll("path.link")
+    .data(links)
+    .enter().insert("path", "g")
+      .attr("class", "link")
+      .attr("d", diagonal)
+      .call(position_links)
 
-  // Enter the links.
-  //link.enter().insert("path", "g")
-  //    .attr("class", "link")
-  //    .attr("d", diagonal);
-
-
-    return;
+  // Functions to position nodes and edges
+  function position_node(node) {
+    node 
+      .attr("cx", function(d) {return xScale(d.x);});
+        //.attr("cy", function(d) { return yScale(y(d)); }) // TODO commenting this out made tree height issues go away
+        //.attr("r", function(d) { return radiusScale(radius(d)); });
   }
+
+  function position_links(link) {
+      diagonal.projection(function(d) {return [xScale(d.x), d.y]; }) 
+      link.attr("d", diagonal);
+  }
+
+  // Function to call when distortion slider is moved
+  distortion_slider.on("input", function() {
+    setting = document.getElementById('distortion_slider').value
+    console.log(setting)
+    xScale.distortion(40).focus(setting);
+
+    node.call(position_node);
+    link.call(position_links)
+    svg.select(".x.axis").call(xAxis);
+    svg.select(".y.axis").call(yAxis);
+  });
+
+  return;
+}
 
 /****************************************************************
 Main Thread of execution

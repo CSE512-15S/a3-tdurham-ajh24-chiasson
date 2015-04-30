@@ -9,8 +9,9 @@
   stroke-width: 1.5px;
 }
 
-.node text {
+.dot text {
   font: 10px sans-serif;
+  color: black;
 }
 
 .link {
@@ -69,6 +70,20 @@ input[type=range]::-moz-range-thumb {
   border-radius: 20px;
   background: #2394F5;
   cursor: pointer;
+}
+
+/* Additional styling for the distortion slider */
+input[id=distortion_slider]::-webkit-slider-thumb {
+  width: 100px;
+  height: 25px;
+  margin-top: -5px;
+  border-radius: 5px;
+  background: #2394F5;
+  opacity: 0.9;
+}
+
+input[id=distortion_slider]{
+  width: 100%;
 }
 
 /* Styling for play-pause button */
