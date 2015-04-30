@@ -429,12 +429,7 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
   var text = svg.selectAll(".node").append('text')
     .attr('class', 'text')
     .text(function(d) {return d.name})
-    .attr("transform", "translate(-25, -20)")
-    .call(position_node)
-    .style("text-anchor", "start")
-    
-    
-
+    .call(position_text)
 
   // Declare the links…
   var link = svg.selectAll("path.link")
@@ -454,6 +449,19 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
         //.attr("r", function(d) { return radiusScale(radius(d)); });
   }
 
+
+  function position_text(text) {
+    text 
+      .attr("cx", function(d) {return xScale(d.x);})
+      .attr("x", function(d) {return xScale(d.x);})
+      .attr("y", function(d) {return d.y;})
+      .attr("transform", function(d) {return "translate(-5, 15)rotate(90" + "," + xScale(d.x) + "," + d.y + ")"})
+
+
+        //.attr("cy", function(d) { return yScale(y(d)); }) // TODO commenting this out made tree height issues go away
+        //.attr("r", function(d) { return radiusScale(radius(d)); });
+  }
+
   function position_links(link) {
       diagonal.projection(function(d) {return [xScale(d.x), d.y]; }) 
       link.attr("d", diagonal);
@@ -466,8 +474,8 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
     xScale.distortion(40).focus(setting);
 
     node.call(position_node);
-    link.call(position_links)
-    text.call(position_node);
+    link.call(position_links);
+    text.call(position_text);
 
     svg.select(".x.axis").call(xAxis);
     svg.select(".y.axis").call(yAxis);

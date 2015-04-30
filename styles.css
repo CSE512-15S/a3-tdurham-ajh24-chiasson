@@ -1,15 +1,9 @@
 /* Styling for lineage tree */
-.dot {
+.node {
   cursor: pointer;
 }
 
-.dot circle {
-  fill: #fff;
-  stroke: steelblue;
-  stroke-width: 1.5px;
-}
-
-.dot text {
+.node text {
   font: 10px sans-serif;
   color: black;
 }
