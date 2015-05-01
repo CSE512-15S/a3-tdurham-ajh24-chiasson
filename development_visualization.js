@@ -286,10 +286,12 @@ function plotData( time_point, duration ) {
     var picker_col = document.getElementsByClassName('hicolor');
     var cells = [];
     var colors = [];
+    var ct_types = [];
     for(var i=0; i < picker_sel.length; i++){
         var selected = picker_sel[i].value;
         if(selected){
             var sel_type = selected.substr(0, 2);
+            ct_types.push(sel_type);
             var sel_val = selected.substr(2);
             if(sel_type === 'cn'){
                 cells.push(sel_val);
@@ -306,7 +308,9 @@ function plotData( time_point, duration ) {
         function calc_highlights(d, elt){
             var pt_colors = [];
             for(i=0; i < cells.length; i++){
-                if(cells[i].indexOf(d.name) > -1){
+                if(ct_types[i] === 'cn' && d.name.indexOf(cells[i]) === 0){
+                    pt_colors.push($.Color(colors[i]))
+                }else if(cells[i].indexOf(d.name) > -1){
                     pt_colors.push($.Color(colors[i]));
                 }
             }
