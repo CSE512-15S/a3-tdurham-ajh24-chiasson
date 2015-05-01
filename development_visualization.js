@@ -658,6 +658,7 @@ function plotCellLineageTree(root) {
   ****************************************************************/   
   var tree = d3.layout.tree()
       .size([height/2, width])
+      .sort(function(a, b) { return d3.ascending(a.name, b.name); });
 
   var diagonal = d3.svg.diagonal()
       .projection(function(d) { return [xScale(d.x), d.y]; });
