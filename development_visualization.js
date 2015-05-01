@@ -610,6 +610,7 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
           .attr("transform", function(d) { 
             return "translate(" + 0 + "," + d.y + ")"; }) // 0 is required for x to make edges match up with nodes
           .call(position_node)
+          .call(scale_radius)
 
   // TODO not working -- no text is displayed
   var text = svg.selectAll(".node").append('text')
@@ -635,17 +636,42 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
         //.attr("r", function(d) { return radiusScale(radius(d)); });
   }
 
+  function is_close_to_plot_border(element) {
+    var currentPosition = xScale(element.x)
+
+    // List of all the blastomeres so can modify them differently
+    var blastomeres = ["ABa", "EMS", "P2", "ABp", "root"]
+
+    return (currentPosition < 100 || currentPosition > width - 200) && blastomeres.indexOf(element.name) < 0
+  }
 
   function position_text(text) {
     text 
       .attr("cx", function(d) {return xScale(d.x);})
       .attr("x", function(d) {return xScale(d.x);})
       .attr("y", function(d) {return d.y;})
-      .attr("transform", function(d) {return "translate(-5, 15)rotate(90" + "," + xScale(d.x) + "," + d.y + ")"})
 
+      // Don't show text if points are close to the edges, but still show the blastomeres
+      .style("visibility", function(d) {
+        return  is_close_to_plot_border(d) ? "hidden" : "visible"
+      })
+
+      .attr("transform", function(d) {return "translate(-5, 15)rotate(90" + "," + xScale(d.x) + "," + d.y + ")"})
 
         //.attr("cy", function(d) { return yScale(y(d)); }) // TODO commenting this out made tree height issues go away
         //.attr("r", function(d) { return radiusScale(radius(d)); });
+  }
+
+  function scale_radius(circle) {
+    var maxCircleRadius = 8
+    
+
+    circle
+    .attr("r", function(d) {
+      var currentPosition = xScale(d.x)
+      // Scale radius smaller when points get close to edges for visibility, but don't change the blastomeres
+      return is_close_to_plot_border(d) ? Math.min(Math.min(maxCircleRadius/100 * xScale(d.x), maxCircleRadius/200 * (width - currentPosition)), maxCircleRadius) : maxCircleRadius
+    })
   }
 
   function position_links(link) {
@@ -662,6 +688,7 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
     node.call(position_node);
     link.call(position_links);
     text.call(position_text);
+    node.call(scale_radius);
 
     svg.select(".x.axis").call(xAxis);
     svg.select(".y.axis").call(yAxis);
