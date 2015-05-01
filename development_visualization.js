@@ -103,7 +103,7 @@ function makeLPDivTemplate(){
         .attr('onchange', 'updatePlot()');
     lpsubdiv.append('input')
         .attr('type', 'button')
-        .attr('value', 'Remove')
+        .attr('value', '-')
         .attr('class', 'removehi')
         .attr('id', 'removehi'+lpidx)
         .attr('onclick', '(function(e, obj) {$(obj).parent().remove(); updatePlot();})(event, this)');
@@ -133,7 +133,7 @@ function initializeLineagePicker(){
     cloneLPDiv();
     d3.select('body').append('input')
         .attr('type', 'button')
-        .attr('value', 'Add Highlight')
+        .attr('value', '+')
         .attr('class', 'add-highlight')
         .attr('onclick', 'cloneLPDiv()');
     d3.select('body').append('input')
