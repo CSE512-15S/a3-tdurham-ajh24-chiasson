@@ -72,6 +72,7 @@ function makeLPDivTemplate(){
         .attr('class', 'selhi')
         .attr('id', id)
         .attr('data-placeholder', 'Cell Lineage or Cell Type...')
+        .attr('onchange', 'updatePlot()');
 //        .attr('size', 15)
     select.append('option').attr('value', '');
     var optgroup = select.append('optgroup')
@@ -98,13 +99,14 @@ function makeLPDivTemplate(){
         .attr('type', 'color')
         .attr('value', '#ff0000')
         .attr('class', 'hicolor')
-        .attr('id', 'hicolor'+lpidx);
+        .attr('id', 'hicolor'+lpidx)
+        .attr('onchange', 'updatePlot()');
     lpsubdiv.append('input')
         .attr('type', 'button')
         .attr('value', 'Remove')
         .attr('class', 'removehi')
         .attr('id', 'removehi'+lpidx)
-        .attr('onclick', '(function(e, obj) {$(obj).parent().remove();})(event, this)');
+        .attr('onclick', '(function(e, obj) {$(obj).parent().remove(); updatePlot();})(event, this)');
     lpidx++;
 }
 
@@ -139,7 +141,7 @@ function initializeLineagePicker(){
         .attr('value', 'Hide Non-Highlighted')
         .attr('class', 'add-highlight')
         .attr('id', 'showhide-highlight')
-        .attr('onclick', '(function(e, obj) {obj.value = obj.value.substr(0,4) === "Hide" ? "Show Non-Highlighted" : "Hide Non-Highlighted";})(event, this)');
+        .attr('onclick', '(function(e, obj) {obj.value = obj.value.substr(0,4) === "Hide" ? "Show Non-Highlighted" : "Hide Non-Highlighted"; updatePlot();})(event, this)');
 }
 
 //check to see if name is the name of a parent of object d
@@ -150,6 +152,15 @@ function isParentOf(d, name){
         return false;
     }else{
         return isParentOf(d.pred, name);
+    }
+}
+
+//update the plots if the highlight options are changed when the development
+//animation is not playing.
+function updatePlot(){
+    var ppbutton = document.getElementById('playpause');
+    if(ppbutton.innerHTML === 'Play'){
+        plotData(timepoint, 0);
     }
 }
 
@@ -278,7 +289,7 @@ function plotData( time_point, duration ) {
     var x = scales[0], y = scales[1], z = scales[2];
 
     // Draw a sphere at each x,y,z coordinate.
-    var timepoint_data = csvdata[time_point];
+    var timepoint_data = csvdata[time_point % csvdata.length];
     var datapoints = scene.selectAll(".datapoint").data( timepoint_data, function(d){return d.name;});
     datapoints.exit().remove();
 
@@ -517,9 +528,9 @@ function initializeEmbryo() {
 
 function development() {
     if (ready && x3d.node() && x3d.node().runtime ) {
-        var t_idx = timepoint % csvdata.length;
-        plotData(t_idx,1000);
-        timepoint = t_idx + 1;
+//        var t_idx = timepoint % csvdata.length;
+        timepoint++;
+        plotData(timepoint,1000);
         document.getElementById('timerange').value = timepoint;
 
         // Update and plot the tree (Not yet working)
