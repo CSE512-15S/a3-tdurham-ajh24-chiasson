@@ -14,12 +14,17 @@ GLOBAL VARIABLES
 //contains the data for each timepoint/cell
 var csvdata = [];
 
+//contains objects for progenitor cells preceding time series data
+var P0 = {name:'P0', pred: -1};
+var P1 = {name:'P1', pred: P0, succ: []};
+var AB = {name:'AB', pred: P0, succ: []};
+
 //maps cell name to an index into this.csvdata for each time point
 var namemap = [];
 
 //maps cell types to cell names
 var celltypes = {};
-var cellnames = [];
+var cellnames = ['EMS', 'P2', 'P3', 'P4'];
 var celldesc = [];
 var celltype = [];
 var tissuetype = [];
@@ -135,6 +140,17 @@ function initializeLineagePicker(){
         .attr('class', 'add-highlight')
         .attr('id', 'showhide-highlight')
         .attr('onclick', '(function(e, obj) {obj.value = obj.value.substr(0,4) === "Hide" ? "Show Non-Highlighted" : "Hide Non-Highlighted";})(event, this)');
+}
+
+//check to see if name is the name of a parent of object d
+function isParentOf(d, name){
+    if(d.name === name){
+        return true;
+    }else if(d.pred === -1){
+        return false;
+    }else{
+        return isParentOf(d.pred, name);
+    }
 }
 
 function loadCellTypeMap(){
@@ -275,9 +291,23 @@ function plotData( time_point, duration ) {
         }})
         .attr('class', 'datapoint')
         .attr('id', function(d){return d.name})
-        .attr('scale', function(d){var ptrad = d.radius * 0.5; return [ptrad, ptrad, ptrad]})
-        .append('shape');
+        .attr('scale', function(d){var ptrad = d.radius * 0.5; return [ptrad, ptrad, ptrad]});
     
+    //use new_data to identify which nodes in the tree should be revealed
+    var allnodes = d3.selectAll('.node');
+//    allnodes.selectAll('.node-circle').attr('style', 'visibility:hidden;');
+    allnodes.selectAll('.node-circle').attr('fill', 'steelblue');
+    allnodes = allnodes.filter(function(d){
+        var dpts = datapoints.filter(function(d2){return isParentOf(d2, d.name) ? this : null;});
+        if(dpts[0].length > 0){
+            return this;
+        }
+        return null;
+//    }).selectAll('.node-circle').attr('style', 'visibility:visible');
+    }).selectAll('.node-circle').attr('fill', 'red');
+    
+    //finish generating data points
+    new_data = new_data.append('shape');
     new_data.append('appearance').append('material');
     new_data.append('sphere');
 
@@ -308,7 +338,8 @@ function plotData( time_point, duration ) {
         function calc_highlights(d, elt){
             var pt_colors = [];
             for(i=0; i < cells.length; i++){
-                if(ct_types[i] === 'cn' && d.name.indexOf(cells[i]) === 0){
+//                if(ct_types[i] === 'cn' && d.name.indexOf(cells[i]) === 0){
+                if(ct_types[i] === 'cn' && isParentOf(d, cells[i])){
                     pt_colors.push($.Color(colors[i]))
                 }else if(cells[i].indexOf(d.name) > -1){
                     pt_colors.push($.Color(colors[i]));
@@ -454,8 +485,18 @@ function initializeEmbryo() {
         csvdata[0] = parseCSV(t0data);
         namemap[0] = {};
         for(var i = 0; i < csvdata[0].length; i++){
-            namemap[0][csvdata[0][i].name] = i;
-            csvdata[0][i].pred = -1;
+            var cell = csvdata[0][i];
+            namemap[0][cell.name] = i;
+            if(cell.name.substr(0, 2) === 'AB'){
+                cell.pred = AB;
+                AB.succ.push(cell);
+            }else if(cell.name === 'EMS' || cell.name == 'P2'){
+                cell.pred = P1;
+                P1.succ.push(cell);
+            }else{
+                cell.pred = -1;
+            }
+//            csvdata[0][i].pred = -1;
         }
         console.log("Got data:")
 
@@ -501,8 +542,10 @@ HELPER FUNCTIONS FOR LINEAGE TREE PLOTTING
 ****************************************************************/
 function getTreeRootFromTimepoints(endTimepoint) {
   // Create a list of {'name': name, 'parent': parent} from the loaded time points
-  cell_lineage = []
-  cell_lineage.push({'name': "root", "parent":'null'})
+  cell_lineage = [];
+  cell_lineage.push({'name': "P0", "parent":'null'});
+  cell_lineage.push({'name': 'AB', 'parent':'P0'});
+  cell_lineage.push({'name': 'P1', 'parent':'P0'});
 
   // Loop over all time points 
   for (j = 0; j < this.csvdata.length; j++) {
@@ -514,7 +557,12 @@ function getTreeRootFromTimepoints(endTimepoint) {
       var parent_name = flat_data[i].pred.name
   
       if (name === parent_name && j == 1) {
-        parent_name = "root"
+          if(name === 'ABa' || name === 'ABp'){
+              parent_name = 'AB';
+          }else{
+              parent_name = 'P1';
+          }
+//        parent_name = "root"
         cell_lineage.push({"name": name, "parent": parent_name})
       } else if(j > 1 &&  name != parent_name){
         cell_lineage.push({"name": name, "parent": parent_name})
@@ -555,6 +603,7 @@ function plotCellLineageTree(root) {
   var margin = {top: 10, right: 10, bottom: 10, left: 10},
   height = 600 - margin.top - margin.bottom;
 
+
   // Set up the SVG element
   var svg = d3.select("body")
     .append('div')
@@ -587,7 +636,6 @@ function plotCellLineageTree(root) {
     setting = document.getElementById('distortion_slider').value
     console.log(setting)
     xScale.distortion(40).focus(setting);
-
     node.call(position_node);
     link.call(position_links);
     text.call(position_text);
@@ -621,7 +669,7 @@ function plotCellLineageTree(root) {
         .enter().append("g").
         attr("class", "node")
         .append('circle')
-        
+          .attr('class', 'node-circle')
           .attr("r", 10)
           .attr("fill", "steelblue")
           .attr("transform", function(d) { 
