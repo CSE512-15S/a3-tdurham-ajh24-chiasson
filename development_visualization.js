@@ -275,9 +275,21 @@ function plotData( time_point, duration ) {
         }})
         .attr('class', 'datapoint')
         .attr('id', function(d){return d.name})
-        .attr('scale', function(d){var ptrad = d.radius * 0.5; return [ptrad, ptrad, ptrad]})
-        .append('shape');
+        .attr('scale', function(d){var ptrad = d.radius * 0.5; return [ptrad, ptrad, ptrad]});
     
+    //use new_data to identify which nodes in the tree should be revealed
+    var test = d3.selectAll('.node')
+    test = test.filter(function(d){
+        var dpts = datapoints.filter(function(d2){return d2.name === d.name ? this : null;});
+        if(dpts[0].length > 0){
+            return this;
+        }
+        return null;
+    })
+    test = test.selectAll('.node-circle').attr('fill', 'red');
+    
+    //finish generating data points
+    new_data = new_data.append('shape');
     new_data.append('appearance').append('material');
     new_data.append('sphere');
 
@@ -608,7 +620,7 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
         .enter().append("g").
         attr("class", "node")
         .append('circle')
-        
+          .attr('class', 'node-circle')
           .attr("r", 10)
           .attr("fill", "steelblue")
           .attr("transform", function(d) { 
