@@ -14,17 +14,24 @@ GLOBAL VARIABLES
 //contains the data for each timepoint/cell
 var csvdata = [];
 
+//mapping of cell name to cell metadata
+var cellmap = {P0: {name:'P0', parent:-1}};
+cellmap.AB = {name:'AB', parent: cellmap.P0, children: []};
+cellmap.P1 = {name:'P1', parent: cellmap.P0, children: []};
+cellmap.P0.children = [cellmap.AB, cellmap.P1];
+
+
 //contains objects for progenitor cells preceding time series data
-var P0 = {name:'P0', pred: -1};
-var P1 = {name:'P1', pred: P0, succ: []};
-var AB = {name:'AB', pred: P0, succ: []};
+var P0 = {meta: cellmap.P0, pred: -1, succ: []};
+var P1 = {meta: cellmap.P1, pred: P0, succ: []};
+var AB = {meta: cellmap.AB, pred: P0, succ: []};
 
 //maps cell name to an index into this.csvdata for each time point
 var namemap = [];
 
 //maps cell types to cell names
 var celltypes = {};
-var cellnames = ['EMS', 'P2', 'P3', 'P4'];
+var cellnames = ['P0', 'AB', 'P1', 'EMS', 'P2', 'P3', 'P4'];
 var celldesc = [];
 var celltype = [];
 var tissuetype = [];
@@ -149,12 +156,48 @@ function initializeLineagePicker(){
 
 //check to see if name is the name of a parent of object d
 function isParentOf(d, name){
+    //return true if name matches d
     if(d.name === name){
         return true;
+    //this will work if name is blastomere or below
+    }else if(d.name.indexOf(name) > -1){
+        return true;
+    //if this is the root node, then there are no more parents to check
     }else if(d.pred === -1){
         return false;
+    //if name is not a substring of d, then the only way it can be a parent is 
+    //for name to be a pre-blastomere. Find the blastomere node for this lineage
+    //branch and recurse to either find parent or end at P0 (root).
     }else{
+        var regex = /^(P0|AB|P1|EMS|P2|E|MS|C|P3|D|P4|Z2|Z3)/;
+        var blast = regex.exec(d.name);
         return isParentOf(d.pred, name);
+    }
+}
+
+//takes a cell name and concatenates any blastomere cell names to get a cell
+//name string suitable for querying with .indexOf(<cellname>)
+function timePointCellNames(timepoint){
+    var timepoint_str = $.map(timepoint, function(elt, idx){return elt.meta.name;}).join('');
+    var regex = /(P0|AB|P1|EMS|P2|E|MS|C|P3|D|P4|Z2|Z3)/g;
+    var blast_list = timepoint_str.match(regex);
+    blast_list = blast_list.filter(onlyUnique);
+    var blast_str = '';
+    for (var i=1; i < blast_list.length; i++){
+        blast_str += _cellnamesStrHelper(cellmap[blast_list[i]]);
+    }
+    return blast_str + timepoint_str;
+}
+//thanks http://stackoverflow.com/questions/1960473/unique-values-in-an-array
+function onlyUnique(value, index, self){
+    return self.indexOf(value) === index;
+}
+
+function _cellnamesStrHelper(obj){
+    if (obj.parent === -1){
+        return obj.name;
+    }else{
+        return _cellnamesStrHelper(obj.parent) + obj.name;
     }
 }
 
@@ -227,8 +270,9 @@ function loadCellTypeMap(){
         initializeLineagePicker();
             // TODO this is here temporarily -- will be moved once updating of the tree is
             // implemented
-            var root = getTreeRootFromTimepoints(csvdata, csvdata.length - 1);
-            plotCellLineageTree(root);
+//            var root = getTreeRootFromTimepoints(csvdata, csvdata.length - 1);
+//            plotCellLineageTree(root);
+            plotCellLineageTree(cellmap.P0);
     });
 }
 
@@ -293,9 +337,9 @@ function plotData( time_point, duration ) {
 
     // Draw a sphere at each x,y,z coordinate.
     var timepoint_data = csvdata[time_point % csvdata.length];
-    var datapoints = scene.selectAll(".datapoint").data( timepoint_data, function(d){return d.name;});
+    var datapoints = scene.selectAll(".datapoint").data( timepoint_data, function(d){return d.meta.name;});
     datapoints.exit().remove();
-
+    var cellnames = timePointCellNames(timepoint_data);
     var new_data = datapoints.enter().append('transform')
         .attr('translation', function(d){
             if (d.pred == -1){
@@ -304,46 +348,30 @@ function plotData( time_point, duration ) {
                 return x(d.pred.x) + " " + y(d.pred.y) + " " + z(d.pred.z);
         }})
         .attr('class', 'datapoint')
-        .attr('id', function(d){return d.name})
+        .attr('id', function(d){return d.meta.name})
         .attr('scale', function(d){var ptrad = d.radius * 0.5; return [ptrad, ptrad, ptrad]});
     
     //use new_data to identify which nodes in the tree should be revealed
     var allnodes = d3.selectAll('.node');
     allnodes.selectAll('.node-circle').attr('style', 'visibility:hidden;');
-//    allnodes.selectAll('.node-circle').attr('fill', 'steelblue');
     allnodes.filter(function(d){
-        var dpts = datapoints.filter(function(d2){return isParentOf(d2, d.name) ? this : null;});
-        if(dpts[0].length > 0){
+        if(cellnames.indexOf(d.name) > -1){
             return this;
         }
         return null;
     }).selectAll('.node-circle').attr('style', 'visibility:visible');
-//    }).selectAll('.node-circle').attr('fill', 'red');
     
-    var newnodes = allnodes.filter(function(d){
-        var tmpnode = this;
-        var dpts = new_data.filter(function(d2){
-            var dpname = d2.name,
-            nodename = d.name;
-//            nodefill = d3.select(tmpnode.firstElementChild).attr('fill');
-//            if(dpname === nodename && nodefill != 'red'){
-            if(dpname === nodename){
-                return this;
-            }else{
-                return null;
-            }
-        });
-//            return (d2.name === d.name && d.select('circle').fill === 'red') ? this : null;});
-        if (dpts[0].length > 0){
-            return this;
-        }
-        return null;
+    var new_data_names = [];
+    new_data.each(function(d){
+        new_data_names.push(d.meta.name);
     });
-//.selectAll('.node-circle')
-//        .append('transform')
-//        .attr('translate', function(d){
-//            return d.parent.x + " " + d.parent.y;
-//    });
+    var newnodes = allnodes.filter(function(d){
+        if(new_data_names.indexOf(d.name) > -1){
+            return this;
+        }else{
+            return null;
+        }
+    });
     var circ1 = newnodes.selectAll('circle')
         .attr('x', function(d){
             return treeXScale(this.parentNode.__data__.parent.x);
@@ -355,16 +383,11 @@ function plotData( time_point, duration ) {
             return this.parentNode.__data__.parent.y;
         })
         .attr('transform', function(d){ return 'translate('+0+','+this.parentNode.__data__.parent.y + ')';});
-////    newnodes.transition().ease(ease).duration(duration)
-////        .attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y +')';});
     var circ2 = newnodes.selectAll('circle').transition().ease(ease).duration(duration)
         .attr('x', function(d){return d3.select(this).attr('x0');})
         .attr('cx', function(d){return d3.select(this).attr('cx0');})
         .attr('y', function(d){return d3.select(this).attr('y0');})
         .attr('transform', function(d){ return 'translate('+0+','+d3.select(this).attr('y0')+')';});
-//        .attr('transform', function(d){
-//            return 'translate('+treeXScale(d.x) + "," + treeYScale(d.y)+')';
-//        });
     
     //finish generating data points
     new_data = new_data.append('shape');
@@ -464,12 +487,15 @@ function parseCSV(csvdata_in) {
     zmean = zmean/filtered_rows.length;
     for (var i=0; i < filtered_rows.length; i++){
         row = filtered_rows[i];
-        parsed_data.push({'succ': [],
-                          'x': row[0] - xmean,
+        parsed_data.push({'x': row[0] - xmean,
                           'y': row[1] - ymean,
                           'z': row[2] - zmean,
                           'radius': row[3],
-                          'name': row[4].trim()
+                          'pred': -1,
+                          'succ': [],
+                          'meta':{'name': row[4].trim().replace(/\s/g, '_'),
+                                  'parent': -1,
+                                  'children': []}
         });
     }
     return parsed_data;
@@ -493,32 +519,43 @@ function loadTimePoints(idx){
             d3.select('#timerange').attr('max', csvdata.length);
             //load cell type data
             loadCellTypeMap();
+            plotData(0, 5);
             return;
         }
         csvdata[idx] = parseCSV(tpdata);
         namemap[idx] = {};
         for(var i = 0; i < this.csvdata[idx].length; i++){
             //make entry in namemap for this cell at this timepoint
-            var cell = this.csvdata[idx][i];
-            this.namemap[idx][cell.name] = i;
-            //get predecessor
-            var pred_idx = this.namemap[idx-1][cell.name];
-            if(typeof pred_idx == 'undefined'){
+            var cell = csvdata[idx][i];
+            namemap[idx][cell.meta.name] = i;
+            //get predecessor in previous time point
+            var pred_idx = namemap[idx-1][cell.meta.name];
+            if(typeof pred_idx === 'undefined'){
                 var pred_name;
                 //blastomere names are not systematic, so we have to look them up
-                if(cell.name in blastpred){
-                    pred_name = blastpred[cell.name];
+                if(cell.meta.name in blastpred){
+                    pred_name = blastpred[cell.meta.name];
                 }else{
-                    pred_name = cell.name.substr(0, cell.name.length - 1);
+                    pred_name = cell.meta.name.substr(0, cell.meta.name.length - 1);
                 }
-                pred_idx = this.namemap[idx-1][pred_name];
+                pred_idx = namemap[idx-1][pred_name];
             }
             if(typeof pred_idx == 'undefined'){
                 cell.pred = -1;
+                cellmap[cell.meta.name] = cell.meta;
             }else{
-                cell.pred = this.csvdata[idx-1][pred_idx];
-                //add cell to its predecessor's successor array
+                //link cell to time point data structure
+                cell.pred = csvdata[idx-1][pred_idx];
                 cell.pred.succ.push(cell);
+                //add entries to lineage data structure (if it's not there already)
+                if(!(cell.meta.name in cellmap)){
+                    console.log(cell.meta.name);
+                    cell.meta.parent = cellmap[cell.pred.meta.name];
+                    cell.meta.parent.children.push(cell.meta);
+                    cellmap[cell.meta.name] = cell.meta;
+                }else{
+                    cell.meta = cellmap[cell.meta.name];
+                }
             }
         }
         loadTimePoints(idx + 1);
@@ -546,27 +583,38 @@ function initializeEmbryo() {
         namemap[0] = {};
         for(var i = 0; i < csvdata[0].length; i++){
             var cell = csvdata[0][i];
-            namemap[0][cell.name] = i;
-            if(cell.name.substr(0, 2) === 'AB'){
+            namemap[0][cell.meta.name] = i;
+            if(cell.meta.name.substr(0, 2) === 'AB'){
+                //link cell to time point data structure
                 cell.pred = AB;
                 AB.succ.push(cell);
-            }else if(cell.name === 'EMS' || cell.name == 'P2'){
+                //add entries to lineage data structure
+                cell.meta.parent = cellmap.AB;
+                cell.meta.parent.children.push(cell.meta);
+                cellmap[cell.meta.name] = cell.meta;
+            }else if(cell.meta.name === 'EMS' || cell.meta.name == 'P2'){
+                //link cell to time point data structure
                 cell.pred = P1;
                 P1.succ.push(cell);
+                //add entries to lineage data structure
+                cell.meta.parent = cellmap.P1;
+                cell.meta.parent.children.push(cell.meta);
+                cellmap[cell.meta.name] = cell.meta;
             }else{
+                //no predecessor in the time series (shouldn't happen)
                 cell.pred = -1;
             }
 //            csvdata[0][i].pred = -1;
         }
-        console.log("Got data:")
+        console.log("Got T0 data");
 
-        console.log("Init Plot")
+        console.log("Init Plot");
         initializePlot();
 //        initializeLineagePicker();
-        console.log("Plot data")
-        
+//        console.log("Plot data")
+        console.log("Load Time Point data");
         loadTimePoints(1);
-        plotData(0, 5);
+        console.log("Initialization Complete");
 
         // Build and plot the tree (Not yet working)
         //var cellLineage = getTreeRootFromTimepoints(this.csvdata, 0)
@@ -725,6 +773,7 @@ function plotCellLineageTree(root) {
   Add graphics to nodes and links in tree layout
   ****************************************************************/
   // Enter the nodes.
+  var i = 0;
   var node = svg.append("g")
     .attr("class", "nodes")
     .selectAll(".node")
