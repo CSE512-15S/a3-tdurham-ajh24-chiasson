@@ -839,7 +839,7 @@ $(window).on("resize", function() {
     var currentPosition = xScale(element.x)
 
     // If element is within 100 px of either side and at a depth greater than 2, return TRUE
-    return (currentPosition < 100 || currentPosition > width - 100) && element.depth > 2
+    return (currentPosition < 250 || currentPosition > width - 250) && element.depth > 2
   }
 
   function position_node(node) {
@@ -861,8 +861,17 @@ $(window).on("resize", function() {
       .attr("y", function(d) {return d.y;})
 
       // Don't show text if points are close to the edges, but still show the blastomeres
-      .style("visibility", function(d) {
-        return  is_close_to_plot_border(d) ? "hidden" : "visible"
+      .style("opacity", function(d) {
+        var currentPosition = xScale(d.x)
+        minOpacity = 0
+        maxOpacity = 1
+
+        if (d.depth <= 2) { 
+          return maxOpacity
+        } else {
+        return Math.max(Math.min(Math.min(maxOpacity/(width/2) * xScale(d.x), 1/(width/2) * (width - currentPosition)), maxOpacity), minOpacity)
+        } 
+
       })
 
       .attr("transform", function(d) {return "translate(-5, 15)rotate(90" + "," + xScale(d.x) + "," + d.y + ")"})
@@ -872,13 +881,19 @@ $(window).on("resize", function() {
   }
 
   function scale_radius(circle) {
-    var maxCircleRadius = 8
+    var maxCircleRadius = 8,
+    minCircleRadius = 2.5;
 
     circle
       .attr("r", function(d) {
         var currentPosition = xScale(d.x)
+
+        if (d.depth <= 2) { 
+          return maxCircleRadius
+        } else {
         // Scale radius smaller when points get close to edges for visibility, but don't change the blastomeres
-        return is_close_to_plot_border(d) ? Math.min(Math.min(maxCircleRadius/100 * xScale(d.x), maxCircleRadius/100 * (width - currentPosition)), maxCircleRadius) : maxCircleRadius
+        return Math.max(Math.min(Math.min(maxCircleRadius/(width/2) * xScale(d.x), maxCircleRadius/(width/2) * (width - currentPosition)), maxCircleRadius), minCircleRadius)
+        } 
       });
   }
 
