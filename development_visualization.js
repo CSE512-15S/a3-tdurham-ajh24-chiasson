@@ -681,8 +681,8 @@ function plotCellLineageTree(root) {
   Set up distortion scale and associate slider
   ****************************************************************/
   // TODO this scale still seems really finicky. Settings are not currently very robust.
-  var xScale = d3.fisheye.scale(d3.scale.linear).domain([0, width/7.3]).range([0, width])
-  treeXScale = xScale
+  var xScale = d3.fisheye.scale(d3.scale.linear).domain([0, width/7.3]).range([0, width]);
+  treeXScale = xScale;
 
   var distortion_slider = d3.select('.lineage_tree')
     .append('input')
