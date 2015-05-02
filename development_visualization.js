@@ -160,7 +160,7 @@ function isParentOf(d, name){
     if(d.name === name){
         return true;
     //this will work if name is blastomere or below
-    }else if(d.name.indexOf(name) > -1){
+    }else if(d.meta.name.indexOf(name) > -1){
         return true;
     //if this is the root node, then there are no more parents to check
     }else if(d.pred === -1){
@@ -170,7 +170,7 @@ function isParentOf(d, name){
     //branch and recurse to either find parent or end at P0 (root).
     }else{
         var regex = /^(P0|AB|P1|EMS|P2|E|MS|C|P3|D|P4|Z2|Z3)/;
-        var blast = regex.exec(d.name);
+        var blast = regex.exec(d.meta.name);
         return isParentOf(d.pred, name);
     }
 }
@@ -179,14 +179,17 @@ function isParentOf(d, name){
 //name string suitable for querying with .indexOf(<cellname>)
 function timePointCellNames(timepoint){
     var timepoint_str = $.map(timepoint, function(elt, idx){return elt.meta.name;}).join('');
+    return cellNamesStr(timepoint_str);
+}
+function cellNamesStr(cellstr){
     var regex = /(P0|AB|P1|EMS|P2|E|MS|C|P3|D|P4|Z2|Z3)/g;
-    var blast_list = timepoint_str.match(regex);
+    var blast_list = cellstr.match(regex);
     blast_list = blast_list.filter(onlyUnique);
     var blast_str = '';
     for (var i=1; i < blast_list.length; i++){
         blast_str += _cellnamesStrHelper(cellmap[blast_list[i]]);
     }
-    return blast_str + timepoint_str;
+    return blast_str + cellstr;
 }
 //thanks http://stackoverflow.com/questions/1960473/unique-values-in-an-array
 function onlyUnique(value, index, self){
@@ -354,18 +357,19 @@ function plotData( time_point, duration ) {
     //use new_data to identify which nodes in the tree should be revealed
     var allnodes = d3.selectAll('.node');
     allnodes.selectAll('.node-circle').attr('style', 'visibility:hidden;');
-    allnodes.filter(function(d){
+    var visiblenodes = allnodes.filter(function(d){
         if(cellnames.indexOf(d.name) > -1){
             return this;
         }
         return null;
-    }).selectAll('.node-circle').attr('style', 'visibility:visible');
+    });
+    visiblenodes.selectAll('.node-circle').attr('style', 'visibility:visible');
     
     var new_data_names = [];
     new_data.each(function(d){
         new_data_names.push(d.meta.name);
     });
-    var newnodes = allnodes.filter(function(d){
+    var newnodes = visiblenodes.filter(function(d){
         if(new_data_names.indexOf(d.name) > -1){
             return this;
         }else{
@@ -383,11 +387,7 @@ function plotData( time_point, duration ) {
             return this.parentNode.__data__.parent.y;
         })
         .attr('transform', function(d){ return 'translate('+0+','+this.parentNode.__data__.parent.y + ')';});
-    var circ2 = newnodes.selectAll('circle').transition().ease(ease).duration(duration)
-        .attr('x', function(d){return d3.select(this).attr('x0');})
-        .attr('cx', function(d){return d3.select(this).attr('cx0');})
-        .attr('y', function(d){return d3.select(this).attr('y0');})
-        .attr('transform', function(d){ return 'translate('+0+','+d3.select(this).attr('y0')+')';});
+    
     
     //finish generating data points
     new_data = new_data.append('shape');
@@ -431,9 +431,9 @@ function plotData( time_point, duration ) {
             if(pt_colors.length === 0){
                 return null;
             }else if(pt_colors.length === 1){
-                pt_color_map[d.name] = pt_colors[0].toHexString();
+                pt_color_map[d.meta.name] = pt_colors[0].toHexString();
             }else{
-                pt_color_map[d.name] = Color_mixer.mix(pt_colors).toHexString();
+                pt_color_map[d.meta.name] = Color_mixer.mix(pt_colors).toHexString();
             }
             return elt;
         }
@@ -447,20 +447,36 @@ function plotData( time_point, duration ) {
         datapoints.selectAll('shape appearance material')
             .attr('transparency', transp)
             .attr('diffuseColor', 'steelblue');
+        //color points
         var to_color = datapoints.select(function(d){return calc_highlights(d, this);});
         to_color.selectAll('shape appearance material')
             .attr('transparency', 0)
-            .attr('diffuseColor', function(d){return pt_color_map[d.name];});
+            .attr('diffuseColor', function(d){return pt_color_map[d.meta.name];});
+        //color nodes
+        visiblenodes.selectAll('circle').attr('fill', function(d){
+            if(d.name in pt_color_map){
+                return pt_color_map[d.name];
+            }else{
+                return 'steelblue';
+            }
+        });
     }else{
         datapoints.selectAll('shape appearance material')
             .attr('transparency', 0)
             .attr('diffuseColor', 'steelblue');
     }
 
+    //transition points
     datapoints.transition().ease(ease).duration(duration)
         .attr("translation", function(row) {
             return x(row.x) + " " + y(row.y) + " " + z(row.z);
         });
+    //transition tree nodes
+    var circ2 = newnodes.selectAll('circle').transition().ease(ease).duration(duration)
+        .attr('x', function(d){return d3.select(this).attr('x0');})
+        .attr('cx', function(d){return d3.select(this).attr('cx0');})
+        .attr('y', function(d){return d3.select(this).attr('y0');})
+        .attr('transform', function(d){ return 'translate('+0+','+d3.select(this).attr('y0')+')';});
 }
 
 /****************************************************************
