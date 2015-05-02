@@ -106,7 +106,7 @@ function makeLPDivTemplate(){
         .attr('onchange', 'updatePlot()');
     lpsubdiv.append('input')
         .attr('type', 'button')
-        .attr('value', 'Remove')
+        .attr('value', '-')
         .attr('class', 'removehi')
         .attr('id', 'removehi'+lpidx)
         .attr('onclick', '(function(e, obj) {$(obj).parent().remove(); updatePlot();})(event, this)');
@@ -136,7 +136,7 @@ function initializeLineagePicker(){
     cloneLPDiv();
     d3.select('body').append('input')
         .attr('type', 'button')
-        .attr('value', 'Add Highlight')
+        .attr('value', '+')
         .attr('class', 'add-highlight')
         .attr('onclick', 'cloneLPDiv()');
     d3.select('body').append('input')
@@ -227,8 +227,8 @@ function loadCellTypeMap(){
         initializeLineagePicker();
             // TODO this is here temporarily -- will be moved once updating of the tree is
             // implemented
-            var cellLineage = getCellLineageMap(csvdata, csvdata.length - 1);
-            plotCellLineageTree(cellLineage);
+            var root = getTreeRootFromTimepoints(csvdata, csvdata.length - 1);
+            plotCellLineageTree(root);
     });
 }
 
@@ -479,7 +479,7 @@ function loadTimePoints(idx){
 //    if (idx == max){
 //        ready = true;
 //
-//        var cellLineage = getCellLineageMap(this.csvdata, idx)
+//        var cellLineage = getTreeRootFromTimepoints(this.csvdata, idx)
 //        plotCellLineageTree(cellLineage)
 //
 //        return;
@@ -569,7 +569,7 @@ function initializeEmbryo() {
         plotData(0, 5);
 
         // Build and plot the tree (Not yet working)
-        //var cellLineage = getCellLineageMap(this.csvdata, 0)
+        //var cellLineage = getTreeRootFromTimepoints(this.csvdata, 0)
         //plotCellLineageTree(cellLineage)
 
 //        setInterval( development, 1000 );
@@ -584,7 +584,7 @@ function development() {
         document.getElementById('timerange').value = timepoint;
 
         // Update and plot the tree (Not yet working)
-        //var cellLineage = getCellLineageMap(this.csvdata, t_idx)
+        //var cellLineage = getTreeRootFromTimepoints(this.csvdata, t_idx)
         //plotCellLineageTree(cellLineage)
 
     } else {
@@ -601,7 +601,7 @@ function updatetime() {
 /****************************************************************
 HELPER FUNCTIONS FOR LINEAGE TREE PLOTTING
 ****************************************************************/
-function getCellLineageMap(endTimepoint) {
+function getTreeRootFromTimepoints(endTimepoint) {
   // Create a list of {'name': name, 'parent': parent} from the loaded time points
   cell_lineage = [];
   cell_lineage.push({'name': "P0", "parent":'null'});
@@ -630,10 +630,7 @@ function getCellLineageMap(endTimepoint) {
       }
     }
   }
-  return cell_lineage;
-}
 
-function plotCellLineageTree(cell_lineage) {
   // create a name: node map
   var dataMap = cell_lineage.reduce(function(map, node) {
     map[node.name] = node;
@@ -649,70 +646,84 @@ function plotCellLineageTree(cell_lineage) {
       // create child array if it doesn't exist
       (parent.children || (parent.children = []))
         // add node to child array
-        .push(node);
+        .push(node)
     } else {
       // parent is null or missing
       treeData.push(node);
     }
   });
 
-  // ************** Generate the tree diagram    *****************
+  root = treeData[0];
+  return root;
+}
 
- // Chart dimensions
-var margin = {top: 10, right: 10, bottom: 10, left: 10},
-    width = 2000 - margin.right - margin.left,
-    height = 600 - margin.top - margin.bottom;
-
-  // Various scales and distortions.
-  var xScale = d3.fisheye.scale(d3.scale.linear).domain([-10, 300]).range([0, 1900]),
-      yScale = d3.fisheye.scale(d3.scale.linear).domain([-20, 100]).range([1000, 0]),
-      radiusScale = d3.scale.sqrt().domain([0, 5e8]).range([0, 40])
-
-  treeXScale = xScale;
-  treeYScale = yScale;
-  treeRadiusScale = radiusScale;
-
-  // The x & y axes.
-  var xAxis = d3.svg.axis().orient("bottom").scale(xScale),
-      yAxis = d3.svg.axis().scale(yScale).orient("left");
-
-    // Set up the SVG element
-    var svg = d3.select("body")
-        .append('div')
-        .attr("class", 'lineage_tree')
-        .append("svg")
-        .attr("width", "100%")
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+function plotCellLineageTree(root) {
+  /****************************************************************
+  Initial sizing of the lineage tree
+  ****************************************************************/
+  var margin = {top: 10, right: 10, bottom: 10, left: 10},
+  height = 600 - margin.top - margin.bottom;
 
 
-    var distortion_slider = d3.select('.lineage_tree')
-        .append('input')
-        .attr('type', 'range')
-        .attr('id', 'distortion_slider')
-        .attr('defaultValue', 0)
-        .attr('min', 0)
-        .attr('max', width)
-        .attr('step', 1)
-        .attr('value', 0);
+  // Set up the SVG element
+  var svg = d3.select("body")
+    .append('div')
+    .attr("class", 'lineage_tree')
+    .append("svg")
+      .attr("width", "100%")
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
 
-  // Now create the tree    
+  // Dynamically get the current width
+  var width = $('.lineage_tree').width() - margin.right - margin.left;
+
+  /****************************************************************
+  Set up distortion scale and associate slider
+  ****************************************************************/
+  // TODO this scale still seems really finicky. Settings are not currently very robust.
+  var xScale = d3.fisheye.scale(d3.scale.linear).domain([0, width/7.3]).range([0, width])
+  treeXScale = xScale
+
+  var distortion_slider = d3.select('.lineage_tree')
+    .append('input')
+      .attr('type', 'range')
+      .attr('id', 'distortion_slider')
+      .attr('defaultValue', 0)
+      .attr('min', 0)
+      .attr('max', width)
+      .attr('step', 1)
+      .attr('value', 0)
+
+  distortion_slider.on("input", function() {
+    setting = document.getElementById('distortion_slider').value
+    console.log(setting)
+    xScale.distortion(40).focus(setting);
+    node.call(position_node);
+    link.call(position_links);
+    text.call(position_text);
+    node.call(scale_radius);
+  });
+
+  /****************************************************************
+  Generate Tree Layout
+  ****************************************************************/   
   var tree = d3.layout.tree()
-      .size([height/2, width]);
+      .size([height/2, width])
+      .sort(function(a, b) { return d3.ascending(a.name, b.name); });
 
   var diagonal = d3.svg.diagonal()
       .projection(function(d) { return [xScale(d.x), d.y]; });
 
-  root = treeData[0];
-
   // Compute the tree layout.
-  var nodes = tree.nodes(root).reverse(),
+  var nodes = tree.nodes(root),
       links = tree.links(nodes);
 
   // Normalize for fixed-depth.
   nodes.forEach(function(d) { d.y = d.depth * 50;});
 
+  /****************************************************************
+  Add graphics to nodes and links in tree layout
+  ****************************************************************/
   // Enter the nodes.
   var node = svg.append("g")
     .attr("class", "nodes")
@@ -729,13 +740,13 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
           .call(position_node)
           .call(scale_radius)
 
-  // TODO not working -- no text is displayed
+  // Add text labels to each node
   var text = svg.selectAll(".node").append('text')
     .attr('class', 'text')
     .text(function(d) {return d.name})
     .call(position_text)
 
-  // Declare the links…
+  // Add links between node
   var link = svg.selectAll("path.link")
     .data(links)
     .enter().insert("path", "g")
@@ -743,7 +754,16 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
       .attr("d", diagonal)
       .call(position_links)
 
-  // Functions to position nodes and edges
+  /****************************************************************
+  Functions for positioning and scaling elements accounting for distortion and position within window
+  ****************************************************************/
+  function is_close_to_plot_border(element) {
+    var currentPosition = xScale(element.x)
+
+    // If element is within 100 px of either side and at a depth greater than 2, return TRUE
+    return (currentPosition < 100 || currentPosition > width - 100) && element.depth > 2
+  }
+
   function position_node(node) {
     node 
       .attr("cx", function(d) {return xScale(d.x);})
@@ -754,15 +774,6 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
       .attr("y0", function(d) {return d.y;});
         //.attr("cy", function(d) { return yScale(y(d)); }) // TODO commenting this out made tree height issues go away
         //.attr("r", function(d) { return radiusScale(radius(d)); });
-  }
-
-  function is_close_to_plot_border(element) {
-    var currentPosition = xScale(element.x)
-
-    // List of all the blastomeres so can modify them differently
-    var blastomeres = ["ABa", "EMS", "P2", "ABp", "root"]
-
-    return (currentPosition < 100 || currentPosition > width - 200) && blastomeres.indexOf(element.name) < 0
   }
 
   function position_text(text) {
@@ -784,35 +795,19 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
 
   function scale_radius(circle) {
     var maxCircleRadius = 8
-    
 
     circle
-    .attr("r", function(d) {
-      var currentPosition = xScale(d.x)
-      // Scale radius smaller when points get close to edges for visibility, but don't change the blastomeres
-      return is_close_to_plot_border(d) ? Math.min(Math.min(maxCircleRadius/100 * xScale(d.x), maxCircleRadius/200 * (width - currentPosition)), maxCircleRadius) : maxCircleRadius
-    })
+      .attr("r", function(d) {
+        var currentPosition = xScale(d.x)
+        // Scale radius smaller when points get close to edges for visibility, but don't change the blastomeres
+        return is_close_to_plot_border(d) ? Math.min(Math.min(maxCircleRadius/100 * xScale(d.x), maxCircleRadius/100 * (width - currentPosition)), maxCircleRadius) : maxCircleRadius
+      });
   }
 
   function position_links(link) {
-      diagonal.projection(function(d) {return [xScale(d.x), d.y]; }) 
-      link.attr("d", diagonal);
+    diagonal.projection(function(d) {return [xScale(d.x), d.y]; }) 
+    link.attr("d", diagonal);
   }
-
-  // Function to call when distortion slider is moved
-  distortion_slider.on("input", function() {
-    setting = document.getElementById('distortion_slider').value
-    console.log(setting)
-    xScale.distortion(40).focus(setting);
-
-    node.call(position_node);
-    link.call(position_links);
-    text.call(position_text);
-    node.call(scale_radius);
-
-    svg.select(".x.axis").call(xAxis);
-    svg.select(".y.axis").call(yAxis);
-  });
 
   return;
 }
@@ -855,93 +850,3 @@ function scatterPlot3d( parent ) {
         .attr('value', 0)
         .attr('onchange', 'updatetime()')
 }
-
-/****************************************************************
-* Fisheye Distortion Plugin
-* https://github.com/d3/d3-plugins/blob/master/fisheye/fisheye.js
-****************************************************************/
-(function() {
-  d3.fisheye = {
-    scale: function(scaleType) {
-      return d3_fisheye_scale(scaleType(), 3, 0);
-    },
-    circular: function() {
-      var radius = 200,
-          distortion = 2,
-          k0,
-          k1,
-          focus = [0, 0];
-
-      function fisheye(d) {
-        var dx = d.x - focus[0],
-            dy = d.y - focus[1],
-            dd = Math.sqrt(dx * dx + dy * dy);
-        if (!dd || dd >= radius) return {x: d.x, y: d.y, z: dd >= radius ? 1 : 10};
-        var k = k0 * (1 - Math.exp(-dd * k1)) / dd * .75 + .25;
-        return {x: focus[0] + dx * k, y: focus[1] + dy * k, z: Math.min(k, 10)};
-      }
-
-      function rescale() {
-        k0 = Math.exp(distortion);
-        k0 = k0 / (k0 - 1) * radius;
-        k1 = distortion / radius;
-        return fisheye;
-      }
-
-      fisheye.radius = function(_) {
-        if (!arguments.length) return radius;
-        radius = +_;
-        return rescale();
-      };
-
-      fisheye.distortion = function(_) {
-        if (!arguments.length) return distortion;
-        distortion = +_;
-        return rescale();
-      };
-
-      fisheye.focus = function(_) {
-        if (!arguments.length) return focus;
-        focus = _;
-        return fisheye;
-      };
-
-      return rescale();
-    }
-  };
-
-  function d3_fisheye_scale(scale, d, a) {
-
-    function fisheye(_) {
-      var x = scale(_),
-          left = x < a,
-          range = d3.extent(scale.range()),
-          min = range[0],
-          max = range[1],
-          m = left ? a - min : max - a;
-      if (m == 0) m = max - min;
-      return (left ? -1 : 1) * m * (d + 1) / (d + (m / Math.abs(x - a))) + a;
-    }
-
-    fisheye.distortion = function(_) {
-      if (!arguments.length) return d;
-      d = +_;
-      return fisheye;
-    };
-
-    fisheye.focus = function(_) {
-      if (!arguments.length) return a;
-      a = +_;
-      return fisheye;
-    };
-
-    fisheye.copy = function() {
-      return d3_fisheye_scale(scale.copy(), d, a);
-    };
-
-    fisheye.nice = scale.nice;
-    fisheye.ticks = scale.ticks;
-    fisheye.tickFormat = scale.tickFormat;
-    return d3.rebind(fisheye, scale, "domain", "range");
-  }
-})();

@@ -89,12 +89,9 @@ input[id=distortion_slider]{
   width: 100%;
 }
 
-/* Styling for play-pause button */
-#playpause:focus {
-  outline: 0;
-}
+/* Styling for buttons */
 
-#playpause {
+#playpause, input[type="button"] {
   background-color: #2394F5;
   -moz-border-radius:28px;
   -webkit-border-radius:28px;
@@ -110,15 +107,33 @@ input[id=distortion_slider]{
   text-decoration:none;
   text-shadow:0px 1px 0px #2f6627;
   margin-right: 10px;
+  outline: 0;
 }
 
-#playpause:hover {
-	background-color: #2394F5;
+#playpause:hover, input[type="button"]:hover {
+	opacity: 0.9;
 }
 
-#playpause:active {
+#playpause:active, input[type="button"]:active {
 	position:relative;
 	top:1px;
+}
+
+/* Overriding styling for certain buttons */
+input[class="add-highlight"], input[class="removehi"] {
+  width: 30px;
+  padding: 0;
+  font-size: 20px;
+}
+
+input[id="showhide-highlight"] {
+  width: 150px;
+  font-size: 12px;
+  padding: 3px 3px;
+}
+
+.chosen-single .chosen-default {
+  background-color: orange;
 }
 
 /* Styling for color picker input box */
@@ -146,4 +161,9 @@ input[type="color"] {
 
 input[type="color"]:focus {
   outline: 0;
+}
+
+/* Styling for add and remove highlight buttons */
+.removehi {
+
 }
