@@ -758,6 +758,9 @@ function plotCellLineageTree(root) {
       .attr('step', 1)
       .attr('value', 0)
 
+  // Initialize the distortion for the tree on load
+  xScale.distortion(40).focus(0)
+
   distortion_slider.on("input", function() {
     setting = document.getElementById('distortion_slider').value
     console.log(setting)
