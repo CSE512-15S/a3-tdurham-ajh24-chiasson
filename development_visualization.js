@@ -722,33 +722,22 @@ function getTreeRootFromTimepoints(endTimepoint) {
 }
 
 function plotCellLineageTree(root) {
-  /****************************************************************
-  Initial sizing of the lineage tree
-  ****************************************************************/
+
   var margin = {top: 10, right: 10, bottom: 10, left: 10},
-  height = 600 - margin.top - margin.bottom;
+  height = 700 - margin.top - margin.bottom;
+  var width = 2000;
 
-
-  // Set up the SVG element
-  var svg = d3.select("body")
+  var tree_div = d3.select("body")
     .append('div')
     .attr("class", 'lineage_tree')
-    .append("svg")
-      .attr("width", "100%")
-      .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-
-  // Dynamically get the current width
-  var width = $('.lineage_tree').width() - margin.right - margin.left;
 
   /****************************************************************
   Set up distortion scale and associate slider
   ****************************************************************/
-  // TODO this scale still seems really finicky. Settings are not currently very robust.
-  var xScale = d3.fisheye.scale(d3.scale.linear).domain([0, width/7.3]).range([0, width]);
+  var xScale = d3.fisheye.scale(d3.scale.linear).domain([0, 340]).range([0, width]);
   treeXScale = xScale;
 
-  var distortion_slider = d3.select('.lineage_tree')
+  var distortion_slider = tree_div
     .append('input')
       .attr('type', 'range')
       .attr('id', 'distortion_slider')
@@ -772,6 +761,27 @@ function plotCellLineageTree(root) {
   });
 
   /****************************************************************
+  Initial sizing of the lineage tree
+  ****************************************************************/
+  // Set up the SVG element
+  var svg = tree_div
+    .append("svg")
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("preserveAspectRatio", "xMidYMid")
+      .append("g")
+
+  // Dynamically get the current width
+  //var width = $('.lineage_tree').width() - margin.right - margin.left;
+
+  var aspect = width / height,
+    chart = $("lineage_tree").select('svg');
+$(window).on("resize", function() {
+    var targetWidth = chart.parent().width();
+    chart.attr("width", targetWidth);
+    chart.attr("height", targetWidth / aspect);
+});
+
+  /****************************************************************
   Generate Tree Layout
   ****************************************************************/   
   var tree = d3.layout.tree()
@@ -786,7 +796,7 @@ function plotCellLineageTree(root) {
       links = tree.links(nodes);
 
   // Normalize for fixed-depth.
-  nodes.forEach(function(d) { d.y = d.depth * 50;});
+  nodes.forEach(function(d) { d.y = d.depth * 50 + 10;});
 
   /****************************************************************
   Add graphics to nodes and links in tree layout
@@ -886,8 +896,8 @@ Main Thread of execution
 function scatterPlot3d( parent ) {
     x3d = parent  
         .append("x3d")
-        .style( "width", parseInt(parent.style("width"))+"px" )
-        .style( "height", parseInt(parent.style("height"))+"px" )
+        .style( "width", "100%")
+        .style( "height", "100%")
         .style( "border", "none" )
 
     scene = x3d.append("scene")

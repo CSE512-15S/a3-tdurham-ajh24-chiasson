@@ -1,4 +1,20 @@
+/* Styling for 3D view */
+#divplot {
+  width: 95%;
+  height: 40%;
+}
+
 /* Styling for lineage tree */
+.lineage_tree {
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lineage_tree svg{
+  width: 100%;
+}
+
 .node {
   cursor: pointer;
 }
