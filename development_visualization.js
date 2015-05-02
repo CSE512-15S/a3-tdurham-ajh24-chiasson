@@ -49,6 +49,9 @@ var x3d, scene;
 //lineage picker idx, for unique ids
 var lpidx = 1;
 
+//tree x, y, and radius scales
+var treeXScale, treeYScale, treeRadiusScale;
+
 //other variables from scatterplot3D
 var axisRange = [-1000, 1000];
 var scales = [];
@@ -306,16 +309,62 @@ function plotData( time_point, duration ) {
     
     //use new_data to identify which nodes in the tree should be revealed
     var allnodes = d3.selectAll('.node');
-//    allnodes.selectAll('.node-circle').attr('style', 'visibility:hidden;');
-    allnodes.selectAll('.node-circle').attr('fill', 'steelblue');
-    allnodes = allnodes.filter(function(d){
+    allnodes.selectAll('.node-circle').attr('style', 'visibility:hidden;');
+//    allnodes.selectAll('.node-circle').attr('fill', 'steelblue');
+    allnodes.filter(function(d){
         var dpts = datapoints.filter(function(d2){return isParentOf(d2, d.name) ? this : null;});
         if(dpts[0].length > 0){
             return this;
         }
         return null;
-//    }).selectAll('.node-circle').attr('style', 'visibility:visible');
-    }).selectAll('.node-circle').attr('fill', 'red');
+    }).selectAll('.node-circle').attr('style', 'visibility:visible');
+//    }).selectAll('.node-circle').attr('fill', 'red');
+    
+    var newnodes = allnodes.filter(function(d){
+        var tmpnode = this;
+        var dpts = new_data.filter(function(d2){
+            var dpname = d2.name,
+            nodename = d.name;
+//            nodefill = d3.select(tmpnode.firstElementChild).attr('fill');
+//            if(dpname === nodename && nodefill != 'red'){
+            if(dpname === nodename){
+                return this;
+            }else{
+                return null;
+            }
+        });
+//            return (d2.name === d.name && d.select('circle').fill === 'red') ? this : null;});
+        if (dpts[0].length > 0){
+            return this;
+        }
+        return null;
+    });
+//.selectAll('.node-circle')
+//        .append('transform')
+//        .attr('translate', function(d){
+//            return d.parent.x + " " + d.parent.y;
+//    });
+    var circ1 = newnodes.selectAll('circle')
+        .attr('x', function(d){
+            return treeXScale(this.parentNode.__data__.parent.x);
+        })
+        .attr('cx', function(d){
+            return treeXScale(this.parentNode.__data__.parent.x);
+        })
+        .attr('y', function(d){
+            return this.parentNode.__data__.parent.y;
+        })
+        .attr('transform', function(d){ return 'translate('+0+','+this.parentNode.__data__.parent.y + ')';});
+////    newnodes.transition().ease(ease).duration(duration)
+////        .attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y +')';});
+    var circ2 = newnodes.selectAll('circle').transition().ease(ease).duration(duration)
+        .attr('x', function(d){return d3.select(this).attr('x0');})
+        .attr('cx', function(d){return d3.select(this).attr('cx0');})
+        .attr('y', function(d){return d3.select(this).attr('y0');})
+        .attr('transform', function(d){ return 'translate('+0+','+d3.select(this).attr('y0')+')';});
+//        .attr('transform', function(d){
+//            return 'translate('+treeXScale(d.x) + "," + treeYScale(d.y)+')';
+//        });
     
     //finish generating data points
     new_data = new_data.append('shape');
@@ -515,8 +564,9 @@ function initializeEmbryo() {
         initializePlot();
 //        initializeLineagePicker();
         console.log("Plot data")
-        plotData(0, 5);
+        
         loadTimePoints(1);
+        plotData(0, 5);
 
         // Build and plot the tree (Not yet working)
         //var cellLineage = getCellLineageMap(this.csvdata, 0)
@@ -618,6 +668,10 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
       yScale = d3.fisheye.scale(d3.scale.linear).domain([-20, 100]).range([1000, 0]),
       radiusScale = d3.scale.sqrt().domain([0, 5e8]).range([0, 40])
 
+  treeXScale = xScale;
+  treeYScale = yScale;
+  treeRadiusScale = radiusScale;
+
   // The x & y axes.
   var xAxis = d3.svg.axis().orient("bottom").scale(xScale),
       yAxis = d3.svg.axis().scale(yScale).orient("left");
@@ -693,8 +747,11 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
   function position_node(node) {
     node 
       .attr("cx", function(d) {return xScale(d.x);})
+      .attr("cx0", function(d) {return xScale(d.x);})
       .attr("x", function(d) {return xScale(d.x);})
-      .attr("y", function(d) {return d.y;});
+      .attr("x0", function(d) {return xScale(d.x);})
+      .attr("y", function(d) {return d.y;})
+      .attr("y0", function(d) {return d.y;});
         //.attr("cy", function(d) { return yScale(y(d)); }) // TODO commenting this out made tree height issues go away
         //.attr("r", function(d) { return radiusScale(radius(d)); });
   }
