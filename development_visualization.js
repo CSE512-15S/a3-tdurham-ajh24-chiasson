@@ -68,6 +68,11 @@ var axisKeys = ["x", "y", "z"];
 
 var load_idx = 0;
 
+//variables for speed dropdown
+var speedarray = ["slow", "medium", "fast"];
+var options = [0,1,2];
+var speed = "slow"
+
 /****************************************************************
 Lineage Highlighting Functions
 ****************************************************************/
@@ -584,9 +589,20 @@ INITIALIZATION AND CALLBACKS FOR VISUALIZATION
 //Function to handle start/stop playback of development
 function playpausedev(){
     var button = document.getElementById('playpause');
+    console.log(speed)
     if(button.innerHTML === "Play"){
-        playback_id = setInterval(development, 1000);
-        button.innerHTML = "Pause";
+    	if(speed == "slow"){
+        	playback_id = setInterval(development, 1000);
+        	button.innerHTML = "Pause";
+        	}
+        else if(speed == "medium"){
+        	playback_id = setInterval(development, 500);
+        	button.innerHTML = "Pause";
+        	}
+        else if(speed == "fast"){
+        	playback_id = setInterval(development, 250);
+        	button.innerHTML = "Pause";
+        	}
     }else{
         clearInterval(playback_id);
         button.innerHTML = "Play";
@@ -942,6 +958,17 @@ function scatterPlot3d( parent ) {
         .attr('id', 'playpause')
         .attr('onclick', "playpausedev()")
         .html("Play");
+        
+	// Add menu for playback speed
+    d3.select('body').append('select')
+    	.selectAll("speed")
+    	.data(options)
+    	.enter()
+    	.append("option")
+    	.text(function(d) {return speedarray[d];})
+    d3.select('body').select('select')
+    	.on("change", function(d) {speed = this.value;})
+
 
     // Add slider for time points
     d3.select('body').append('input')
