@@ -734,7 +734,12 @@ function plotCellLineageTree(root) {
   /****************************************************************
   Set up distortion scale and associate slider
   ****************************************************************/
-  var xScale = d3.fisheye.scale(d3.scale.linear).domain([0, 340]).range([0, width]);
+  var xScale = d3.fisheye.scale(d3.scale.linear)
+    .domain([0, 340])
+    .range([0, width])
+    .distortion(5)
+    .power(4)
+    .focus(0)
   treeXScale = xScale;
 
   var distortion_slider = tree_div
@@ -747,13 +752,10 @@ function plotCellLineageTree(root) {
       .attr('step', 1)
       .attr('value', 0)
 
-  // Initialize the distortion for the tree on load
-  xScale.distortion(40).focus(0)
-
   distortion_slider.on("input", function() {
     setting = document.getElementById('distortion_slider').value
     console.log(setting)
-    xScale.distortion(40).focus(setting);
+    xScale.focus(setting);
     node.call(position_node);
     link.call(position_links);
     text.call(position_text);
@@ -863,7 +865,7 @@ $(window).on("resize", function() {
       // Don't show text if points are close to the edges, but still show the blastomeres
       .style("opacity", function(d) {
         var currentPosition = xScale(d.x)
-        minOpacity = 0
+        minOpacity = 000
         maxOpacity = 1
 
         if (d.depth <= 2) { 
