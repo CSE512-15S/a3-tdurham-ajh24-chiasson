@@ -737,8 +737,8 @@ function plotCellLineageTree(root) {
   var xScale = d3.fisheye.scale(d3.scale.linear)
     .domain([0, 340])
     .range([0, width])
-    .distortion(5)
-    .power(4)
+    .distortion(16)
+    .power(2)
     .focus(0)
   treeXScale = xScale;
 
