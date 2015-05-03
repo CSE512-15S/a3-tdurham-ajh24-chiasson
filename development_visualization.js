@@ -878,20 +878,6 @@ function plotCellLineageTree(root) {
         } 
       })
 
-      // Scale text size with position
-      .style("font-size", function(d) {
-        var currentPosition = xScale(d.x)
-        
-        minTextSize = 3
-        maxTextSize = 15
-
-        if (d.depth <= 2) { 
-          return maxTextSize
-        } else {
-          return Math.max((-3/Math.pow(width, 2) * Math.pow(currentPosition, 2) + 3/ width * currentPosition) * maxTextSize + 4, minTextSize)
-        } 
-      })
-
       .attr("transform", function(d) {return "translate(-5, 15)rotate(90" + "," + xScale(d.x) + "," + d.y + ")"})
 
         //.attr("cy", function(d) { return yScale(y(d)); }) // TODO commenting this out made tree height issues go away
