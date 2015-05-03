@@ -860,7 +860,7 @@ function plotCellLineageTree(root) {
       .attr("x", function(d) {return xScale(d.x);})
       .attr("y", function(d) {return d.y;})
 
-      // Don't show text if points are close to the edges, but still show the blastomeres
+      // Scale opacity with position
       .style("opacity", function(d) {
         var currentPosition = xScale(d.x)
 
@@ -872,7 +872,20 @@ function plotCellLineageTree(root) {
         } else {
           return Math.max(-4/Math.pow(width, 2) * Math.pow(currentPosition, 2) + 4 / width * currentPosition, minOpacity)
         } 
+      })
 
+      // Scale text size with position
+      .style("font-size", function(d) {
+        var currentPosition = xScale(d.x)
+        
+        minTextSize = 3
+        maxTextSize = 15
+
+        if (d.depth <= 2) { 
+          return maxTextSize
+        } else {
+          return Math.max((-3/Math.pow(width, 2) * Math.pow(currentPosition, 2) + 3/ width * currentPosition) * maxTextSize + 4, minTextSize)
+        } 
       })
 
       .attr("transform", function(d) {return "translate(-5, 15)rotate(90" + "," + xScale(d.x) + "," + d.y + ")"})
