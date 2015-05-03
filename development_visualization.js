@@ -593,6 +593,10 @@ function playpausedev(){
     }
 }
 
+function resetView() {
+  x3d.node().runtime.resetView()
+}
+
 function initializeEmbryo() {
     d3.text('http://localhost:2255/timepoints/nuclei/t001-nuclei', function(t0data){
         csvdata[0] = parseCSV(t0data);
@@ -924,13 +928,14 @@ Main Thread of execution
 function scatterPlot3d( parent ) {
     x3d = parent  
         .append("x3d")
+        .attr('id', '3dplot')
         .style( "width", "100%")
         .style( "height", "100%")
         .style( "border", "none" )
 
     scene = x3d.append("scene")
 
-    scene.append("orthoviewpoint")
+    var viewpoint = scene.append("orthoviewpoint")
         .attr( "centerOfRotation", [0, 0, 0])
         .attr( "fieldOfView", [-300, -300, 800, 800])
         .attr( "orientation", [-0.5, 1, 0.2, 1.12*Math.PI/4])
@@ -940,6 +945,12 @@ function scatterPlot3d( parent ) {
     initializeEmbryo();
     console.log("Loading data")
     
+    d3.select('body').append('input')
+      .attr('type', 'button')
+      .attr('value', 'Reset')
+      .attr('onclick', 'resetView()')
+
+
     // Add play button for time points
     d3.select('body').append('button')
         .attr('id', 'playpause')
