@@ -753,8 +753,7 @@ function plotCellLineageTree(root) {
       .attr('value', 0)
 
   distortion_slider.on("input", function() {
-    setting = document.getElementById('distortion_slider').value
-    console.log(setting)
+    setting = this.value
     xScale.focus(setting);
     node.call(position_node);
     link.call(position_links);
@@ -772,16 +771,15 @@ function plotCellLineageTree(root) {
       .attr("preserveAspectRatio", "xMidYMid")
       .append("g")
 
-  // Dynamically get the current width
-  //var width = $('.lineage_tree').width() - margin.right - margin.left;
-
+  // Add callback to maintain aspect ratio on window resize
   var aspect = width / height,
     chart = $("lineage_tree").select('svg');
-$(window).on("resize", function() {
-    var targetWidth = chart.parent().width();
-    chart.attr("width", targetWidth);
-    chart.attr("height", targetWidth / aspect);
-});
+
+  $(window).on("resize", function() {
+      var targetWidth = chart.parent().width();
+      chart.attr("width", targetWidth);
+      chart.attr("height", targetWidth / aspect);
+  });
 
   /****************************************************************
   Generate Tree Layout
@@ -865,13 +863,14 @@ $(window).on("resize", function() {
       // Don't show text if points are close to the edges, but still show the blastomeres
       .style("opacity", function(d) {
         var currentPosition = xScale(d.x)
+
         minOpacity = 000
         maxOpacity = 1
 
         if (d.depth <= 2) { 
           return maxOpacity
         } else {
-        return Math.max(Math.min(Math.min(maxOpacity/(width/2) * xScale(d.x), 1/(width/2) * (width - currentPosition)), maxOpacity), minOpacity)
+          return Math.max(-4/Math.pow(width, 2) * Math.pow(currentPosition, 2) + 4 / width * currentPosition, minOpacity)
         } 
 
       })
@@ -893,8 +892,7 @@ $(window).on("resize", function() {
         if (d.depth <= 2) { 
           return maxCircleRadius
         } else {
-        // Scale radius smaller when points get close to edges for visibility, but don't change the blastomeres
-        return Math.max(Math.min(Math.min(maxCircleRadius/(width/2) * xScale(d.x), maxCircleRadius/(width/2) * (width - currentPosition)), maxCircleRadius), minCircleRadius)
+          return Math.max(maxCircleRadius * (-4/Math.pow(width, 2) * Math.pow(currentPosition, 2) + 4 / width * currentPosition), minCircleRadius)
         } 
       });
   }
