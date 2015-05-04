@@ -706,7 +706,7 @@ function loadTimePoints(idx){
 //    }
 
     var basename = 't' + ("000" + (idx + 1)).substr(-3) + '-nuclei';
-    var url = 'http://noble.gs.washington.edu/~tdurham/nopass/cevis/timepoints/nuclei/' + basename;
+    var url = 'http://cse512-15s.github.io/a3-tdurham-ajh24-chiasson/timepoints/nuclei/' + basename;
     d3.text(url, function(tpdata){
         if (!tpdata){
             ready = true;
@@ -786,7 +786,7 @@ function resetView() {
 }
 
 function initializeEmbryo() {
-    d3.text('http://noble.gs.washington.edu/~tdurham/nopass/cevis/timepoints/nuclei/t001-nuclei', function(t0data){
+    d3.text('http://cse512-15s.github.io/a3-tdurham-ajh24-chiasson/timepoints/nuclei/t001-nuclei', function(t0data){
         csvdata[0] = parseCSV(t0data);
         namemap[0] = {};
         for(var i = 0; i < csvdata[0].length; i++){
