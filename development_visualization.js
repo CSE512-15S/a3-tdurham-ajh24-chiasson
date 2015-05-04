@@ -1049,12 +1049,12 @@ function scatterPlot3d( parent ) {
 
     console.log("Reading in embryo positions.");
     initializeEmbryo();
-    console.log("Loading data")
+    console.log("Loading data");
     
     d3.select('#divControls').append('input')
       .attr('type', 'button')
       .attr('value', 'Reset')
-      .attr('onclick', 'resetView()')
+      .attr('onclick', 'resetView()');
 
 
     // Add play button for time points
@@ -1062,6 +1062,15 @@ function scatterPlot3d( parent ) {
         .attr('id', 'playpause')
         .attr('onclick', "playpausedev()")
         .html("Play");
+
+    // Add menu for playback speed
+    d3.select('#divControls').append('div').attr('class', 'select-style')
+        .append('select')
+           .selectAll("speed")
+           .data(options)
+           .enter()
+           .append("option")
+           .text(function(d) {return speedarray[d];});
 
     // Add slider for time points
     d3.select('#divControls').append('input')
@@ -1071,17 +1080,8 @@ function scatterPlot3d( parent ) {
         .attr('min', 0)
         .attr('step', 1)
         .attr('value', 0)
-        .attr('onchange', 'updatetime()')
-
-    // Add menu for playback speed
-    d3.select('body').append('div').attr('class', 'select-style')
-        .append('select')
-           .selectAll("speed")
-           .data(options)
-           .enter()
-           .append("option")
-           .text(function(d) {return speedarray[d];})
+        .attr('onchange', 'updatetime()');
            
     d3.select('body').select('select')
-        .on("change", function(d) {speed = this.value;})
+        .on("change", function(d) {speed = this.value;});
 }
