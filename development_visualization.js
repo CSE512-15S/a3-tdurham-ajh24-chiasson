@@ -92,23 +92,44 @@ function makeLPDivTemplate(){
     select.append('option').attr('value', '');
     var optgroup = select.append('optgroup')
         .attr('label', 'Tissue Type');
+    var disp;
     for(var i=0; i < tissuetype.length; i++){
-        optgroup.append('option').attr('value', 'tt' + tissuetype[i]).html(tissuetype[i]);
+        if(tissuetype[i].length > 50){
+            disp = tissuetype[i].substr(0, 50) + '...';
+        }else{
+            disp = tissuetype[i];
+        }
+        optgroup.append('option').attr('value', 'tt' + tissuetype[i]).html(disp);
     }
     optgroup = select.append('optgroup')
         .attr('label', 'Cell Type');
     for(i=0; i < celltype.length; i++){
-        optgroup.append('option').attr('value', 'ct' + celltype[i]).html(celltype[i]);
+        if(celltype[i].length > 50){
+            disp = celltype[i].substr(0, 50) + '...';
+        }else{
+            disp = celltype[i];
+        }
+        optgroup.append('option').attr('value', 'ct' + celltype[i]).html(disp);
     }
     optgroup = select.append('optgroup')
         .attr('label', 'Cell Description');
     for(i=0; i < celldesc.length; i++){
-        optgroup.append('option').attr('value', 'cd' + celldesc[i]).html(celldesc[i]);
+        if(celldesc[i].length > 50){
+            disp = celldesc[i].substr(0, 50) + '...';
+        }else{
+            disp = celldesc[i];
+        }
+        optgroup.append('option').attr('value', 'cd' + celldesc[i]).html(disp);
     }
     optgroup = d3.select('#'+id).append('optgroup')
         .attr('label', 'Cell Name');
     for(i=0; i < cellnames.length; i++){
-        optgroup.append('option').attr('value', 'cn' + cellnames[i]).html(cellnames[i]);
+        if(cellnames[i].length > 50){
+            disp = cellnames[i].substr(0, 50) + '...';
+        }else{
+            disp = cellnames[i];
+        }
+        optgroup.append('option').attr('value', 'cn' + cellnames[i]).html(disp);
     }
     lpsubdiv.append('input')
         .attr('type', 'color')
@@ -614,7 +635,7 @@ function loadTimePoints(idx){
     d3.text(url, function(tpdata){
         if (!tpdata){
             ready = true;
-            d3.select('#timerange').attr('max', csvdata.length);
+            d3.select('#timerange').attr('max', csvdata.length - 1);
             //load cell type data
             loadCellTypeMap();
             plotData(0, 5);
@@ -742,7 +763,7 @@ function development() {
 //        var t_idx = timepoint % csvdata.length;
         timepoint++;
         plotData(timepoint,1000);
-        document.getElementById('timerange').value = timepoint;
+        document.getElementById('timerange').value = timepoint % csvdata.length;
 
         // Update and plot the tree (Not yet working)
         //var cellLineage = getTreeRootFromTimepoints(this.csvdata, t_idx)
