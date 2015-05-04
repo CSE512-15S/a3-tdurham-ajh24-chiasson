@@ -226,7 +226,7 @@ function cellNamesStr(cellstr){
     for (var i=1; i < blast_list.length; i++){
         blast_str += _cellnamesStrHelper(cellmap[blast_list[i].substr(1)]);
     }
-    return '.' + blast_str + cellstr + '.';
+    return blast_str + cellstr + '.';
 }
 
 //thanks http://stackoverflow.com/questions/1960473/unique-values-in-an-array
@@ -516,7 +516,7 @@ function plotData( time_point, duration ) {
 //                }else if(cells[i].indexOf(d.name) > -1){
                 if(typeof cells[i] === 'string' && cells[i].indexOf(d.name) > -1){
                     pt_colors.push($.Color(colors[i]));
-                }else if(typeof cells[i] === 'Object'){
+                }else if(typeof cells[i] === 'object'){
                     //find blastomere name
                     var blastregex = /^(P0|AB|P1|EMS|P2|E|MS|C|P3|D|P4|Z2|Z3)/;
                     var blastmatch = blastregex.exec(d.name);
