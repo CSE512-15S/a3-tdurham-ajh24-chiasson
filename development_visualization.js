@@ -861,8 +861,8 @@ function plotCellLineageTree(root) {
   var xScale = d3.fisheye.scale(d3.scale.linear)
     .domain([0, 340])
     .range([0, width])
-    .distortion(16)
-    .power(2)
+    .distortion(45)
+    .power(1)
     .focus(0)
   treeXScale = xScale;
 
@@ -988,13 +988,13 @@ function plotCellLineageTree(root) {
       .style("opacity", function(d) {
         var currentPosition = xScale(d.x)
 
-        minOpacity = 000
+        minOpacity = 0
         maxOpacity = 1
 
         if (d.depth <= 2) { 
           return maxOpacity
         } else {
-          return Math.max(-4/Math.pow(width, 2) * Math.pow(currentPosition, 2) + 4 / width * currentPosition, minOpacity)
+          return Math.max(-4.5/Math.pow(width, 2) * Math.pow(currentPosition, 2) + 4.5/ width * currentPosition - 0.05, minOpacity)
         } 
       })
 
@@ -1062,17 +1062,6 @@ function scatterPlot3d( parent ) {
         .attr('id', 'playpause')
         .attr('onclick', "playpausedev()")
         .html("Play");
-        
-	// Add menu for playback speed
-    d3.select('#divControls').append('select')
-    	.selectAll("speed")
-    	.data(options)
-    	.enter()
-    	.append("option")
-    	.text(function(d) {return speedarray[d];})
-    d3.select('body').select('select')
-    	.on("change", function(d) {speed = this.value;})
-
 
     // Add slider for time points
     d3.select('#divControls').append('input')
@@ -1083,4 +1072,16 @@ function scatterPlot3d( parent ) {
         .attr('step', 1)
         .attr('value', 0)
         .attr('onchange', 'updatetime()')
+
+    // Add menu for playback speed
+    d3.select('body').append('div').attr('class', 'select-style')
+        .append('select')
+           .selectAll("speed")
+           .data(options)
+           .enter()
+           .append("option")
+           .text(function(d) {return speedarray[d];})
+           
+    d3.select('body').select('select')
+        .on("change", function(d) {speed = this.value;})
 }
