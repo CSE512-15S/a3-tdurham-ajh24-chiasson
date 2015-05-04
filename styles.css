@@ -106,7 +106,6 @@ input[id=distortion_slider]{
 }
 
 /* Styling for buttons */
-
 #playpause, input[type="button"] {
   background-color: #2394F5;
   -moz-border-radius:28px;
@@ -179,7 +178,30 @@ input[type="color"]:focus {
   outline: 0;
 }
 
-/* Styling for add and remove highlight buttons */
-.removehi {
+/* Styling for playback speed buttons */
+.select-style {
+  text-align:center;
+    border: 1px solid #ccc;
+    margin: 0 auto;
+    position: relative;
+    top: 10px;
+    width: 100px;
+    border-radius: 3px;
+    display: inline-block;
+    overflow: hidden;
+    background: #fafafa url("data:image/png;base64,R0lGODlhDwAUAIABAAAAAP///yH5BAEAAAEALAAAAAAPABQAAAIXjI+py+0Po5wH2HsXzmw//lHiSJZmUAAAOw==") no-repeat 90% 50%;
+}
 
+.select-style select {
+    padding: 8px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
 }
