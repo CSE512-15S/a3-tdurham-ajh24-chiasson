@@ -20,11 +20,23 @@
     <link rel="stylesheet" type="text/css" href="chosen_v1.4.2/chosen.min.css"/>
   </head>
   <body>
+    <div id="divIntro">
+        <h1>3D <i>C. elegans</i> Embryogenesis</h1>
+        <h3>By: Melissa Chiasson, Timothy Durham, and Andrew Hill, UW Genome Sciences</h3>
+    </div>
     <div id="divPlot"></div>
+    <div id="divControls">
+        <h3>Lineage Controls</h3>
+    </div>
     <script>
       d3.select('html').style('height','100%').style('width','100%')
       d3.select('body').style('height','100%').style('width','100%')
-      d3.select('#divPlot').style('width', "100%").style('height', "45%")
+      d3.select('#divPlot').style('width', "70%").style('height', "45%")
+        .style('float', 'right');
+      d3.select('#divControls').style('width', '30%').style('height', '30%')
+        .style('float', 'left');
+      d3.select('#divIntro').style('width', '30%').style('height', '15%')
+        .style('float', 'left');
       scatterPlot3d( d3.select('#divPlot'));
     </script>
   </body>

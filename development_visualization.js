@@ -142,37 +142,43 @@ function makeLPDivTemplate(){
         .attr('value', '-')
         .attr('class', 'removehi')
         .attr('id', 'removehi'+lpidx)
-        .attr('onclick', '(function(e, obj) {$(obj).parent().remove(); updatePlot();})(event, this)');
+        .attr('onclick', '(function(e, obj) {$(obj).parent().remove(); $("#add-lp").prop("disabled", false); updatePlot();})(event, this)');
     lpidx++;
 }
 
 function cloneLPDiv(){
-    var lpdivclone = $('#lineage-picker-template').clone(true);
-    lpdivclone.attr('id', 'lineage-picker'+lpidx)
-        .attr('class', 'lineage-picker')
-        .attr('style', 'display: block');
-    var childs = lpdivclone.children();
-    var id;
-    for(var i = 0; i < childs.length; i++){
-        id = childs[i].id;
-        childs[i].id = id.substr(0, id.length - 1) + lpidx;
+    if($('.lineage-pickers').children().length < 5){
+        var lpdivclone = $('#lineage-picker-template').clone(true);
+        lpdivclone.attr('id', 'lineage-picker'+lpidx)
+            .attr('class', 'lineage-picker')
+            .attr('style', 'display: block');
+        var childs = lpdivclone.children();
+        var id;
+        for(var i = 0; i < childs.length; i++){
+            id = childs[i].id;
+            childs[i].id = id.substr(0, id.length - 1) + lpidx;
+        }
+        lpdivclone.appendTo('.lineage-pickers');
+        $('#selhi'+lpidx).chosen({search_contains:true});
+        lpidx++;
+        if($('#lineage-pickers').children().length === 4){
+            $('#add-lp').prop('disabled', true);
+        }
     }
-    lpdivclone.appendTo('.lineage-pickers');
-    $('#selhi'+lpidx).chosen({search_contains:true});
-    lpidx++;
 }
 
 function initializeLineagePicker(){
-    d3.select('body')
+    d3.select('#divControls')
         .append('div').attr('class', 'lineage-pickers');
     makeLPDivTemplate();
     cloneLPDiv();
-    d3.select('body').append('input')
+    d3.select('#divControls').append('input')
         .attr('type', 'button')
         .attr('value', '+')
         .attr('class', 'add-highlight')
+        .attr('id', 'add-lp')
         .attr('onclick', 'cloneLPDiv()');
-    d3.select('body').append('input')
+    d3.select('#divControls').append('input')
         .attr('type', 'button')
         .attr('value', 'Hide Non-Highlighted')
         .attr('class', 'add-highlight')
@@ -348,6 +354,7 @@ function loadCellTypeMap(){
 //            var root = getTreeRootFromTimepoints(csvdata, csvdata.length - 1);
 //            plotCellLineageTree(root);
             plotCellLineageTree(cellmap.P0);
+            plotData(0, 5);
     });
 }
 
@@ -638,7 +645,6 @@ function loadTimePoints(idx){
             d3.select('#timerange').attr('max', csvdata.length - 1);
             //load cell type data
             loadCellTypeMap();
-            plotData(0, 5);
             return;
         }
         csvdata[idx] = parseCSV(tpdata);
@@ -689,15 +695,15 @@ function playpausedev(){
     var button = document.getElementById('playpause');
     console.log(speed)
     if(button.innerHTML === "Play"){
-    	if(speed == "slow"){
+    	if(speed === "slow"){
         	playback_id = setInterval(development, 1000);
         	button.innerHTML = "Pause";
         	}
-        else if(speed == "medium"){
+        else if(speed === "medium"){
         	playback_id = setInterval(development, 500);
         	button.innerHTML = "Pause";
         	}
-        else if(speed == "fast"){
+        else if(speed === "fast"){
         	playback_id = setInterval(development, 250);
         	button.innerHTML = "Pause";
         	}
@@ -783,61 +789,61 @@ function updatetime() {
 /****************************************************************
 HELPER FUNCTIONS FOR LINEAGE TREE PLOTTING
 ****************************************************************/
-function getTreeRootFromTimepoints(endTimepoint) {
-  // Create a list of {'name': name, 'parent': parent} from the loaded time points
-  cell_lineage = [];
-  cell_lineage.push({'name': "P0", "parent":'null'});
-  cell_lineage.push({'name': 'AB', 'parent':'P0'});
-  cell_lineage.push({'name': 'P1', 'parent':'P0'});
+//function getTreeRootFromTimepoints(endTimepoint) {
+//  // Create a list of {'name': name, 'parent': parent} from the loaded time points
+//  cell_lineage = [];
+//  cell_lineage.push({'name': "P0", "parent":'null'});
+//  cell_lineage.push({'name': 'AB', 'parent':'P0'});
+//  cell_lineage.push({'name': 'P1', 'parent':'P0'});
 
-  // Loop over all time points 
-  for (j = 0; j < this.csvdata.length; j++) {
-    flat_data = this.csvdata[j]
+//  // Loop over all time points 
+//  for (j = 0; j < this.csvdata.length; j++) {
+//    flat_data = this.csvdata[j]
 
-    // For each cell in time point, record the nodes next to the root and any transitions
-    for (i = 0; i < flat_data.length; i++) {
-      var name = flat_data[i].name
-      var parent_name = flat_data[i].pred.name
+//    // For each cell in time point, record the nodes next to the root and any transitions
+//    for (i = 0; i < flat_data.length; i++) {
+//      var name = flat_data[i].name
+//      var parent_name = flat_data[i].pred.name
   
-      if (name === parent_name && j == 1) {
-          if(name === 'ABa' || name === 'ABp'){
-              parent_name = 'AB';
-          }else{
-              parent_name = 'P1';
-          }
-//        parent_name = "root"
-        cell_lineage.push({"name": name, "parent": parent_name})
-      } else if(j > 1 &&  name != parent_name){
-        cell_lineage.push({"name": name, "parent": parent_name})
-      }
-    }
-  }
+//      if (name === parent_name && j == 1) {
+//          if(name === 'ABa' || name === 'ABp'){
+//              parent_name = 'AB';
+//          }else{
+//              parent_name = 'P1';
+//          }
+////        parent_name = "root"
+//        cell_lineage.push({"name": name, "parent": parent_name})
+//      } else if(j > 1 &&  name != parent_name){
+//        cell_lineage.push({"name": name, "parent": parent_name})
+//      }
+//    }
+//  }
 
   // create a name: node map
-  var dataMap = cell_lineage.reduce(function(map, node) {
-    map[node.name] = node;
-    return map;
-  }, {});
+//  var dataMap = cell_lineage.reduce(function(map, node) {
+//    map[node.name] = node;
+//    return map;
+//  }, {});
 
-  // create the tree array
-  var treeData = [];
-  cell_lineage.forEach(function(node) {
-    // add to parent
-    var parent = dataMap[node.parent];
-    if (parent) {
-      // create child array if it doesn't exist
-      (parent.children || (parent.children = []))
-        // add node to child array
-        .push(node)
-    } else {
-      // parent is null or missing
-      treeData.push(node);
-    }
-  });
+//  // create the tree array
+//  var treeData = [];
+//  cell_lineage.forEach(function(node) {
+//    // add to parent
+//    var parent = dataMap[node.parent];
+//    if (parent) {
+//      // create child array if it doesn't exist
+//      (parent.children || (parent.children = []))
+//        // add node to child array
+//        .push(node)
+//    } else {
+//      // parent is null or missing
+//      treeData.push(node);
+//    }
+//  });
 
-  root = treeData[0];
-  return root;
-}
+//  root = treeData[0];
+//  return root;
+//}
 
 function plotCellLineageTree(root) {
 
@@ -1045,20 +1051,20 @@ function scatterPlot3d( parent ) {
     initializeEmbryo();
     console.log("Loading data")
     
-    d3.select('body').append('input')
+    d3.select('#divControls').append('input')
       .attr('type', 'button')
       .attr('value', 'Reset')
       .attr('onclick', 'resetView()')
 
 
     // Add play button for time points
-    d3.select('body').append('button')
+    d3.select('#divControls').append('button')
         .attr('id', 'playpause')
         .attr('onclick', "playpausedev()")
         .html("Play");
         
 	// Add menu for playback speed
-    d3.select('body').append('select')
+    d3.select('#divControls').append('select')
     	.selectAll("speed")
     	.data(options)
     	.enter()
@@ -1069,7 +1075,7 @@ function scatterPlot3d( parent ) {
 
 
     // Add slider for time points
-    d3.select('body').append('input')
+    d3.select('#divControls').append('input')
         .attr('type', 'range')
         .attr('id', 'timerange')
         .attr('defaultValue', 0)
