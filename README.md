@@ -3,8 +3,9 @@ a3-tdurham-ajh24-chiasson
 
 ## Team Members 
 
-1. Timothy Durham tdurham@uw.edu 2. Andrew Hill ajh24@uw.edu 3. Melissa
-Chiasson chiasson@uw.edu
+1. Timothy Durham tdurham@uw.edu 
+2. Andrew Hill ajh24@uw.edu 
+3. Melissa Chiasson chiasson@uw.edu
 
 ## Project Name
 
@@ -37,7 +38,9 @@ We recommend using either Chrome or Opera for ideal viewing.
 We wanted to address this lack of resource, since it would be a great
 tool for the _C. elegans_ community.  In initial discussions, we decided
 we wanted to show both a 3D representation of the worm embryo throughout
-development and the classic _C. elegans_ cell lineage tree (Figure 1).
+development and the classic _C. elegans_ cell lineage tree.
+
+![Figure 1] (https://github.com/CSE512-15S/a3-tdurham-ajh24-chiasson/Figure1.png)
 
 Most of our understandings of cell-cell connections and spatial
 relationships in development comes from two-dimensional representations,
@@ -73,8 +76,11 @@ and lineages and to provide this familiar context.
 
 We thought it would be ideal if you could highlight specific cells and
 their lineages or cell types with color and get their locations on the
-lineage tree (Figure 2). We also wanted to add a slider that you could
-use to navigate back and forth through developmental time (Figure 2).
+lineage tree. We also wanted to add a slider that you could
+use to navigate back and forth through developmental time.
+
+![Figure 2] (https://github.com/CSE512-15S/a3-tdurham-ajh24-chiasson/Figure2.png)
+
 Since we were all unfamiliar with D3, we figured our first goal would be
 to get the 3D embryo visualization working with a lineage map displayed
 next to it, with the aim that if we got this to work and still had more
