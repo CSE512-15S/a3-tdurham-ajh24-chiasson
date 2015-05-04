@@ -142,12 +142,22 @@ function makeLPDivTemplate(){
         .attr('value', '-')
         .attr('class', 'removehi')
         .attr('id', 'removehi'+lpidx)
-        .attr('onclick', '(function(e, obj) {$(obj).parent().remove(); $("#add-lp").prop("disabled", false); updatePlot();})(event, this)');
+        .attr('onclick', 'removeLPDiv(event, this)');
     lpidx++;
 }
 
+function removeLPDiv(e, obj) {
+
+
+    $(obj).parent().remove(); $("#add-lp").prop("disabled", false); updatePlot();
+
+    // Restore color of + button if few enough highlights are present
+    $('#add-lp').removeAttr('style');
+}
+
 function cloneLPDiv(){
-    if($('.lineage-pickers').children().length < 5){
+    var highlightCount = $('.lineage-pickers').children().length
+    if(highlightCount < 5){
         var lpdivclone = $('#lineage-picker-template').clone(true);
         lpdivclone.attr('id', 'lineage-picker'+lpidx)
             .attr('class', 'lineage-picker')
@@ -164,6 +174,11 @@ function cloneLPDiv(){
         if($('#lineage-pickers').children().length === 4){
             $('#add-lp').prop('disabled', true);
         }
+    }
+
+    // Grey out the button when too many highlights are added
+    if (highlightCount >= 4) {
+        $('#add-lp').css('background-color', '#D3D3D3').css('border-color', '#D3D3D3')
     }
 }
 
