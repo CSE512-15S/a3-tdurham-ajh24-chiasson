@@ -7,7 +7,7 @@ a3-tdurham-ajh24-chiasson
 2. Andrew Hill ajh24@uw.edu 
 3. Melissa Chiasson chiasson@uw.edu
 
-## _Caenorhabditis elegans_ (_C. elegans_) embryo development
+## _Caenorhabditis elegans_ embryo development
 
  _Caenorhabditis elegans_ (_C. elegans_) is small roundworm used widely as a model organism
 in genetics and genomics. Its development has been well studied; each
@@ -39,7 +39,7 @@ tool for the _C. elegans_ community.  In initial discussions, we decided
 we wanted to show both a 3D representation of the worm embryo throughout
 development and the classic _C. elegans_ cell lineage tree.
 
-![Figure 1](https://github.com/CSE512-15S/a3-tdurham-ajh24-chiasson/Figure1.png)
+![Figure 1](https://github.com/CSE512-15S/a3-tdurham-ajh24-chiasson/blob/master/Figure1.png)
 
 Most of our understandings of cell-cell connections and spatial
 relationships in development comes from two-dimensional representations,
@@ -78,7 +78,7 @@ their lineages or cell types with color and get their locations on the
 lineage tree. We also wanted to add a slider that you could
 use to navigate back and forth through developmental time.
 
-![Figure 2](https://github.com/CSE512-15S/a3-tdurham-ajh24-chiasson/Figure2.png)
+![Figure 2](https://github.com/CSE512-15S/a3-tdurham-ajh24-chiasson/blob/master/Figure2.png)
 
 Since we were all unfamiliar with D3, we figured our first goal would be
 to get the 3D embryo visualization working with a lineage map displayed
