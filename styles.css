@@ -1,3 +1,16 @@
+     
+#divIntro {
+  float: left;
+  width: 30%;
+  height: 15%;
+}
+
+#divControls {
+  float: left;
+  width: 30%;
+  height: 30%;
+}
+
 /* Styling for 3D view */
 #divplot {
   width: 95%;
@@ -103,6 +116,16 @@ input[id=distortion_slider]::-moz-range-thumb {
 
 input[id=distortion_slider]{
   width: 100%;
+}
+
+#reset-button {
+  margin-bottom: 20px;
+  display: block;
+  width: 150px;
+}
+
+#playpause {
+  margin-bottom: 20px;
 }
 
 /* Styling for buttons */

@@ -1053,7 +1053,8 @@ function scatterPlot3d( parent ) {
     
     d3.select('#divControls').append('input')
       .attr('type', 'button')
-      .attr('value', 'Reset')
+      .attr('id', 'reset-button')
+      .attr('value', 'Reset View')
       .attr('onclick', 'resetView()');
 
 
@@ -1062,15 +1063,6 @@ function scatterPlot3d( parent ) {
         .attr('id', 'playpause')
         .attr('onclick', "playpausedev()")
         .html("Play");
-
-    // Add menu for playback speed
-    d3.select('#divControls').append('div').attr('class', 'select-style')
-        .append('select')
-           .selectAll("speed")
-           .data(options)
-           .enter()
-           .append("option")
-           .text(function(d) {return speedarray[d];});
 
     // Add slider for time points
     d3.select('#divControls').append('input')
@@ -1081,6 +1073,15 @@ function scatterPlot3d( parent ) {
         .attr('step', 1)
         .attr('value', 0)
         .attr('onchange', 'updatetime()');
+
+    // Add menu for playback speed
+    d3.select('#divControls').append('div').attr('class', 'select-style')
+        .append('select')
+           .selectAll("speed")
+           .data(options)
+           .enter()
+           .append("option")
+           .text(function(d) {return speedarray[d];});
            
     d3.select('body').select('select')
         .on("change", function(d) {speed = this.value;});
