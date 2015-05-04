@@ -890,7 +890,7 @@ function plotCellLineageTree(root) {
         if (d.depth <= 2) { 
           return maxOpacity
         } else {
-          return Math.max(-4/Math.pow(width, 2) * Math.pow(currentPosition, 2) + 4 / width * currentPosition, minOpacity)
+          return Math.max(-4.5/Math.pow(width, 2) * Math.pow(currentPosition, 2) + 4.5/ width * currentPosition - 0.05, minOpacity)
         } 
       })
 
