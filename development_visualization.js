@@ -376,6 +376,12 @@ function initializePlot() {
     initializeAxis(2);
 }
 
+function constVecWithAxisValue( otherValue, axisValue, axisIndex ) {
+    var result = [otherValue, otherValue, otherValue];
+    result[axisIndex] = axisValue;
+    return result;
+}
+
 function initializeAxis( axisIndex ){
     var key = axisKeys[axisIndex];
     drawAxis( axisIndex, key, initialDuration );
@@ -396,7 +402,54 @@ function initializeAxis( axisIndex ){
         .append("polyline2d")
          // Line drawn along y axis does not render in Firefox, so draw one
          // along the x axis instead and rotate it (above).
-        .attr("lineSegments", scaleMin + " 0," + scaleMax + " 0")
+        .attr("lineSegments", scaleMin * 0.4 + " 0," + scaleMax * 0.4 + " 0")
+    
+    // axis labels
+    var labels = {'0':['Anterior', 'Posterior'],
+                  '1':['Ventral', 'Dorsal'],
+                  '2':['Right', 'Left']
+                  };
+    var labelFontSize = 60;
+
+    var newAxisLabel = scene.append("transform")
+        .attr("class", 'axis-label')
+        .attr("translation", constVecWithAxisValue( 0, scaleMin*0.42, axisIndex));
+
+    var newAxisLabelShape = newAxisLabel
+        .append("billboard")
+            .attr("axisOfRotation", "0 0 0") // face viewer
+        .append("shape")
+            .call(makeSolid)
+
+    newAxisLabelShape
+        .append("text")
+            .attr("class", 'axis-label-text')
+            .attr("solid", "true")
+            .attr("string", labels[axisIndex][0])
+        .append("fontstyle")
+            .attr("size", labelFontSize)
+            .attr("family", "SANS")
+            .attr("justify", "END MIDDLE" )
+
+    newAxisLabel = scene.append("transform")
+        .attr("class", 'axis-label')
+        .attr("translation", constVecWithAxisValue( 0, scaleMax*0.42, axisIndex));
+
+    newAxisLabelShape = newAxisLabel
+        .append("billboard")
+            .attr("axisOfRotation", "0 0 0") // face viewer
+        .append("shape")
+            .call(makeSolid)
+
+    newAxisLabelShape
+        .append("text")
+            .attr("class", 'axis-label-text')
+            .attr("solid", "true")
+            .attr("string", labels[axisIndex][1])
+        .append("fontstyle")
+            .attr("size", labelFontSize)
+            .attr("family", "SANS")
+            .attr("justify", "END MIDDLE" )
 }
 
 // Assign key to axis, creating or updating its ticks, grid lines, and labels.
@@ -1045,7 +1098,7 @@ function scatterPlot3d( parent ) {
         .attr( "centerOfRotation", [0, 0, 0])
         .attr( "fieldOfView", [-300, -300, 800, 800])
         .attr( "orientation", [-0.5, 1, 0.2, 1.12*Math.PI/4])
-        .attr( "position", [600, 300, 800])
+        .attr( "position", [600, 150, 800])
 
     console.log("Reading in embryo positions.");
     initializeEmbryo();

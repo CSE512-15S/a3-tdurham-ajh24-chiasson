@@ -119,13 +119,13 @@ input[id=distortion_slider]{
 }
 
 #reset-button {
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   display: block;
   width: 150px;
 }
 
 #playpause {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 /* Styling for buttons */
