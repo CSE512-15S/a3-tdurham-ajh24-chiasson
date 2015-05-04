@@ -7,10 +7,9 @@ a3-tdurham-ajh24-chiasson
 2. Andrew Hill ajh24@uw.edu 
 3. Melissa Chiasson chiasson@uw.edu
 
-## Project Name
+## _Caenorhabditis elegans_ (_C. elegans_) embryo development
 
-_Caenorhabditis elegans_ (_C. elegans_) embryo development. _Caenorhabditis
-elegans_ (_C. elegans_) is small roundworm used widely as a model organism
+ _Caenorhabditis elegans_ (_C. elegans_) is small roundworm used widely as a model organism
 in genetics and genomics. Its development has been well studied; each
 worm takes around 14 hours to grow from a single fertilized cell to a
 hatched larvae with 558 cells. This process of embryonic development
