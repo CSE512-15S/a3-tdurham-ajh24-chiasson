@@ -92,23 +92,44 @@ function makeLPDivTemplate(){
     select.append('option').attr('value', '');
     var optgroup = select.append('optgroup')
         .attr('label', 'Tissue Type');
+    var disp;
     for(var i=0; i < tissuetype.length; i++){
-        optgroup.append('option').attr('value', 'tt' + tissuetype[i]).html(tissuetype[i]);
+        if(tissuetype[i].length > 50){
+            disp = tissuetype[i].substr(0, 50) + '...';
+        }else{
+            disp = tissuetype[i];
+        }
+        optgroup.append('option').attr('value', 'tt' + tissuetype[i]).html(disp);
     }
     optgroup = select.append('optgroup')
         .attr('label', 'Cell Type');
     for(i=0; i < celltype.length; i++){
-        optgroup.append('option').attr('value', 'ct' + celltype[i]).html(celltype[i]);
+        if(celltype[i].length > 50){
+            disp = celltype[i].substr(0, 50) + '...';
+        }else{
+            disp = celltype[i];
+        }
+        optgroup.append('option').attr('value', 'ct' + celltype[i]).html(disp);
     }
     optgroup = select.append('optgroup')
         .attr('label', 'Cell Description');
     for(i=0; i < celldesc.length; i++){
-        optgroup.append('option').attr('value', 'cd' + celldesc[i]).html(celldesc[i]);
+        if(celldesc[i].length > 50){
+            disp = celldesc[i].substr(0, 50) + '...';
+        }else{
+            disp = celldesc[i];
+        }
+        optgroup.append('option').attr('value', 'cd' + celldesc[i]).html(disp);
     }
     optgroup = d3.select('#'+id).append('optgroup')
         .attr('label', 'Cell Name');
     for(i=0; i < cellnames.length; i++){
-        optgroup.append('option').attr('value', 'cn' + cellnames[i]).html(cellnames[i]);
+        if(cellnames[i].length > 50){
+            disp = cellnames[i].substr(0, 50) + '...';
+        }else{
+            disp = cellnames[i];
+        }
+        optgroup.append('option').attr('value', 'cn' + cellnames[i]).html(disp);
     }
     lpsubdiv.append('input')
         .attr('type', 'color')
@@ -165,37 +186,43 @@ function isParentOf(d, name){
     if(d.name === name){
         return true;
     //this will work if name is blastomere or below
-    }else if(d.meta.name.indexOf(name) > -1){
+    }else if(d.name.indexOf(name) > -1){
         return true;
     //if this is the root node, then there are no more parents to check
-    }else if(d.pred === -1){
+    }else if(d.parent === -1){
         return false;
     //if name is not a substring of d, then the only way it can be a parent is 
     //for name to be a pre-blastomere. Find the blastomere node for this lineage
     //branch and recurse to either find parent or end at P0 (root).
     }else{
         var regex = /^(P0|AB|P1|EMS|P2|E|MS|C|P3|D|P4|Z2|Z3)/;
-        var blast = regex.exec(d.meta.name);
-        return isParentOf(d.pred, name);
+        var blast = regex.exec(d.name);
+        if(blast === null){
+            return false;
+        }else{
+            console.log(blast, name);
+            return isParentOf(cellmap[blast[0]].parent, name);
+        }
     }
 }
 
 //takes a cell name and concatenates any blastomere cell names to get a cell
 //name string suitable for querying with .indexOf(<cellname>)
 function timePointCellNames(timepoint){
-    var timepoint_str = $.map(timepoint, function(elt, idx){return elt.meta.name;}).join('');
-    return cellNamesStr(timepoint_str);
+    var timepoint_str = $.map(timepoint, function(elt, idx){return elt.meta.name;}).join('.');
+    return cellNamesStr('.'+timepoint_str);
 }
 function cellNamesStr(cellstr){
-    var regex = /(P0|AB|P1|EMS|P2|E|MS|C|P3|D|P4|Z2|Z3)/g;
+    var regex = /\.(P0|AB|P1|EMS|P2|E|MS|C|P3|D|P4|Z2|Z3)/g;
     var blast_list = cellstr.match(regex);
     blast_list = blast_list.filter(onlyUnique);
     var blast_str = '';
     for (var i=1; i < blast_list.length; i++){
-        blast_str += _cellnamesStrHelper(cellmap[blast_list[i]]);
+        blast_str += _cellnamesStrHelper(cellmap[blast_list[i].substr(1)]);
     }
-    return blast_str + cellstr;
+    return '.' + blast_str + cellstr + '.';
 }
+
 //thanks http://stackoverflow.com/questions/1960473/unique-values-in-an-array
 function onlyUnique(value, index, self){
     return self.indexOf(value) === index;
@@ -203,9 +230,49 @@ function onlyUnique(value, index, self){
 
 function _cellnamesStrHelper(obj){
     if (obj.parent === -1){
-        return obj.name;
+        return '.' + obj.name;
     }else{
-        return _cellnamesStrHelper(obj.parent) + obj.name;
+        return _cellnamesStrHelper(obj.parent) + '.' + obj.name;
+    }
+}
+
+//iterate over lineage and produce string of progenitors (for highlighting for 
+//specific cells) returns an object mapping blastomere names to concatenated lineage suffixes.
+function cellLineageStr(cellname){
+    var lineage_obj = {};
+    _cellLineageStrHelper(lineage_obj, cellname, '');
+    return lineage_obj;
+}
+
+function _cellLineageStrHelper(lineage_obj, cellname, prev_name){
+    var cell = cellmap[cellname];
+    var regex = /^(AB|E|MS|C|D)([aplrdv]+)/;
+    if(cell.children){
+        for(var i=0; i < cell.children.length; i++){
+            var child = cell.children[i];
+            _cellLineageStrHelper(lineage_obj, child.name, cellname);
+        }
+    }
+    //the non-blastomere name will be the second group matched
+    var matchres = regex.exec(cell.name);
+    //this must be a pre-blastomere (or random Nuc*** cell), so just add it as itself
+    if(matchres === null){
+        if(cell.name in lineage_obj){
+            lineage_obj[cell.name].push(cell.name);
+        }else{
+            lineage_obj[cell.name] = [cell.name];
+        }
+    }else{
+        var blast = matchres[1], lineagestr = matchres[2];
+        //if this is a blastomere (AB, E, MS, C, or D) just set it as itself
+        if(blast === cell.name){
+            lineage_obj[blast] = [blast];
+        //otherwise, add the lineage suffix to the corresponding blastomere string
+        }else if(blast in lineage_obj){
+            lineage_obj[blast].push(lineagestr);
+        }else{
+            lineage_obj[blast] = [lineagestr];
+        }
     }
 }
 
@@ -337,7 +404,7 @@ function drawAxis( axisIndex, key, duration ) {
 // Update the data points (spheres) and stems.
 function plotData( time_point, duration ) {
     if (!this.csvdata){
-     console.log("no rows to plot.")
+     console.log("no rows to plot.");
      return;
     }
 
@@ -363,12 +430,23 @@ function plotData( time_point, duration ) {
     var allnodes = d3.selectAll('.node');
     allnodes.selectAll('.node-circle').attr('style', 'visibility:hidden;');
     var visiblenodes = allnodes.filter(function(d){
-        if(cellnames.indexOf(d.name) > -1){
-            return this;
+        if(d.name === 'E' || d.name === 'MS'){
+            if(cellnames.indexOf('.'+d.name+'.') > -1){
+                return this;
+            }else{
+                return null;
+            }
+        }else{
+            if(cellnames.indexOf(d.name) > -1){
+                return this;
+            }else{
+                return null;
+            }
         }
-        return null;
     });
-    visiblenodes.selectAll('.node-circle').attr('style', 'visibility:visible');
+    visiblenodes.selectAll('.node-circle')
+        .attr('style', 'visibility:visible')
+        .attr('fill', 'steelblue');
     
     var new_data_names = [];
     new_data.each(function(d){
@@ -412,7 +490,7 @@ function plotData( time_point, duration ) {
             ct_types.push(sel_type);
             var sel_val = selected.substr(2);
             if(sel_type === 'cn'){
-                cells.push(sel_val);
+                cells.push(cellLineageStr(sel_val));
             }else {
                 cells.push(celltypes[sel_val]);
             }
@@ -426,19 +504,42 @@ function plotData( time_point, duration ) {
         function calc_highlights(d, elt){
             var pt_colors = [];
             for(i=0; i < cells.length; i++){
-//                if(ct_types[i] === 'cn' && d.name.indexOf(cells[i]) === 0){
-                if(ct_types[i] === 'cn' && isParentOf(d, cells[i])){
-                    pt_colors.push($.Color(colors[i]))
-                }else if(cells[i].indexOf(d.name) > -1){
+//                if(ct_types[i] === 'cn' && isParentOf(d.meta, cells[i])){
+//                    pt_colors.push($.Color(colors[i]))
+//                }else if(cells[i].indexOf(d.name) > -1){
+                if(typeof cells[i] === 'string' && cells[i].indexOf(d.name) > -1){
                     pt_colors.push($.Color(colors[i]));
+                }else if(typeof cells[i] === 'Object'){
+                    //find blastomere name
+                    var blastregex = /^(P0|AB|P1|EMS|P2|E|MS|C|P3|D|P4|Z2|Z3)/;
+                    var blastmatch = blastregex.exec(d.name);
+                    if(blastmatch === null){
+                        console.log('null blastmatch: ' + d.name);
+                        continue;
+                    }
+                    var blast = blastmatch[1];
+                    
+                    //find lineage suffix
+                    var linregex = /([aplrdv]+)$/;
+                    var linmatch = linregex.exec(d.name);
+                    if(linmatch === null){
+                        if(blast === d.name && d.name in cells[i] && cells[i][d.name].indexOf(d.name) > -1){
+                            pt_colors.push($.Color(colors[i]));
+                        }
+                        continue;
+                    }
+                    var linsuffix = linmatch[1];
+                    if(blast in cells[i] && cells[i][blast].indexOf(linsuffix) > -1){
+                        pt_colors.push($.Color(colors[i]));
+                    }
                 }
             }
             if(pt_colors.length === 0){
                 return null;
             }else if(pt_colors.length === 1){
-                pt_color_map[d.meta.name] = pt_colors[0].toHexString();
+                pt_color_map[d.name] = pt_colors[0].toHexString();
             }else{
-                pt_color_map[d.meta.name] = Color_mixer.mix(pt_colors).toHexString();
+                pt_color_map[d.name] = Color_mixer.mix(pt_colors).toHexString();
             }
             return elt;
         }
@@ -453,17 +554,14 @@ function plotData( time_point, duration ) {
             .attr('transparency', transp)
             .attr('diffuseColor', 'steelblue');
         //color points
-        var to_color = datapoints.select(function(d){return calc_highlights(d, this);});
+        var to_color = datapoints.select(function(d){return calc_highlights(d.meta, this);});
         to_color.selectAll('shape appearance material')
             .attr('transparency', 0)
             .attr('diffuseColor', function(d){return pt_color_map[d.meta.name];});
         //color nodes
-        visiblenodes.selectAll('circle').attr('fill', function(d){
-            if(d.name in pt_color_map){
-                return pt_color_map[d.name];
-            }else{
-                return 'steelblue';
-            }
+        visiblenodes.select(function(d) {return calc_highlights(d, this);})
+            .selectAll('circle').attr('fill', function(d){
+            return pt_color_map[d.name];
         });
     }else{
         datapoints.selectAll('shape appearance material')
@@ -537,7 +635,7 @@ function loadTimePoints(idx){
     d3.text(url, function(tpdata){
         if (!tpdata){
             ready = true;
-            d3.select('#timerange').attr('max', csvdata.length);
+            d3.select('#timerange').attr('max', csvdata.length - 1);
             //load cell type data
             loadCellTypeMap();
             plotData(0, 5);
@@ -570,7 +668,7 @@ function loadTimePoints(idx){
                 cell.pred.succ.push(cell);
                 //add entries to lineage data structure (if it's not there already)
                 if(!(cell.meta.name in cellmap)){
-                    console.log(cell.meta.name);
+//                    console.log(cell.meta.name);
                     cell.meta.parent = cellmap[cell.pred.meta.name];
                     cell.meta.parent.children.push(cell.meta);
                     cellmap[cell.meta.name] = cell.meta;
@@ -665,7 +763,7 @@ function development() {
 //        var t_idx = timepoint % csvdata.length;
         timepoint++;
         plotData(timepoint,1000);
-        document.getElementById('timerange').value = timepoint;
+        document.getElementById('timerange').value = timepoint % csvdata.length;
 
         // Update and plot the tree (Not yet working)
         //var cellLineage = getTreeRootFromTimepoints(this.csvdata, t_idx)
